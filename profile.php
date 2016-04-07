@@ -1,4 +1,20 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php'; 
+		include 'dbsettings.php';
+		if (isset($_POST["guncelle"])){
+			$ad = $_POST["ad"];
+			$soyad = $_POST["soyad"];
+			$eposta = $_POST["eposta"];
+			$cep_tel = $_POST["cep_tel"];
+			$adres = $_POST["adres"];
+			$dogum_tarih = $_POST["dogum_tarih"];
+
+			$result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error());			
+		}
+		else if(isset($_POST["sil"])){
+
+		}
+
+?>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -9,7 +25,14 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <form action="">
+                        <form action="" method="post">
+                        <?php
+                            $result = mysqli_query($connection, 
+                            "CALL kisisel_bilgileri_cek('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+
+                            $row = mysqli_fetch_array($result);
+
+                        ?>
                             <div class="row">
                                 <div class="col-xs-12 col-md-8">
                                     <div class="info-content">
@@ -19,7 +42,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" value="Deniz">
+                                                    <input name ="ad" class="form-control" type="text" value=<?php echo $row[0]?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +58,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" value="Güzel">
+                                                    <input name="soyad" class="form-control" type="text" value=<?php echo $row[1]?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,7 +74,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" value="denizguzel.iu@gmail.com">
+                                                    <input name="eposta" class="form-control" type="text" value=<?php echo $_SESSION['eposta']?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,7 +90,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" value="5056493091">
+                                                    <input name="cep_tel" class="form-control" type="text" value=<?php echo $row[2]?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +106,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque natus in ab, quos.">
+                                                    <?php echo "<input name ='adres' class='form-control' type='text' value='" . $row[4] . "'>" ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,7 +122,7 @@
                                             </div>
                                             <div class="col-xs-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control datepicker" data-provide="datepicker" placeholder="Gün/Ay/Yıl">
+                                                    <input name="dogum_tarih" type="text" class="form-control datepicker" data-provide="datepicker" placeholder="Gün/Ay/Yıl" value=<?php echo $row[3]?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,10 +131,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-3">
-                                    <input type="submit" class="btn btn-success btn-send" value="Bilgileri Güncelle" name="">
+                                    <input type="submit" class="btn btn-success btn-send" value="Bilgileri Güncelle" name="guncelle">
                                 </div>
                                 <div class="col-xs-12 col-md-3 col-md-offset-2">
-                                    <a href="#" class="btn btn-danger btn-send" data-toggle="modal" data-target="#profile-modal">Hesabımı Sil</a>
+                                    <input type="submit" class="btn btn-danger btn-send" value="Hesabı Sil" name="sil">
                                 </div>
                             </div>
                         </form>

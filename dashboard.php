@@ -1,12 +1,12 @@
-<?php include 'login-header.php'; ?>
-        <script type="text/javascript">
-        function a(){
-            var Row = document.getElementsByTagName("tr");
-            var Cells = Row.getElementById("ariza_no");
-            alert(Cells);             
-        }
-            
-        </script>
+<?php include 'login-header.php';
+	
+?>
+<script type="text/javascript">
+	$('#thetable').find('tr').click( function(){
+  alert('You clicked row '+ ($(this).index()+1) );
+});
+</script>
+        
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -68,7 +68,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
+                                    <table id = "tablo" class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Arıza No #</th>
@@ -87,15 +87,18 @@
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
                                                 ?>
-                                                    <tr id="somerow">
+                                                
+                                                	<tr>
                                                     
-                                                        <td id="ariza_no" class="col-xs-2"><?php echo $row[0]?></td>
+                                                        <td name="ariza_no" id="ariza_no" class="col-xs-2"><?php echo $row[0]?></td>
                                                         <td class="col-xs-2"><?php echo $row[3]?></td>
                                                         <td class="col-xs-2"><?php echo $row[1]?></td>
                                                         <td class="col-xs-2"><?php echo $row[2]?></td>
                                                         <td class="col-xs-2"><?php echo $row[5]?></td>
-                                                        <td class="col-xs-2"><a href="order-view.php" class="btn btn-primary" onclick="a()">Görüntüle</a></td>
+                                                        <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" onclick="get_id()"></td>
                                                     </tr>
+                                                
+                                                    
 
                                                 <?php
                                                     }
