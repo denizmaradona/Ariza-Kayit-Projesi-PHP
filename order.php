@@ -1,4 +1,10 @@
 <?php include 'login-header.php'; ?>
+<script type="text/javascript">
+	function changeTest(){
+    var x = document.getElementById("mySelect").value;
+    alert(x);
+  }
+</script>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -14,55 +20,35 @@
                                 <div class="col-xs-6">
                                     <div class="info-content">
                                         <div class="form-group">
-                                            <select name="" class="form-control phones selectpicker" data-container="body">
-                                                <option value="">Marka Seçiniz</option>
-                                                <option value="iphone">iPhone</option>
-                                                <option value="samsung">Samsung</option>
-                                                <option value="asus" value="">Asus</option>
-                                                <option value="lg" value="">LG</option>
-                                                <option value="nokia" value="">Nokia</option>
-                                            </select>
+                                        <?php 
+                                        	include 'dbsettings.php';
+                                        	$result = mysqli_query($connection, 
+     										"CALL marka_combobox()") or die("Query fail: " . mysqli_error());
+                                        
+                                            echo '<select name="markalar" class="form-control phones selectpicker onChange="changeTest()" data-container="body">';
+                                            while ($row = mysqli_fetch_array($result)){
+                                            	echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>'; 
+                                            }
+                                            echo '</select>';
+                                                
+                                        ?>    
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="info-content">
                                         <div class="form-group">
-                                            <select name="" class="form-control models iphone active selectpicker" data-container="body">
-                                                <option value="">iPhone 4</option>
-                                                <option value="">iPhone 4s</option>
-                                                <option value="">iPhone 5</option>
-                                                <option value="">iPhone 5s</option>
-                                                <option value="">iPhone 6</option>
-                                            </select>
-                                            <select name="" class="form-control models samsung selectpicker" data-container="body">
-                                                <option value="">Galaxy S2</option>
-                                                <option value="">Galaxy S3</option>
-                                                <option value="">Galaxy S4</option>
-                                                <option value="">Galaxy S5</option>
-                                                <option value="">Galaxy S6</option>
-                                            </select>
-                                            <select name="" class="form-control models asus selectpicker" data-container="body">
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                            </select>
-                                            <select name="" class="form-control models lg selectpicker" data-container="body">
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                            </select>
-                                            <select name="" class="form-control models nokia selectpicker" data-container="body">
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                            </select>
+                                        <?php
+                                        	$result = mysqli_query($connection, 
+     										"CALL model_combobox('$marka')") or die("Query fail: " . mysqli_error());
+
+     										echo '<select name="modeller" class="form-control models iphone active selectpicker" data-container="body">';
+     										while($row = mysqli_fetch_array($result)){
+     											echo '<option value = '.$row["model"].'>'.$row["model"].'</option>';
+     										}
+     										echo '<select/>';
+                                        ?>
+                                        
                                         </div>
                                     </div>
                                 </div>
