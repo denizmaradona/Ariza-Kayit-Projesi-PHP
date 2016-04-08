@@ -1,6 +1,12 @@
-<?php include 'login-header.php'; ?>
-
-<div class="page-wrapper">
+<?php include 'login-header.php';
+        $sayac=0; 
+        include 'dbsettings.php';
+        $result = mysqli_query($connection, 
+        "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
+        while($row = mysqli_fetch_array($result)) {
+            $sayac++;
+        }
+        echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
@@ -28,7 +34,7 @@
                                         <i class="fa fa-edit fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right count">
-                                        <div class="huge">3</div>
+                                        <div class="huge">'.$sayac.'</div>
                                         <div>Arıza Kayıtları</div>
                                     </div>
                                 </div>
@@ -79,63 +85,31 @@
                                 <thead>
                                     <tr>
                                         <th>Arıza No #</th>
-                                        <th>İşlem Tarihi</th>
+                                        <th>Oluşturulma Tarihi</th>
                                         <th>Telefon Marka</th>
                                         <th>Telefon Model</th>
                                         <th>Kayıt Durumu</th>
                                         <th>Kayıt Detayları</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr data-id="3326">
-                                        <td class="col-xs-2">3326</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">4s</td>
-                                        <td class="col-xs-2">Ücret onaylanmadı ve onarım iptal edildi</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                    <tr data-id="3325">
-                                        <td class="col-xs-2">3325</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:20</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">5s</td>
-                                        <td class="col-xs-2">Onay Bekliyor</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                    <tr data-id="3324">
-                                        <td class="col-xs-2">3324</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:03</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">6</td>
-                                        <td class="col-xs-2">Onay Bekliyor</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                    <tr data-id="3326">
-                                        <td class="col-xs-2">3326</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">4s</td>
-                                        <td class="col-xs-2">Ücret onaylanmadı ve onarım iptal edildi</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                    <tr data-id="3325">
-                                        <td class="col-xs-2">3325</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:20</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">5s</td>
-                                        <td class="col-xs-2">Onay Bekliyor</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                    <tr data-id="3324">
-                                        <td class="col-xs-2">3324</td>
-                                        <td class="col-xs-2">06/03/2016 , 13:03</td>
-                                        <td class="col-xs-2">iPhone</td>
-                                        <td class="col-xs-2">6</td>
-                                        <td class="col-xs-2">Onay Bekliyor</td>
-                                        <td class="col-xs-2"><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                    </tr>
-                                </tbody>
+                                <tbody>';           
+                                            include 'dbsettings.php';
+                                            $result = mysqli_query($connection, 
+                                            "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
+                                                
+                                            while($row = mysqli_fetch_array($result)) {                                            
+
+                                            echo '<tr>
+                                                    
+                                                    <td name="ariza_no" id="ariza_no" class="col-xs-2">'.$row[0].'</td>
+                                                    <td class="col-xs-2">'.$row[1].'</td>
+                                                    <td class="col-xs-2">'.$row[2].'</td>
+                                                    <td class="col-xs-2">'.$row[3].'</td>
+                                                    <td class="col-xs-2">'.$row[4].'</td>
+                                                    <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" onclick=""></td>
+                                                </tr>';
+                                                    }                                               
+                                echo '</tbody>
                             </table>
                         </div>
                     </div>
@@ -146,4 +120,5 @@
 </div>
 </div>
 </body>
-</html>
+</html>';
+?>
