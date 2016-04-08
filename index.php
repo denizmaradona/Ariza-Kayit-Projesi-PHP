@@ -16,10 +16,10 @@
      	$row = mysqli_fetch_array($result);
 
      	if ($row[@bilgi]=="kayit basarili"){
-     		//
+     		header("Location:index.php");
      	}
      	else{
-
+            header("Location:index.php");
      	}
 
 	}
@@ -39,19 +39,16 @@
      		$_SESSION["eposta"] = $eposta;
      		header("Location:dashboard.php");
 
-     	}
-     	else if($row[@bilgi]=="sifre hatali"){
-     		//sifre hatalı oldugunda bu blok calıscak
-     		header("Location:index.php");
-     	}
-     	else if($row[@bilgi]=="kullanici yok"){
-     		header("Location:index.php");
-     		//kullanıcı olmadıgı durumunda bu blok calıscak
-     	}
-     	else { //temsilci girisi
-     		header("Location:index.php");
-     		//temsilci girisi oldugunda bu blok calıscak
-     	}
+     	}    	
+     	else if($row[@bilgi]=="temsilci girisi basarili"){
+            $_SESSION["oturum"] = true;
+            $_SESSION["eposta"] = $eposta;            
+     		header("Location:admin-dashboard.php");
+        }
+     		
+        else { // kullanıcı adı veya şifre yanlış
+            header("Location:index.php");
+        }
     }	
 
 	else{
