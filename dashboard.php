@@ -1,13 +1,21 @@
 <?php include 'login-header.php';
-	
+include 'dbsettings.php';
+	if (isset($_POST["goruntule"])){
+
+			$_SESSION["id"] = $_POST["id"];
+			echo $_SESSION["id"];
+		}
+
 ?>
-<script type="text/javascript">
-	$('#thetable').find('tr').click( function(){
-  alert('You clicked row '+ ($(this).index()+1) );
-});
-</script>
-        
-        <div class="page-wrapper">
+<?php 
+	$result = mysqli_query($connection, 
+	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+	    $sayac=0;
+
+	    while($row = mysqli_fetch_array($result)){
+	    	$sayac++;  
+	}
+	echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -35,7 +43,7 @@
                                                 <i class="fa fa-edit fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right count">
-                                                <div class="huge">3</div>
+                                                <div class="huge">'.$sayac.'</div>
                                                 <div>Arıza Kayıtlarınız</div>
                                             </div>
                                         </div>
@@ -79,31 +87,27 @@
                                                 <th>Kayıt Detayları</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
+                                        <tbody>';
+                                            
                                                 include 'dbsettings.php';
                                                 $result = mysqli_query($connection, 
                                                 "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                
-                                                	<tr>
-                                                    
-                                                        <td name="ariza_no" id="ariza_no" class="col-xs-2"><?php echo $row[0]?></td>
-                                                        <td class="col-xs-2"><?php echo $row[3]?></td>
-                                                        <td class="col-xs-2"><?php echo $row[1]?></td>
-                                                        <td class="col-xs-2"><?php echo $row[2]?></td>
-                                                        <td class="col-xs-2"><?php echo $row[5]?></td>
-                                                        <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" onclick="get_id()"></td>
-                                                    </tr>
-                                                
-                                                    
-
-                                                <?php
+                                                echo 
+                                                	'<form action="order-view.php" method="post">
+                                                		<tr>
+	                                                        <td class="col-xs-2">'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"></td>
+	                                                        <td class="col-xs-2">'.$row[3].'</td>
+	                                                        <td class="col-xs-2">'.$row[1].'</td>
+	                                                        <td class="col-xs-2">'.$row[2].'</td>
+	                                                        <td class="col-xs-2">'.$row[5].'</td>
+	                                                        <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" name="goruntule"></td>
+                                                    	</tr>
+                                                	</form>';                                                                                   
                                                     }
-                                                ?>   
-                                        </tbody>
+                                                 
+                                                echo '</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -114,4 +118,16 @@
         </div>
     </div>
 </body>
-</html>
+</html>';
+
+?>
+	
+		
+    
+
+
+                                                 
+                                        
+	
+        
+        
