@@ -1,4 +1,10 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php'; 
+    if (isset($_POST["goruntule"])){
+
+            $_SESSION["id"] = $_POST["id"];
+            echo $_SESSION["id"];
+        }
+?>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -28,7 +34,7 @@
                                     <?php
                                                 include 'dbsettings.php';
                                                 $result = mysqli_query($connection, 
-                                                "CALL ariza_detay_goster('".$_COOKIE['ariza_no']."')") or die("Query fail: " . mysqli_error());
+                                                "CALL ariza_detay_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
                                                 ?>
