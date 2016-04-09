@@ -1,6 +1,29 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php';
+    include 'dbsettings.php';  
+    if (isset($_POST["talep_olustur"])){
+        $konu = $_POST["konu"];
+        $mesaj = $_POST["mesaj"];
 
-        <div class="page-wrapper">
+        $result = mysqli_query($connection, 
+        "CALL talep_olustur('$konu','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="basarili"){ //TALEP OLUSTURULDU
+
+        }
+        else if($row[@bilgi]=="basarisiz"){ // TALEP OLUSTURULAMADI
+
+        }
+        else{//NEDENI BILINMIYOR
+            
+        }
+
+         
+    }
+?>
+
+<?php 
+     
+    echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -27,55 +50,29 @@
                                         <thead>
                                             <tr>
                                                 <th>Talep No #</th>
-                                                <th>Talep Tarihi</th>
+                                                <th>Oluşturulma Tarihi</th>
                                                 <th>Son İşlem Tarihi</th>
                                                 <th>Konu</th>
                                                 <th>Durum</th>
                                                 <th>Talebi Görüntüle</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="col-xs-1">3326</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                                <td class="col-xs-1"><i class="fa fa-info-circle"></i>İnceleniyor</td>
-                                                <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-xs-1">3326</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                                <td class="col-xs-1"><i class="fa fa-check-circle"></i>Cevaplandırıldı</td>
-                                                <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-xs-1">3326</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                                <td class="col-xs-1"><i class="fa fa-check-circle "></i>Cevaplandırıldı</td>
-                                                <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-xs-1">3326</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                                <td class="col-xs-1"><i class="fa fa-info-circle"></i>İnceleniyor</td>
-                                                <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-xs-1">3326</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                                <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                                <td class="col-xs-1"><i class="fa fa-info-circle"></i>İnceleniyor</td>
-                                                <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody>';
+                                        include 'dbsettings.php';
+                                        $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+                                        
+                                        while ($row = mysqli_fetch_array($result)){
+                                            echo '<tr>
+                                                    <td class="col-xs-1">'.$row[0].'</td>
+                                                    <td class="col-xs-1">'.$row[1].'</td>
+                                                    <td class="col-xs-1">'.$row[2].'</td>
+                                                    <td class="col-xs-3">'.$row[3].'</td>
+                                                    <td class="col-xs-1"><i class="fa fa-info-circle"></i>'.$row[4].'</td>
+                                                    <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
+                                                </tr>';
+                                        }
+                                            
+                                        echo '</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -88,34 +85,40 @@
             </div>
         </div>
     </div>
-
 <div class="modal fade" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">Talep Oluştur</h3>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Konu">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <textarea class="form-control" name="" id="" cols="30" rows="5" placeholder="Mesajınız"></textarea>
-                        </div>
-                    </div>
+                <form action="" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Talep Oluştur</h3>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <input type="submit" class="btn btn-success" data-dismiss="modal" value="Kaydet" name="">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
-            </div>
+                
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Konu" name="konu">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" cols="30" rows="5" placeholder="Mesajınız" name="mesaj"></textarea>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="Kaydet" name="talep_olustur">
+                    <button type="button" class="btn btn-danger">Kapat</button>
+                </div>
+                </form>       
         </div>
     </div>
 </div>
 </body>
-</html>
+</html>';    
+                                        
+?>
+
+        
