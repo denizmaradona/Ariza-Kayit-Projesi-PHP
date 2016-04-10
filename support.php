@@ -62,14 +62,17 @@
                                         $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
                                         
                                         while ($row = mysqli_fetch_array($result)){
-                                            echo '<tr>
-                                                    <td class="col-xs-1">'.$row[0].'</td>
-                                                    <td class="col-xs-1">'.$row[1].'</td>
-                                                    <td class="col-xs-1">'.$row[2].'</td>
-                                                    <td class="col-xs-3">'.$row[3].'</td>
-                                                    <td class="col-xs-1"><i class="fa fa-info-circle"></i>'.$row[4].'</td>
-                                                    <td class="col-xs-1"><a href="ticket-view.php" class="btn btn-primary">Görüntüle</a></td>
-                                                </tr>';
+                                            echo '
+                                                    <form action="ticket-view.php" method="post">
+                                                        <tr>
+                                                            <td class="col-xs-1">'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"></td>
+                                                            <td class="col-xs-1">'.$row[1].'</td>
+                                                            <td class="col-xs-1">'.$row[2].'</td>
+                                                            <td class="col-xs-3">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
+                                                            <td class="col-xs-1"><i class="fa fa-info-circle"></i>'.$row[4].'</td>
+                                                            <td class="col-xs-1"><input type="submit" class="btn btn-primary" name="goruntule" value="Görüntüle"></td>
+                                                        </tr>
+                                                    </form>';
                                         }
                                             
                                         echo '</tbody>
