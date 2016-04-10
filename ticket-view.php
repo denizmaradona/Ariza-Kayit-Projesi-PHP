@@ -1,10 +1,21 @@
 <?php include 'login-header.php';
     if (isset($_POST["gonder"])){
+        $mesaj = $_POST["mesaj"];
+        include 'dbsettings.php';
+        $result = mysqli_query($connection, 
+        "CALL kul_talep_cevapla('".$_SESSION['id']."','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="iletildi"){
+
+        }
+        else{
+
+        }
 
     }
     else if (isset($_POST["goruntule"])){
-        $id = $_POST["id"];
-        $konu = $_POST["konu"];
+        $_SESSION["id"] = $_POST["id"];
+        $_SESSION["konu"] = $_POST["konu"];
     }
 ?>
 <?php 
@@ -20,14 +31,14 @@
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title ticket-title"><strong>Konu: '.$konu.'</strong></h3>
-                                    <span class="ticket-id pull-right">Talep No # '.$id.'</span>
+                                    <h3 class="panel-title ticket-title"><strong>Konu: '.$_SESSION["konu"].'</strong></h3>
+                                    <span class="ticket-id pull-right">Talep No # '.$_SESSION["id"].'</span>
                                 </div>
                                 <div class="panel-body">
                                     ';
                                     include 'dbsettings.php';
                                     $result = mysqli_query($connection, 
-                                    "CALL konusma_gecmis_goster('$id')") or die("Query fail: " . mysqli_error());
+                                    "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                     while ($row = mysqli_fetch_array($result)){
                                         if ($row['yazan']=="Müşteri Temsilcisi"){
                                             echo '<article class="pull-right text-right">
@@ -62,10 +73,7 @@
                                                         </div>
                                                     </div>
                                                 </article>';
-                                        }
-                                        
-                                            
-                                        
+                                        }                                      
                                     }
 
                                     /**/
@@ -74,11 +82,11 @@
                             </div>
                         </div>
                     </div>
-                    <form action="">
+                    <form action="" method="post">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <textarea name="" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
+                                    <textarea name="mesaj" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +95,7 @@
                                 <a href="support.php" class="btn btn-primary btn-send">Geri Dön</a>
                             </div>
                             <div class="col-xs-12 col-md-2 col-md-offset-2">
-                                <input type="submit" class="btn btn-success btn-send" value="Gönder" name="">
+                                <input type="submit" class="btn btn-success btn-send" value="Gönder" name="gonder">
                             </div>
                         </div>
                     </form>
