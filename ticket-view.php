@@ -1,6 +1,14 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php';
+    if (isset($_POST["gonder"])){
 
-        <div class="page-wrapper">
+    }
+    else if (isset($_POST["goruntule"])){
+        $id = $_POST["id"];
+        $konu = $_POST["konu"];
+    }
+?>
+<?php 
+    echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="info-content">
                     <div class="row">
@@ -12,40 +20,56 @@
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title ticket-title"><strong>Konu: </strong>Telefonum söylenilen tarihte teslim edilmedi.</h3>
-                                    <span class="ticket-id pull-right">Talep No # 3326</span>
+                                    <h3 class="panel-title ticket-title"><strong>Konu: '.$konu.'</strong></h3>
+                                    <span class="ticket-id pull-right">Talep No # '.$id.'</span>
                                 </div>
                                 <div class="panel-body">
-                                    <article class="pull-left">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-2">
-                                                <div class="article-heading">
-                                                    <span>Okan Uzun</span><br>
-                                                    <time>06/03/2016 , 13:29</time>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-10">
-                                                <div class="article-body">
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="pull-right text-right">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-10">
-                                                <div class="article-body">
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-2">
-                                                <div class="article-heading mtop">
-                                                    <span>Müşteri Temsilcisi</span><br>
-                                                    <time>06/03/2016 , 17:52</time>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
+                                    ';
+                                    include 'dbsettings.php';
+                                    $result = mysqli_query($connection, 
+                                    "CALL konusma_gecmis_goster('$id')") or die("Query fail: " . mysqli_error());
+                                    while ($row = mysqli_fetch_array($result)){
+                                        if ($row['yazan']=="Müşteri Temsilcisi"){
+                                            echo '<article class="pull-right text-right">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-10">
+                                                            <div class="article-body">
+                                                                <p>'.$row[1].'</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-2">
+                                                            <div class="article-heading mtop">
+                                                                <span>'.$row[0].'</span><br>
+                                                                <time>'.$row[2].'</time>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>';
+                                        }
+                                        else{
+                                            echo '<article class="pull-left">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-2">
+                                                            <div class="article-heading">
+                                                                <span>'.$row[0].'</span><br>
+                                                                <time>'.$row[2].'</time>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-10">
+                                                            <div class="article-body">
+                                                                <p>'.$row[1].'</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>';
+                                        }
+                                        
+                                            
+                                        
+                                    }
+
+                                    /**/
+                                    echo '
                                 </div>
                             </div>
                         </div>
@@ -72,4 +96,7 @@
         </div>
     </div>
 </body>
-</html>
+</html>';
+?>
+
+        
