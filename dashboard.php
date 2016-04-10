@@ -1,10 +1,6 @@
 <?php include 'login-header.php';
 include 'dbsettings.php';
-	if (isset($_POST["goruntule"])){
-
-			$_SESSION["id"] = $_POST["id"];
-			echo $_SESSION["id"];
-		}
+	
 
 ?>
 <?php 
