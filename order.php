@@ -1,11 +1,4 @@
 <?php include 'login-header.php'; ?>
-<script type="text/javascript">
-	function changeTest(){
-    var x = document.getElementById("mySelect").value;
-    alert(x);
-  }
-</script>
-
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -25,7 +18,7 @@
                                         	$result = mysqli_query($connection, 
      										"CALL marka_combobox()") or die("Query fail: " . mysqli_error());
                                         
-                                            echo '<select name="markalar" class="form-control phones selectpicker onChange="changeTest()" data-container="body">';
+                                            echo '<select name="markalar" class="form-control phones selectpicker onChange="changeTest(this)" data-container="body">';
                                             while ($row = mysqli_fetch_array($result)){
                                             	echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>'; 
                                             }
