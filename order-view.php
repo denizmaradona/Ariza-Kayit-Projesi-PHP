@@ -1,8 +1,7 @@
 <?php include 'login-header.php'; 
     if (isset($_POST["goruntule"])){
 
-            $_SESSION["id"] = $_POST["id"];
-            echo $_SESSION["id"];
+            $id = $_POST["id"];
         }
 ?>
 
@@ -34,7 +33,7 @@
                                     <?php
                                                 include 'dbsettings.php';
                                                 $result = mysqli_query($connection, 
-                                                "CALL ariza_detay_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
+                                                "CALL ariza_detay_goster('$id')") or die("Query fail: " . mysqli_error());
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
                                                 ?>
