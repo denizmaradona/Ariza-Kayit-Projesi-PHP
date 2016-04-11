@@ -1,11 +1,23 @@
 <?php include 'login-header.php'; 
     if (isset($_POST["goruntule"])){
 
-            $id = $_POST["id"];
+            $_SESSION["id"] = $_POST["id"];
         }
-?>
+    else if ($_POST["sil"]){
+        include 'dbsettings.php';
+        $result = mysqli_query($connection, 
+        "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="silindi"){ // silindi
 
-        <div class="page-wrapper">
+        }
+        else{ // silinemedi
+
+        }    
+    }
+?>
+<?php
+    echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -29,30 +41,32 @@
                                         <th>Kaydı Sil</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
+                                <tbody>';
+                                    
                                                 include 'dbsettings.php';
                                                 $result = mysqli_query($connection, 
-                                                "CALL ariza_detay_goster('$id')") or die("Query fail: " . mysqli_error());
+                                                "CALL ariza_detay_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                    <tr>
-                                                        
-                                                        <td><?php echo $row[0]?></td>
-                                                        <td><?php echo $row[1]?></td>
-                                                        <td><?php echo $row[2]?></td>
-                                                        <td><?php echo $row[3]?></td>
-                                                        <td><?php echo $row[4]?></td>
-                                                        <td><?php echo $row[5]?></td>
-                                                        <td><a href="order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                                        <td><a href="order-update.php" class="btn btn-success">Güncelle</a></td>
-                                                        <td><a href="#" class="btn btn-danger btn-delete">Sil</a></td>
-                                                    </tr>
+                                                    echo '
+                                                    <form action="" method="post">
+                                                        <tr>
+                                                            <td>'.$row[0].'</td>
+                                                            <td>'.$row[1].'</td>
+                                                            <td>'.$row[2].'</td>
+                                                            <td>'.$row[3].'</td>
+                                                            <td>'.$row[4].'</td>
+                                                            <td>'.$row[5].'</td>
+                                                            <td><a href="order-detail.php" class="btn btn-primary">Görüntüle</a></td>
+                                                            <td><a href="order-update.php" class="btn btn-success">Güncelle</a></td>
+                                                            <td><a href="#" class="btn btn-danger btn-delete">Sil</a></td>
+                                                        </tr>
+                                                    </form>
+                                                    ';
 
-                                                <?php
+                                                
                                                     }
-                                                ?> 
+                                                echo '
                                 </tbody>
                             </table>
                         </div>
@@ -75,12 +89,18 @@
             <div class="modal-body">
                 <p>Kaydı <b>silmek</b> istediğinize emin misiniz?</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="delete-confirm" href="#">Evet</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
-            </div>
+            <form action="" method="post">
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger" value="Evet" name="sil">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
+                </div>
+            </form>
+            
         </div>
     </div>
 </div>
 </body>
-</html>
+</html>';
+?>
+
+        
