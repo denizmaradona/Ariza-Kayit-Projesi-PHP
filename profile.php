@@ -8,10 +8,24 @@
 			$adres = $_POST["adres"];
 			$dogum_tarih = $_POST["dogum_tarih"];
 
-			$result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error());			
+			$result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','".$_SESSION['eposta']."','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error());
+            if ($result){
+                $_SESSION["eposta"] = $eposta;
+            }			
 		}
 		else if(isset($_POST["sil"])){
-
+            $sifre = $_POST["sifre"];
+            $result = mysqli_query($connection,"CALL hesabi_sil('".$_SESSION['eposta']."','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            if ($row[@bilgi]=="silindi"){
+                
+            }
+            else if ($row[@bilgi]=="silinemez"){
+                
+            }
+            else if ($row[@bilgi]=="hatali sifre"){
+                
+            } 
 		}
 
 ?>
@@ -28,7 +42,7 @@
                         <form action="" method="post">
                         <?php
                             $result = mysqli_query($connection, 
-                            "CALL kisisel_bilgileri_cek('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+                            "CALL kisisel_bilgileri_cek('".$_SESSION["eposta"]."')") or die("Query fail: " . mysqli_error());
 
                             $row = mysqli_fetch_array($result);
 
@@ -134,7 +148,7 @@
                                     <input type="submit" class="btn btn-success btn-send" value="Bilgileri Güncelle" name="guncelle">
                                 </div>
                                 <div class="col-xs-12 col-md-3 col-md-offset-2">
-                                    <input type="submit" class="btn btn-danger btn-send" value="Hesabı Sil" name="sil">
+                                    <a href="#" class="btn btn-danger btn-send" data-toggle="modal" data-target="#profile-modal">Hesabımı Sil</a>
                                 </div>
                             </div>
                         </form>
@@ -153,10 +167,13 @@
                 <div class="modal-body">
                     <p>Hesabınız <strong>kalıcı</strong> olarak silinecektir. Bu işlem geri döndürülemez. Emin misiniz?</p>
                 </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-success" data-dismiss="modal" value="Evet" name="">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
-                </div>
+                <form action="" method="post">
+                    <div class="modal-footer">
+                        <input type="password" class="form-control" placeholder="Şifreniz" name="sifre">
+                        <input type="submit" class="btn btn-success" value="Evet" name="sil">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
