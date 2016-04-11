@@ -4,13 +4,22 @@ include 'dbsettings.php';
 
 ?>
 <?php 
-	$result = mysqli_query($connection, 
+		$result = mysqli_query($connection, 
 	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-	    $sayac=0;
+	    $kayit_sayi=0;
 
 	    while($row = mysqli_fetch_array($result)){
-	    	$sayac++;  
-	}
+	    	$kayit_sayi++;  
+		}
+
+		include'dbsettings.php';
+    	$result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+    	$talep_sayi=0;
+
+    	while ($row = mysqli_fetch_array($result)){
+    		$talep_sayi++;
+    	}
+
 	echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -39,7 +48,7 @@ include 'dbsettings.php';
                                                 <i class="fa fa-edit fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right count">
-                                                <div class="huge">'.$sayac.'</div>
+                                                <div class="huge">'.$kayit_sayi.'</div>
                                                 <div>Arıza Kayıtlarınız</div>
                                             </div>
                                         </div>
@@ -54,7 +63,7 @@ include 'dbsettings.php';
                                                 <i class="fa fa-support fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right count">
-                                                <div class="huge">5</div>
+                                                <div class="huge">'.$talep_sayi.'</div>
                                                 <div>Destek Talepleriniz</div>
                                             </div>
                                         </div>
