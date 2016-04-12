@@ -1,10 +1,5 @@
 <?php include 'login-header.php'; 
-    if (isset($_POST["goruntule"])){
-        $id = $_POST["id"];
-    }
-?>
-<?php 
-
+    
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -16,7 +11,7 @@
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Arıza No #</strong> 3326</h3>
+                        <h3 class="panel-title"><strong>Arıza No #</strong> '.$_POST["id"].'</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -42,7 +37,7 @@
                                 }
                                 include 'dbsettings.php';
                                 $result = mysqli_query($connection, 
-                                "CALL toplam_maliyet('".$_SESSION['id']."',@toplam)") or die("Query fail: " . mysqli_error());
+                                "CALL toplam_maliyet('".$_POST["id"]."',@toplam)") or die("Query fail: " . mysqli_error());
                                 $row = mysqli_fetch_array($result);
                                 echo '
                                 <tr>
@@ -66,4 +61,8 @@
 </div>
 </body>
 </html>';
+?>
+
+
+    
 
