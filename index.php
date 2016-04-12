@@ -1,6 +1,6 @@
 <?php include 'header.php';
 	include 'dbsettings.php';
-	session_start();	
+		
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
 		$ad = $_POST["ad"];
 		$soyad = $_POST["soyad"];
@@ -34,13 +34,14 @@
      	$row = mysqli_fetch_array($result);
 
      	if ($row[@bilgi]=="kullanici girisi basarili"){
-     		
+     		session_start();
      		$_SESSION["oturum"] = true;
      		$_SESSION["eposta"] = $eposta;
      		header("Location:dashboard.php");
 
      	}    	
      	else if($row[@bilgi]=="temsilci girisi basarili"){
+            session_start();
             $_SESSION["oturum"] = true;
             $_SESSION["eposta"] = $eposta;            
      		header("Location:admin-dashboard.php");
@@ -49,9 +50,10 @@
         else { // kullanıcı adı veya şifre yanlış
             header("Location:index.php");
         }
-    }	
+    }
+?>	
 
-	else{
+<?php 
 		echo '<section class="main-area">
         <div class="container">
             <div class="row">
@@ -155,7 +157,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-10 col-xs-offset-1">
-                            <form action="">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Adınız" name="ad">
                                 </div>
@@ -178,7 +180,7 @@
                                     <input type="text" class="form-control datepicker" data-provide="datepicker" placeholder="Gün/Ay/Yıl" name="dogum_tarih">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Adres" name="adres"></textarea>
+                                    <textarea cols="30" rows="3" class="form-control" placeholder="Adres" name="adres"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-register" value="Kayıt Ol" name="kayit_ol">
@@ -190,7 +192,7 @@
             </div>
         </div>
     </div>';
-	}
+	
 ?>
 
     
