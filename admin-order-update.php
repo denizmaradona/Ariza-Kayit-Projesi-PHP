@@ -19,7 +19,7 @@
                             '
                                 <select name="durumlar" class="form-control phones selectpicker" data-container="body">';
                                 while ($row = mysqli_fetch_array($result)){
-                                echo '<option value = '.$row["durum"].'>'.$row["durum"].'</option>'; 
+                                echo '<option value = "'.$row["durum"].'">'.$row["durum"].'</option>'; 
                                     }
                                  echo '
                                 </select>                          
