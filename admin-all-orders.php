@@ -1,13 +1,6 @@
 <?php include 'login-header.php'; 
     
 ?>
-<script type="text/javascript">
-    function submitForm(action)
-    {
-        document.getElementById('form1').action = action;
-        document.getElementById('form1').submit();
-    }
-</script>
 <?php 
     echo '<div class="page-wrapper">
         <div class="container-fluid">
@@ -42,7 +35,7 @@
                                                 
                                         while($row = mysqli_fetch_array($result)){
                                             ?>
-                                            <form action="" method="post" id="form1"> 
+                                            <form action="" method="post"> 
                                                 <tr>
                                                     <td><?php echo $row[0]?><input type="hidden" name="id" value=<?php echo $row[0]?>></td>
                                                     <td><?php echo $row[1]?></td>
@@ -52,7 +45,7 @@
                                                     <td><i class="fa fa-try"></i><?php echo $row[6]?></td>
                                                     <td><?php echo $row[5]?></td>
                                                     <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php">Görüntüle</button></td>
-                                                    <td><input type="button" class="btn btn-success" value="Güncelle" onclick="submitForm('admin-order-update.php')"></td>                                                                                                       
+                                                    <td><button type="submit" class="btn btn-success" name="guncelle" formaction="admin-order-update.php">Güncelle</button></td>                                                                                                       
                                                 </tr>
                                             </form>
                                             <?php

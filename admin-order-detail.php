@@ -1,4 +1,18 @@
 <?php include 'login-header.php'; 
+if (isset($_POST["guncelle"])){
+    $durum = $_POST["durumlar"];
+    $detay = $_POST["detay"];
+    $ucret = $_POST["ucret"];
+    $id = $_SESSION["id"];
+
+    include 'dbsettings.php';
+    $result = mysqli_query($connection, 
+    "CALL ariza_durum_guncelle('$id','$durum','$detay','$ucret')") or die("Query fail: " . mysqli_error());
+
+}
+else if(isset($_POST["goruntule"])){
+    $id = $_POST["id"];
+}
     
     echo '<div class="page-wrapper">
     <div class="container-fluid">
@@ -11,7 +25,7 @@
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Arıza No #</strong> '.$_POST["id"].'</h3>
+                        <h3 class="panel-title"><strong>Arıza No #</strong> '.$id.'</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -26,7 +40,7 @@
                                 <tbody>';
                                 include 'dbsettings.php';
                                 $result = mysqli_query($connection, 
-                                "CALL durum_gecmis_goster('".$_POST["id"]."')") or die("Query fail: " . mysqli_error());
+                                "CALL durum_gecmis_goster('$id')") or die("Query fail: " . mysqli_error());
                                 while ($row = mysqli_fetch_array($result)){
                                     echo '
                                     <tr>
@@ -37,7 +51,7 @@
                                 }
                                 include 'dbsettings.php';
                                 $result = mysqli_query($connection, 
-                                "CALL toplam_maliyet('".$_POST["id"]."',@toplam)") or die("Query fail: " . mysqli_error());
+                                "CALL toplam_maliyet('$id',@toplam)") or die("Query fail: " . mysqli_error());
                                 $row = mysqli_fetch_array($result);
                                 echo '
                                 <tr>
