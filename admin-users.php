@@ -1,6 +1,6 @@
 <?php include 'login-header.php'; ?>
-
-    <div class="page-wrapper">
+<?php
+    echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -19,24 +19,26 @@
                                             <th>Soyisim</th>
                                             <th>E-Posta</th>
                                             <th>Telefon</th>
+                                            <th>Kayıt Olduğu Tarih</th>
                                             <th>Adres</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="col-xs-2">Deniz</td>
-                                            <td class="col-xs-2">Güzel</td>
-                                            <td class="col-xs-2">denizguzel.iu@gmail.com</td>
-                                            <td class="col-xs-2">5056493091</td>
-                                            <td class="col-xs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-xs-2">Okan</td>
-                                            <td class="col-xs-2">Uzun</td>
-                                            <td class="col-xs-2">okan.uzun@outlook.com</td>
-                                            <td class="col-xs-2">5056493091</td>
-                                            <td class="col-xs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
-                                        </tr>
+                                    <tbody>';
+                                        include 'dbsettings.php';
+                                        $result = mysqli_query($connection, 
+                                        "CALL kullanicilari_goster()") or die("Query fail: " . mysqli_error());
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo '
+                                            <tr>
+                                                <td class="col-xs-1">'.$row[0].'</td>
+                                                <td class="col-xs-1">'.$row[1].'</td>
+                                                <td class="col-xs-2">'.$row[2].'</td>
+                                                <td class="col-xs-2">'.$row[3].'</td>
+                                                <td class="col-xs-2">'.$row[4].'</td>
+                                                <td class="col-xs-4">'.$row[5].'</td>
+                                            </tr>';
+                                        }
+                                        echo ' 
                                     </tbody>
                                 </table>
                             </div>
@@ -48,4 +50,9 @@
     </div>
 </div>
 </body>
-</html>
+</html>';
+                                        
+                                   
+?>
+
+    
