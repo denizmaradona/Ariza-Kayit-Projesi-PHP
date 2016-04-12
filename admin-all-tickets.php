@@ -1,6 +1,5 @@
-<?php include 'login-header.php'; ?>
-
-<div class="page-wrapper">
+<?php include 'login-header.php'; 
+    echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
@@ -16,7 +15,8 @@
                                 <thead>
                                     <tr>
                                         <th class="skip-filter">Talep No #</th>
-                                        <th class="skip-filter">Kullanıcı İsmi</th>
+                                        <th class="skip-filter">Oluşturan</th>
+                                        <th class="skip-filter">Son Yazan</th>
                                         <th class="skip-filter">Talep Tarihi</th>
                                         <th class="skip-filter">Son İşlem Tarihi</th>
                                         <th class="skip-filter">Konu</th>
@@ -24,44 +24,27 @@
                                         <th class="skip-filter">Talebi Görüntüle</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="col-xs-1">3326</td>
-                                        <td class="col-xs-1">Deniz Güzel</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                        <td class="col-xs-1"><i class="fa fa-info-circle"></i>İnceleniyor</td>
-                                        <td class="col-xs-1"><a href="admin-ticket-view.php" class="btn btn-primary">İncele</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-xs-1">3326</td>
-                                        <td class="col-xs-1">Okan Uzun</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                        <td class="col-xs-1"><i class="fa fa-check-circle"></i>Cevaplandırıldı</td>
-                                        <td class="col-xs-1"><a href="admin-ticket-view.php" class="btn btn-primary">İncele</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-xs-1">3326</td>
-                                        <td class="col-xs-1">Deniz Güzel</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                        <td class="col-xs-1"><i class="fa fa-info-circle"></i>İnceleniyor</td>
-                                        <td class="col-xs-1"><a href="admin-ticket-view.php" class="btn btn-primary">İncele</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-xs-1">3326</td>
-                                        <td class="col-xs-1">Okan Uzun</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-1">06/03/2016 , 13:29</td>
-                                        <td class="col-xs-3">Telefonum söylenilen tarihte teslim edilmedi.</td>
-                                        <td class="col-xs-1"><i class="fa fa-check-circle"></i>Cevaplandırıldı</td>
-                                        <td class="col-xs-1"><a href="admin-ticket-view.php" class="btn btn-primary">İncele</a></td>
-                                    </tr>
-                                </tbody>
+                                <tbody>';
+                                include 'dbsettings.php';
+                                $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
+                                        
+                                while ($row = mysqli_fetch_array($result)){
+                                    echo '
+                                    <form action="admin-ticket-view.php" method="post">
+                                        <tr>
+                                            <td class="col-xs-1">'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"</td>
+                                            <td class="col-xs-1">'.$row[1].'</td>
+                                            <td class="col-xs-1">'.$row[2].'</td>
+                                            <td class="col-xs-2">'.$row[3].'</td>
+                                            <td class="col-xs-2">'.$row[4].'</td>
+                                            <td class="col-xs-2">'.$row[5].'</td>
+                                            <td class="col-xs-2"><i class="fa fa-info-circle"></i>'.$row[6].'</td>
+                                            <td class="col-xs-1"><input type="submit" value="İncele" name="incele" class="btn btn-primary"></td>
+                                        </tr>
+                                    </form>
+                                    ';
+                                }
+                                echo '</tbody>
                             </table>
                         </div>
                     </div>
@@ -72,4 +55,8 @@
 </div>
 </div>
 </body>
-</html>
+</html>';
+                                    
+                                
+?>
+
