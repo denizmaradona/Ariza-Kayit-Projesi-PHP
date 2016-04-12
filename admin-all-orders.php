@@ -1,4 +1,13 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php'; 
+    
+?>
+<script type="text/javascript">
+    function submitForm(action)
+    {
+        document.getElementById('form1').action = action;
+        document.getElementById('form1').submit();
+    }
+</script>
 <?php 
     echo '<div class="page-wrapper">
         <div class="container-fluid">
@@ -33,17 +42,21 @@
                                                 
                                         while($row = mysqli_fetch_array($result)){
                                             echo '
-                                            <tr>
-                                                <td>'.$row[0].'</td>
-                                                <td>'.$row[1].'</td>
-                                                <td>'.$row[2].'</td>
-                                                <td>'.$row[3].'</td>
-                                                <td>'.$row[4].'</td>
-                                                <td><i class="fa fa-try"></i> '.$row[6].'</td>
-                                                <td>'.$row[5].'</td>
-                                                <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                                <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                                            </tr>';
+                                            <form action="" method="post" id="form1"> 
+                                                <tr>
+                                                    <td>'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"></td>
+                                                    <td>'.$row[1].'</td>
+                                                    <td>'.$row[2].'</td>
+                                                    <td>'.$row[3].'</td>
+                                                    <td>'.$row[4].'</td>
+                                                    <td><i class="fa fa-try"></i> '.$row[6].'</td>
+                                                    <td>'.$row[5].'</td>'
+                                                    ?>
+                                                    <td><input type="button" class="btn btn-primary" value="Görüntüle" onclick="submitForm('admin-order-detail.php')"></td>
+                                                    <td><input type="button" class="btn btn-success" value="Güncelle" onclick="submitForm('admin-order-update.php')"></td>
+                                                </tr>
+                                            </form>
+                                            <?php
                                         }
                                         
                                         echo '
