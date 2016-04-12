@@ -1,6 +1,6 @@
 <?php include 'login-header.php'; ?>
-
-    <div class="page-wrapper">
+<?php 
+    echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -26,51 +26,27 @@
                                             <th class="skip-filter">Kaydı Güncelle</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>Onay Bekliyor</td>
-                                            <td>Nokia</td>
-                                            <td>Lumia 920</td>
-                                            <td>Arıza kaydınız onay aşamasındadır.</td>
-                                            <td><i class="fa fa-try"></i> 0</td>
-                                            <td>06/03/2016 , 13:29</td>
-                                            <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                            <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3327</td>
-                                            <td>Onay Bekliyor</td>
-                                            <td>Nokia</td>
-                                            <td>Lumia 920</td>
-                                            <td>Arıza kaydınız onay aşamasındadır.</td>
-                                            <td><i class="fa fa-try"></i> 0</td>
-                                            <td>06/03/2016 , 13:29</td>
-                                            <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                            <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>Onaylandı</td>
-                                            <td>iPhone</td>
-                                            <td>4s</td>
-                                            <td>Telefonunuzu teslim almak için iletişime geçilecek.</td>
-                                            <td><i class="fa fa-try"></i> 0</td>
-                                            <td>06/03/2016 , 13:29</td>
-                                            <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                            <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3327</td>
-                                            <td>Onay Bekliyor</td>
-                                            <td>Samsung</td>
-                                            <td>Galaxy S2</td>
-                                            <td>Arıza kaydınız onay aşamasındadır.</td>
-                                            <td><i class="fa fa-try"></i> 0</td>
-                                            <td>06/03/2016 , 13:29</td>
-                                            <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                            <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                                        </tr>
+                                    <tbody>';
+                                        include 'dbsettings.php';
+                                        $result = mysqli_query($connection, 
+                                        "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
+                                                
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo '
+                                            <tr>
+                                                <td>'.$row[0].'</td>
+                                                <td>'.$row[1].'</td>
+                                                <td>'.$row[2].'</td>
+                                                <td>'.$row[3].'</td>
+                                                <td>'.$row[4].'</td>
+                                                <td><i class="fa fa-try"></i> '.$row[6].'</td>
+                                                <td>'.$row[5].'</td>
+                                                <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
+                                                <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
+                                            </tr>';
+                                        }
+                                        
+                                        echo '
                                     </tbody>
                                 </table>
                             </div>
@@ -82,4 +58,7 @@
     </div>
 </div>
 </body>
-</html>
+</html>';
+?>
+
+    
