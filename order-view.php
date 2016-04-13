@@ -3,7 +3,7 @@
 
             $_SESSION["id"] = $_POST["id"];
         }
-    else if ($_POST["sil"]){
+    else if (isset($_POST["sil"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection, 
         "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());

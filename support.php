@@ -1,28 +1,31 @@
 <?php include 'login-header.php';
+?>
+
+<?php 
     include 'dbsettings.php';  
+    $talep_sayi=0;
+    $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
+    while ($row = mysqli_fetch_array($result)){
+        $talep_sayi++;
+    }
     if (isset($_POST["talep_olustur"])){
         $konu = $_POST["konu"];
         $mesaj = $_POST["mesaj"];
 
+        include 'dbsettings.php';
         $result = mysqli_query($connection, 
         "CALL talep_olustur('$konu','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if ($row[@bilgi]=="basarili"){ //TALEP OLUSTURULDU
-
+            $talep_sayi++;
         }
         else if($row[@bilgi]=="basarisiz"){ // TALEP OLUSTURULAMADI
 
         }
         else{//NEDENI BILINMIYOR
             
-        }
-
-         
+        }      
     }
-?>
-
-<?php 
-     
     echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -37,8 +40,9 @@
                             <i class="fa fa-info-circle"></i>  <strong>Destek talepleriniz en kısa süre içerisinde cevaplandırılacaktır.</strong>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div>';
+                if ($talep_sayi!=0){
+                    echo '<div class="row">
                     <div class="col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -49,7 +53,6 @@
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Talep No #</th>
                                                 <th>Oluşturulma Tarihi</th>
                                                 <th>Son İşlem Tarihi</th>
                                                 <th>Konu</th>
@@ -62,14 +65,20 @@
                                         $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
                                         
                                         while ($row = mysqli_fetch_array($result)){
+                                            if ($row[3]=="Cevaplandırıldı"){
+                                                $i_class='fa fa-check-circle';
+                                            }
+                                            else{
+                                                $i_class='fa fa-info-circle';
+                                            }
                                             echo '
                                                     <form action="ticket-view.php" method="post">
                                                         <tr>
-                                                            <td class="col-xs-1">'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"></td>
-                                                            <td class="col-xs-1">'.$row[1].'</td>
-                                                            <td class="col-xs-1">'.$row[2].'</td>
-                                                            <td class="col-xs-3">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
-                                                            <td class="col-xs-1"><i class="fa fa-info-circle"></i>'.$row[4].'</td>
+                                                            <input type="hidden" name="id" value="'.$row[0].'">
+                                                            <td class="col-xs-2">'.$row[1].'</td>
+                                                            <td class="col-xs-2">'.$row[2].'</td>
+                                                            <td class="col-xs-2">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
+                                                            <td class="col-xs-1"><i class="'.$i_class.'"></i>'.$row[4].'</td>
                                                             <td class="col-xs-1"><input type="submit" class="btn btn-primary" name="goruntule" value="Görüntüle"></td>
                                                         </tr>
                                                     </form>';
@@ -80,11 +89,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                    }
+                    echo '
                     <div class="col-xs-12 col-md-3">
                         <a href="#" class="btn btn-danger btn-ticket" data-toggle="modal" data-target="#support-modal">Talep Oluştur</a>
                     </div>
-                </div>
+                </div>         
             </div>
         </div>
     </div>
@@ -120,8 +131,15 @@
     </div>
 </div>
 </body>
-</html>';    
-                                        
+</html>'; 
+
 ?>
+    
+
+
+     
+       
+                                        
+
 
         

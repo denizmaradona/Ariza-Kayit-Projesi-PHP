@@ -72,8 +72,9 @@ include 'dbsettings.php';
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div>';
+                if ($kayit_sayi!=0){
+                    echo '<div class="row">
                     <div class="col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -84,7 +85,7 @@ include 'dbsettings.php';
                                     <table id = "tablo" class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Arıza No #</th>
+                                                
                                                 <th>İşlem Tarihi</th>
                                                 <th>Telefon Marka</th>
                                                 <th>Telefon Model</th>
@@ -100,16 +101,16 @@ include 'dbsettings.php';
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
                                                 echo 
-                                                	'<form action="order-view.php" method="post">
-                                                		<tr>
-	                                                        <td class="col-xs-2">'.$row[0].'<input type="hidden" name="id" value="'.$row[0].'"></td>
-	                                                        <td class="col-xs-2">'.$row[3].'</td>
-	                                                        <td class="col-xs-2">'.$row[1].'</td>
-	                                                        <td class="col-xs-2">'.$row[2].'</td>
-	                                                        <td class="col-xs-2">'.$row[5].'</td>
-	                                                        <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" name="goruntule"></td>
-                                                    	</tr>
-                                                	</form>';                                                                                   
+                                                    '<form action="order-view.php" method="post">
+                                                        <tr>
+                                                            <input type="hidden" name="id" value="'.$row[0].'">
+                                                            <td class="col-xs-2">'.$row[3].'</td>
+                                                            <td class="col-xs-2">'.$row[1].'</td>
+                                                            <td class="col-xs-2">'.$row[2].'</td>
+                                                            <td class="col-xs-2">'.$row[5].'</td>
+                                                            <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" name="goruntule"></td>
+                                                        </tr>
+                                                    </form>';                                                                                   
                                                     }
                                                  
                                                 echo '</tbody>
@@ -118,7 +119,9 @@ include 'dbsettings.php';
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>';
+                }
+                echo '
             </div>
         </div>
     </div>
