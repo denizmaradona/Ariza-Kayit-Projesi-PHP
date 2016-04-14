@@ -1,6 +1,6 @@
 <?php include 'header.php';
 	include 'dbsettings.php';
-		
+
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
 		$ad = $_POST["ad"];
 		$soyad = $_POST["soyad"];
@@ -10,7 +10,7 @@
 		$adres = $_POST["adres"];
 		$cep_tel = $_POST["cep_tel"];
 
-		$result = mysqli_query($connection, 
+		$result = mysqli_query($connection,
      	"CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
 
      	$row = mysqli_fetch_array($result);
@@ -28,7 +28,7 @@
      	$eposta = $_POST["eposta"];
 		$sifre = $_POST["sifre"];
 
-		$result = mysqli_query($connection, 
+		$result = mysqli_query($connection,
      	"CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
 
      	$row = mysqli_fetch_array($result);
@@ -39,21 +39,21 @@
      		$_SESSION["eposta"] = $eposta;
      		header("Location:dashboard.php");
 
-     	}    	
+     	}
      	else if($row[@bilgi]=="temsilci girisi basarili"){
             session_start();
             $_SESSION["oturum"] = true;
-            $_SESSION["eposta"] = $eposta;            
+            $_SESSION["eposta"] = $eposta;
      		header("Location:admin-dashboard.php");
         }
-     		
+
         else { // kullanıcı adı veya şifre yanlış
             header("Location:index.php");
         }
     }
-?>	
+?>
 
-<?php 
+<?php
 		echo '<section class="main-area">
         <div class="container">
             <div class="row">
@@ -177,7 +177,7 @@
                                     <input type="text" class="form-control" placeholder="Telefon Numaranız" name="cep_tel">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control datepicker" data-provide="datepicker" placeholder="Gün/Ay/Yıl" name="dogum_tarih">
+                                    <input type="text" class="form-control datepicker" data-provide="datepicker" placeholder="Doğum Tarihiniz" name="dogum_tarih">
                                 </div>
                                 <div class="form-group">
                                     <textarea cols="30" rows="3" class="form-control" placeholder="Adres" name="adres"></textarea>
@@ -192,9 +192,9 @@
             </div>
         </div>
     </div>';
-	
+
 ?>
 
-    
+
 
 <?php include 'footer.php'; ?>
