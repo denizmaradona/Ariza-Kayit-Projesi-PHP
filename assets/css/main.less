@@ -611,6 +611,7 @@ footer {
                         background-color: @grey-background;
                         border: 2px solid #454545;
                         border-radius: 0;
+                        color: @white-text;
                         &:focus {
                             border-color: #BCBCB2 !important;
                             -webkit-transition: all 0.3s ease;
@@ -636,6 +637,14 @@ footer {
             .modal-footer {
                 border-top: 0;
             }
+        }
+    }
+}
+
+#profile-modal {
+    .modal-footer {
+        .form-control {
+            margin-bottom: 10px;
         }
     }
 }

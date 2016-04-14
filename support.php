@@ -1,8 +1,8 @@
 <?php include 'login-header.php';
 ?>
 
-<?php 
-    include 'dbsettings.php';  
+<?php
+    include 'dbsettings.php';
     $talep_sayi=0;
     $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
     while ($row = mysqli_fetch_array($result)){
@@ -13,7 +13,7 @@
         $mesaj = $_POST["mesaj"];
 
         include 'dbsettings.php';
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL talep_olustur('$konu','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if ($row[@bilgi]=="basarili"){ //TALEP OLUSTURULDU
@@ -23,8 +23,8 @@
 
         }
         else{//NEDENI BILINMIYOR
-            
-        }      
+
+        }
     }
     echo '<div class="page-wrapper">
             <div class="container-fluid">
@@ -63,9 +63,9 @@
                                         <tbody>';
                                         include 'dbsettings.php';
                                         $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-                                        
+
                                         while ($row = mysqli_fetch_array($result)){
-                                            if ($row[3]=="Cevaplandırıldı"){
+                                            if ($row[4]=="Cevaplandırıldı"){
                                                 $i_class='fa fa-check-circle';
                                             }
                                             else{
@@ -83,7 +83,7 @@
                                                         </tr>
                                                     </form>';
                                         }
-                                            
+
                                         echo '</tbody>
                                     </table>
                                 </div>
@@ -95,7 +95,7 @@
                     <div class="col-xs-12 col-md-3">
                         <a href="#" class="btn btn-danger btn-ticket" data-toggle="modal" data-target="#support-modal">Talep Oluştur</a>
                     </div>
-                </div>         
+                </div>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 class="modal-title" id="myModalLabel">Talep Oluştur</h3>
                 </div>
-                
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-xs-12">
@@ -120,26 +120,25 @@
                                     <textarea class="form-control" cols="30" rows="5" placeholder="Mesajınız" name="mesaj"></textarea>
                                 </div>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-success" value="Kaydet" name="talep_olustur">
-                    <button type="button" class="btn btn-danger">Kapat</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                 </div>
-                </form>       
+                </form>
         </div>
     </div>
 </div>
 </body>
-</html>'; 
+</html>';
 
 ?>
-    
 
 
-     
-       
-                                        
 
 
-        
+
+
+
+

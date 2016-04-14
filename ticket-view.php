@@ -2,7 +2,7 @@
     if (isset($_POST["gonder"])){
         $mesaj = $_POST["mesaj"];
         include 'dbsettings.php';
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL kul_talep_cevapla('".$_SESSION['id']."','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if ($row[@bilgi]=="iletildi"){
@@ -18,7 +18,7 @@
         $_SESSION["konu"] = $_POST["konu"];
     }
 ?>
-<?php 
+<?php
     echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="info-content">
@@ -36,13 +36,13 @@
                                 <div class="panel-body">
                                     ';
                                     include 'dbsettings.php';
-                                    $result = mysqli_query($connection, 
+                                    $result = mysqli_query($connection,
                                     "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
-                                    while ($row = mysqli_fetch_array($result)){                                                        
-                                                     
+                                    while ($row = mysqli_fetch_array($result)){
+
                                         if ($row['yazan']!='Müşteri Temsilcisi'){
-                                            echo '      
-                                                <article class="pull-left">
+                                            echo '
+                                                <article>
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-2">
                                                             <div class="article-heading">
@@ -57,7 +57,7 @@
                                                         </div>
                                                     </div>
                                                 </article>';
-              
+
                                         }
                                         else{
 
@@ -77,9 +77,9 @@
                                                         </div>
                                                     </div>
                                                 </article>';
-                                            
-                                            
-                                        }                                    
+
+
+                                        }
                                     }
 
                                     echo '
@@ -112,4 +112,3 @@
 </html>';
 ?>
 
-        

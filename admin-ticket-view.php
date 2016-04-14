@@ -1,11 +1,11 @@
-<?php include 'login-header.php'; 
+<?php include 'login-header.php';
     if (isset($_POST["incele"])){
         $_SESSION["id"] = $_POST["id"];
     }
     else if (isset($_POST["gonder"])){
         $mesaj = $_POST["mesaj"];
         include 'dbsettings.php';
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL admin_talep_cevapla('".$_SESSION["id"]."','$mesaj',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if($row[@bilgi]=="iletildi"){
@@ -16,7 +16,7 @@
         }
     }
 ?>
-<?php 
+<?php
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="info-content">
@@ -34,19 +34,19 @@
                         </div>
                         <div class="panel-body">';
                         include 'dbsettings.php';
-                        $result = mysqli_query($connection, 
+                        $result = mysqli_query($connection,
                         "CALL konusma_gecmis_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
                         while ($row = mysqli_fetch_array($result)){
                             echo '
-                            <article class="pull-left ml">
+                            <article class="ml">
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-2">
+                                    <div class="col-xs-12 col-sm-3 col-md-2">
                                         <div class="article-heading">
                                             <span>'.$row[0].'</span><br>
                                             <time>'.$row[2].'</time>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-9 col-md-10">
                                         <div class="article-body">
                                             <p>'.$row[1].'</p>
                                         </div>
@@ -55,7 +55,7 @@
                             </article>
                             ';
                         }
-                        echo '                           
+                        echo '
                         </div>
                     </div>
                 </div>

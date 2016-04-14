@@ -1,4 +1,4 @@
-<?php include 'login-header.php'; 
+<?php include 'login-header.php';
 		include 'dbsettings.php';
 		if (isset($_POST["guncelle"])){
 			$ad = $_POST["ad"];
@@ -11,21 +11,21 @@
 			$result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','".$_SESSION['eposta']."','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error());
             if ($result){
                 $_SESSION["eposta"] = $eposta;
-            }			
+            }
 		}
 		else if(isset($_POST["sil"])){
             $sifre = $_POST["sifre"];
             $result = mysqli_query($connection,"CALL hesabi_sil('".$_SESSION['eposta']."','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
             $row = mysqli_fetch_array($result);
             if ($row[@bilgi]=="silindi"){
-                
+
             }
             else if ($row[@bilgi]=="silinemez"){
-                
+
             }
             else if ($row[@bilgi]=="hatali sifre"){
-                
-            } 
+
+            }
 		}
 
 ?>
@@ -41,7 +41,7 @@
                     <div class="col-xs-12">
                         <form action="" method="post">
                         <?php
-                            $result = mysqli_query($connection, 
+                            $result = mysqli_query($connection,
                             "CALL kisisel_bilgileri_cek('".$_SESSION["eposta"]."')") or die("Query fail: " . mysqli_error());
 
                             $row = mysqli_fetch_array($result);
@@ -169,7 +169,7 @@
                 </div>
                 <form action="" method="post">
                     <div class="modal-footer">
-                        <input type="password" class="form-control" placeholder="Şifreniz" name="sifre">
+                        <input type="password" class="form-control" placeholder="Şifrenizi giriniz" name="sifre">
                         <input type="submit" class="btn btn-success" value="Evet" name="sil">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
                     </div>

@@ -1,10 +1,17 @@
 <?php include 'login-header.php';
-        $sayac=0; 
+        $kayit_sayi=0; 
         include 'dbsettings.php';
         $result = mysqli_query($connection, 
         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
         while($row = mysqli_fetch_array($result)) {
-            $sayac++;
+            $kayit_sayi++;
+        }
+
+        $talep_sayi=0;
+        include 'dbsettings.php';
+        $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
+        while($row = mysqli_fetch_array($result)) {
+            $talep_sayi++;
         }
         echo '<div class="page-wrapper">
     <div class="container-fluid">
@@ -34,7 +41,7 @@
                                         <i class="fa fa-edit fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right count">
-                                        <div class="huge">'.$sayac.'</div>
+                                        <div class="huge">'.$kayit_sayi.'</div>
                                         <div>Arıza Kayıtları</div>
                                     </div>
                                 </div>
@@ -56,7 +63,7 @@
                                         <i class="fa fa-support fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right count">
-                                        <div class="huge">5</div>
+                                        <div class="huge">'.$talep_sayi.'</div>
                                         <div>Destek Talepleri</div>
                                     </div>
                                 </div>
@@ -72,8 +79,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div>';
+        if ($kayit_sayi!=0){
+            echo '<div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -115,7 +123,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>';
+        }
+        echo '        
     </div>
 </div>
 </div>
