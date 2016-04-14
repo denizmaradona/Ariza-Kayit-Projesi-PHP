@@ -3,21 +3,22 @@
 
             $_SESSION["id"] = $_POST["id"];
         }
-    else if (isset($_POST["sil"])){
+    else if(isset($_POST["onayla"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection, 
-        "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-        if ($row[@bilgi]=="silindi"){ // silindi
+        "CALL fiyati_onayla('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
 
-        }
-        else{ // silinemedi
-
-        }    
     }
+    else if(isset($POST["onaylama"])){
+        include 'dbsettings.php';
+        $result = mysqli_query($connection, 
+        "CALL fiyati_onaylama('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
+    }    
+    
 ?>
 <?php
-    echo '<div class="page-wrapper">
+    echo '
+        <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -49,7 +50,7 @@
                                                 
                                                 while($row = mysqli_fetch_array($result)) {
                                                     echo '
-                                                    <form action="" method="post">
+                                                    
                                                         <tr>
                                                             <td>'.$row[0].'</td>
                                                             <td>'.$row[1].'</td>
@@ -61,8 +62,9 @@
                                                             <td><a href="order-update.php" class="btn btn-success">Güncelle</a></td>
                                                             <td><a href="#" class="btn btn-danger btn-delete">Sil</a></td>
                                                         </tr>
-                                                    </form>
                                                     ';
+                                                    
+                                                    
 
                                                 
                                                     }
@@ -89,7 +91,7 @@
             <div class="modal-body">
                 <p>Kaydı <b>silmek</b> istediğinize emin misiniz?</p>
             </div>
-            <form action="" method="post">
+            <form action="dashboard.php" method="post">
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-danger" value="Evet" name="sil">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
@@ -99,6 +101,7 @@
         </div>
     </div>
 </div>
+</form>
 </body>
 </html>';
 ?>

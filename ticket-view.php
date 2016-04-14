@@ -38,9 +38,7 @@
                                     include 'dbsettings.php';
                                     $result = mysqli_query($connection, 
                                     "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
-                                    while ($row = mysqli_fetch_array($result)){
-                                       
-                                                        
+                                    while ($row = mysqli_fetch_array($result)){                                                        
                                                      
                                         if ($row['yazan']!='Müşteri Temsilcisi'){
                                             echo '      
@@ -84,7 +82,6 @@
                                         }                                    
                                     }
 
-                                    /**/
                                     echo '
                                 </div>
                             </div>

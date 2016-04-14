@@ -1,9 +1,22 @@
-<?php include 'login-header.php';
-include 'dbsettings.php';
-	
+<?php include 'login-header.php'
+;
+    if (isset($_POST["sil"])){
+        include 'dbsettings.php';
+
+        $result = mysqli_query($connection, 
+        "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="silindi"){ // silindi
+
+        }
+        else{ // silinemedi
+
+        }    
+    }
 
 ?>
 <?php 
+        include 'dbsettings.php';
 		$result = mysqli_query($connection, 
 	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
 	    $kayit_sayi=0;

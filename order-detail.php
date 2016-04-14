@@ -29,6 +29,7 @@ include 'dbsettings.php';
                                             
                                             $result = mysqli_query($connection, 
                                             "CALL durum_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
+                                            $onay='';
                                             while ($row = mysqli_fetch_array($result)){
                                                 echo '
                                                 <tr>
@@ -37,6 +38,7 @@ include 'dbsettings.php';
                                                     <td class="col-xs-4">'.$row[2].'</td>
                                                     <td class="col-xs-2"><i class="fa fa-try">'.$row[3].'</i></td>
                                                 </tr>';
+                                                $onay=$row[0];
                                             }
                                             
                                             include 'dbsettings.php';
@@ -59,13 +61,17 @@ include 'dbsettings.php';
                     <div class="btn-wrapper">
                         <div class="col-xs-12 col-md-2">
                             <a href="order-view.php" class="btn btn-primary center-block">Geri Dön</a>
-                        </div>
-                        <div class="col-xs-12 col-md-2 col-md-offset-6 confirm hide">
+                        </div>';
+                        if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
+                            echo'
+                        <div class="col-xs-12 col-md-2 col-md-offset-6">
                             <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal">Onaylıyorum</a>
                         </div>
-                        <div class="col-xs-12 col-md-2 reject hide">
+                        <div class="col-xs-12 col-md-2">
                             <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal">Onaylamıyorum</a>
-                        </div>
+                        </div>';
+                        }
+                        echo '
                     </div>
                 </div>
             </div>
@@ -83,8 +89,10 @@ include 'dbsettings.php';
                 <p>Emin misiniz?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Evet</button>
+            <form action="order-view.php" method="post">
+                <input type="submit" class="btn btn-success" name="onayla" value="Evet">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+            </form>    
             </div>
         </div>
     </div>
