@@ -3,7 +3,7 @@
     if (isset($_POST["sil"])){
         include 'dbsettings.php';
 
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if ($row[@bilgi]=="silindi"){ // silindi
@@ -11,18 +11,18 @@
         }
         else{ // silinemedi
 
-        }    
+        }
     }
 
 ?>
-<?php 
+<?php
         include 'dbsettings.php';
-		$result = mysqli_query($connection, 
+		$result = mysqli_query($connection,
 	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
 	    $kayit_sayi=0;
 
 	    while($row = mysqli_fetch_array($result)){
-	    	$kayit_sayi++;  
+	    	$kayit_sayi++;
 		}
 
 		include'dbsettings.php';
@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="panel panel-yellow">
                                     <div class="panel-heading">
                                         <div class="row">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="panel panel-red">
                                     <div class="panel-heading">
                                         <div class="row">
@@ -98,7 +98,7 @@
                                     <table id = "tablo" class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                
+
                                                 <th>İşlem Tarihi</th>
                                                 <th>Telefon Marka</th>
                                                 <th>Telefon Model</th>
@@ -107,13 +107,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>';
-                                            
+
                                                 include 'dbsettings.php';
-                                                $result = mysqli_query($connection, 
+                                                $result = mysqli_query($connection,
                                                 "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-                                                
+
                                                 while($row = mysqli_fetch_array($result)) {
-                                                echo 
+                                                echo
                                                     '<form action="order-view.php" method="post">
                                                         <tr>
                                                             <input type="hidden" name="id" value="'.$row[0].'">
@@ -123,9 +123,9 @@
                                                             <td class="col-xs-2">'.$row[5].'</td>
                                                             <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" name="goruntule"></td>
                                                         </tr>
-                                                    </form>';                                                                                   
+                                                    </form>';
                                                     }
-                                                 
+
                                                 echo '</tbody>
                                     </table>
                                 </div>
@@ -142,13 +142,12 @@
 </html>';
 
 ?>
-	
-		
-    
 
 
-                                                 
-                                        
-	
-        
-        
+
+
+
+
+
+
+

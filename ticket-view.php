@@ -11,7 +11,6 @@
         else{
 
         }
-
     }
     else if (isset($_POST["goruntule"])){
         $_SESSION["id"] = $_POST["id"];
@@ -39,7 +38,6 @@
                                     $result = mysqli_query($connection,
                                     "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                     while ($row = mysqli_fetch_array($result)){
-
                                         if ($row['yazan']!='Müşteri Temsilcisi'){
                                             echo '
                                                 <article>
@@ -57,10 +55,8 @@
                                                         </div>
                                                     </div>
                                                 </article>';
-
                                         }
                                         else{
-
                                             echo '
                                                 <article class="pull-right text-right">
                                                     <div class="row">
@@ -77,11 +73,8 @@
                                                         </div>
                                                     </div>
                                                 </article>';
-
-
                                         }
                                     }
-
                                     echo '
                                 </div>
                             </div>
@@ -97,10 +90,10 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-2">
-                                <a href="support.php" class="btn btn-primary btn-send">Geri Dön</a>
+                                <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                             </div>
                             <div class="col-xs-12 col-md-2 col-md-offset-2">
-                                <input type="submit" class="btn btn-success btn-send" value="Gönder" name="gonder">
+                                <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
                             </div>
                         </div>
                     </form>
@@ -111,4 +104,3 @@
 </body>
 </html>';
 ?>
-

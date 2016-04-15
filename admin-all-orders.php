@@ -1,7 +1,7 @@
-<?php include 'login-header.php'; 
-    
+<?php include 'login-header.php';
+
 ?>
-<?php 
+<?php
     echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -30,12 +30,11 @@
                                     </thead>
                                     <tbody>';
                                         include 'dbsettings.php';
-                                        $result = mysqli_query($connection, 
+                                        $result = mysqli_query($connection,
                                         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
-                                                
                                         while($row = mysqli_fetch_array($result)){
                                             ?>
-                                            <form action="" method="post"> 
+                                            <form action="" method="post">
                                                 <tr>
                                                     <td><?php echo $row[0]?><input type="hidden" name="id" value=<?php echo $row[0]?>></td>
                                                     <td><?php echo $row[1]?></td>
@@ -44,13 +43,12 @@
                                                     <td><?php echo $row[4]?></td>
                                                     <td><i class="fa fa-try"></i><?php echo $row[6]?></td>
                                                     <td><?php echo $row[5]?></td>
-                                                    <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php">Görüntüle</button></td>
-                                                    <td><button type="submit" class="btn btn-success" name="guncelle" formaction="admin-order-update.php">Güncelle</button></td>                                                                                                       
+                                                    <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php"><i class="fa fa-eye"></i> Görüntüle</button></td>
+                                                    <td><button type="submit" class="btn btn-success" name="guncelle" formaction="admin-order-update.php"><i class="fa fa-refresh"></i> Güncelle</button></td>
                                                 </tr>
                                             </form>
                                             <?php
                                         }
-                                        
                                         echo '
                                     </tbody>
                                 </table>
@@ -66,4 +64,3 @@
 </html>';
 ?>
 
-    

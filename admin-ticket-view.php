@@ -70,10 +70,10 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-2">
-                        <a href="admin-all-tickets.php" class="btn btn-primary btn-send">Geri Dön</a>
+                        <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                     </div>
                     <div class="col-xs-12 col-md-2 col-md-offset-2">
-                        <input type="submit" class="btn btn-success btn-send" value="Gönder" name="gonder">
+                        <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
                     </div>
                 </div>
             </form>

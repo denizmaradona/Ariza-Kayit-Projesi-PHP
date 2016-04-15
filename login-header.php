@@ -147,9 +147,6 @@
                                     <a href="profile.php"><i class="fa fa-fw fa-user"></i>Profil</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-gear"></i>Ayarlar</a>
-                                </li>
-                                <li>
                                     <a href="index.php"><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
                                 </li>
                             </ul>

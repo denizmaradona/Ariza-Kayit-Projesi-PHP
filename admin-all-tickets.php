@@ -1,4 +1,4 @@
-<?php include 'login-header.php'; 
+<?php include 'login-header.php';
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -27,14 +27,14 @@
                                 <tbody>';
                                 include 'dbsettings.php';
                                 $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
-                                        
+
                                 while ($row = mysqli_fetch_array($result)){
                                     if ($row[6]=="Cevaplandırıldı")
                                         $i_class='fa fa-check-circle';
-                                        
+
                                     else
                                         $i_class='fa fa-info-circle';
-                                    
+
                                     echo '
                                     <form action="admin-ticket-view.php" method="post">
                                         <tr>
@@ -45,7 +45,9 @@
                                             <td class="col-xs-2">'.$row[4].'</td>
                                             <td class="col-xs-2">'.$row[5].'</td>
                                             <td class="col-xs-2"><i class="'.$i_class.'"></i>'.$row[6].'</td>
-                                            <td class="col-xs-1"><input type="submit" value="İncele" name="incele" class="btn btn-primary"></td>
+                                            <td class="col-xs-1">
+                                                <button type="submit" name="incele" class="btn btn-primary"><i class="fa fa-eye"></i> İncele</button>
+                                            </td>
                                         </tr>
                                     </form>
                                     ';
@@ -62,7 +64,7 @@
 </div>
 </body>
 </html>';
-                                    
-                                
+
+
 ?>
 

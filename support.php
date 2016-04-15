@@ -79,7 +79,9 @@
                                                             <td class="col-xs-2">'.$row[2].'</td>
                                                             <td class="col-xs-2">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
                                                             <td class="col-xs-1"><i class="'.$i_class.'"></i>'.$row[4].'</td>
-                                                            <td class="col-xs-1"><input type="submit" class="btn btn-primary" name="goruntule" value="Görüntüle"></td>
+                                                            <td class="col-xs-1">
+                                                                <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
+                                                            </td>
                                                         </tr>
                                                     </form>';
                                         }
@@ -93,21 +95,20 @@
                     }
                     echo '
                     <div class="col-xs-12 col-md-3">
-                        <a href="#" class="btn btn-danger btn-ticket" data-toggle="modal" data-target="#support-modal">Talep Oluştur</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#support-modal"><i class="fa fa-plus-square-o"></i> Talep Oluştur</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<div class="modal fade" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal fade" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <form action="" method="post">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="modal-title" id="myModalLabel">Talep Oluştur</h3>
-                </div>
-
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title" id="myModalLabel">Talep Oluştur</h3>
+                    </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-xs-12">
@@ -122,14 +123,14 @@
                             </div>
                         </div>
                     </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-success" value="Kaydet" name="talep_olustur">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
-                </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Kaydet" name="talep_olustur">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                    </div>
                 </form>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>';
 

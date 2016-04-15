@@ -39,30 +39,30 @@ body,h1,h2,h3,h4,h5,h6,p,ul,ol {
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder { /* Chrome */
     color: @white-text !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder { /* Firefox 18- */
     color: @white-text !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 input::-moz-placeholder,
 textarea::-moz-placeholder {  /* Firefox 19+ */
     color: @white-text !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder { /* Internet Explorer */
     color: @white-text !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .transition {
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition:    all 0.3s ease-in-out;
-    -ms-transition:     all 0.3s ease-in-out;
-    -o-transition:      all 0.3s ease-in-out;
-    transition:         all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition:    all 0.3s linear;
+    -ms-transition:     all 0.3s linear;
+    -o-transition:      all 0.3s linear;
+    transition:         all 0.3s linear;
 }
 
 .box-shadow {
@@ -72,7 +72,12 @@ textarea:-ms-input-placeholder { /* Internet Explorer */
 .modal-open {
     padding-right: 0 !important;
 }
-
+.btn {
+    letter-spacing: 0.5px;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
 .btn-danger {
     border-bottom: 4px solid darken(#D9534F,10%);
 }
@@ -82,22 +87,15 @@ textarea:-ms-input-placeholder { /* Internet Explorer */
 .btn-success {
     border-bottom: 4px solid darken(#46A046,10%);
 }
+.btn-info {
+    border-bottom: 4px solid darken(#5BC0DE, 10%);
+}
 
 @white-background : #DBD8D8;
 @grey-background: #313131;
-@blue-background: #3E606F;
-@lightblue-background: #91AA9D;
-@darkblue-background: #193441;
-@darkwhite-background: #D1DBBD;
-@green-background: #3FAF6C;
 
 @white-text: #DBD8D8;
 @grey-text: #313131;
-@blue-text: #3E606F;
-@lightblue-text: #91AA9D;
-@darkblue-text: #193441;
-@darkwhite-text: #D1DBBD;
-@green-text: #3FAF6C;
 
 header {
     .navbar {
@@ -130,7 +128,7 @@ header {
             font-size: 30px;
             margin-top: -75px;
             span {
-                color: @darkblue-text;
+                color: #000;
                 i {
                     margin-right: 5px;
                 }
@@ -144,22 +142,22 @@ header {
     input::-webkit-input-placeholder,
     textarea::-webkit-input-placeholder { /* Chrome */
         color: @grey-text !important;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
     input:-moz-placeholder,
     textarea:-moz-placeholder { /* Firefox 18- */
         color: @grey-text !important;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
     input::-moz-placeholder,
     textarea::-moz-placeholder {  /* Firefox 19+ */
         color: @grey-text !important;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
     input:-ms-input-placeholder,
     textarea:-ms-input-placeholder { /* Internet Explorer */
         color: @grey-text !important;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
     .dashboard-header {
         .navbar {
@@ -350,7 +348,7 @@ header {
                     }
                 }
                 select,textarea {
-                    letter-spacing: 2px;
+                    letter-spacing: 1px;
                     color: @grey-text;
                 }
                 textarea {
@@ -367,15 +365,6 @@ header {
                     display: block;
                 }
             }
-        }
-        .btn {
-            letter-spacing: 1px;
-        }
-        .btn-send,.btn-ticket{
-            display: block;
-            width: 100%;
-            color: #fff;
-            letter-spacing: 1px;
         }
         table.filtered {
             th {
@@ -396,10 +385,13 @@ header {
                                 color: #F0AD4E;
                             }
                             i.fa-check-circle {
-                                color: @green-text;
+                                color: #34BF49;
+                            }
+                            i.fa-eye {
+                                padding-right: 0;
                             }
                             .btn {
-                                display: block;
+                                margin-bottom: 0;
                             }
                         }
                     }
@@ -410,6 +402,12 @@ header {
             .btn {
                 margin-bottom: 5px;
             }
+        }
+    }
+    .profile {
+        .form-group {
+            display: inline-block;
+            width: 100%;
         }
     }
 }
@@ -461,7 +459,7 @@ section.main-area {
     .content-header {
         margin-bottom: 20px;
         h1 {
-            color: @darkblue-text;
+            color: #000;
         }
     }
     .content-area {
@@ -585,9 +583,15 @@ footer {
     }
 }
 
-#register-modal,#support-modal {
+.modal {
     overflow-x: hidden;
     overflow-y: auto;
+    .btn {
+        padding: 6px 30px;
+        margin: 0 2.5px;
+        display: inline-block;
+        width: auto;
+    }
     .modal-dialog {
         .modal-content {
             background-color: @grey-background;
@@ -603,6 +607,10 @@ footer {
                 }
             }
             .modal-body {
+                p {
+                    color: #fff;
+                    font-size: 16px;
+                }
                 .form-group {
                     textarea {
                         resize: none;
@@ -641,19 +649,17 @@ footer {
     }
 }
 
-#profile-modal {
-    .modal-footer {
-        .form-control {
-            margin-bottom: 10px;
-        }
-    }
-}
-
-#delete-modal,#support-modal,#register-modal,#confirm-modal,#profile-modal {
-    .modal-dialog {
-        .modal-body {
-            p {
-                font-size: 16px;
+#success-modal {
+    .modal-body {
+        .icon-wrapper {
+            text-align: center;
+            i.fa-check-circle {
+                color: #34BF49;
+                font-size: 90px;
+            }
+            i.fa-times-circle {
+                color: #FF4C4C;
+                font-size: 90px;
             }
         }
     }
@@ -688,9 +694,6 @@ footer {
         .table {
             margin-bottom: 0;
         }
-    }
-    .wrapper .page-wrapper .btn-send {
-        margin-bottom: 10px;
     }
     .wrapper .page-wrapper .panel .panel-heading .ticket-id {
         padding: 0;
@@ -748,9 +751,6 @@ footer {
     .page-wrapper .page-header {
         font-size: 29px;
     }
-    .wrapper .page-wrapper .panel .panel-heading i.fa-5x {
-        font-size: 4em;
-    }
     .page-wrapper .confirm,
     .page-wrapper .reject {
         margin-top: 10px;
@@ -764,9 +764,6 @@ footer {
     }
     .border-left {
         padding: 10px 0 0 0;
-    }
-    .wrapper .page-wrapper .btn-send {
-        font-size: 12px;
     }
     .wrapper .page-wrapper .info-content h3 {
         font-size: 18px;

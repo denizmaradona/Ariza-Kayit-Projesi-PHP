@@ -135,7 +135,7 @@
                                     <div class="form-group">
                                         <input class="btn btn-login" type="submit" value="Giriş Yap" name="giris_yap">
                                         <a href="#" class="register" data-toggle="modal" data-target="#register-modal">Kayıt Ol</a>
-                                        <a href="#" class="forgot">Şifremi Unuttum</a>
+                                        <a href="#" class="forgot" data-toggle="modal" data-target="#lost-password-modal">Şifremi Unuttum</a>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Register Modal -->
     <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -191,7 +191,53 @@
                 </div>
             </div>
         </div>
-    </div>';
+    </div>
+
+    <!-- Register Successful Modal -->
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarılı</h4>
+                    <h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarısız</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="icon-wrapper">
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lost Password Modal -->
+    <div class="modal fade" id="lost-password-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Şifremi Unuttum</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="E-Posta Adresinizi Giriniz" name="eposta">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-register" value="Gönder" name="">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    ';
 
 ?>
 

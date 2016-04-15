@@ -74,10 +74,10 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="order-view.php" class="btn btn-primary btn-send">Geri Dön</a>
+                                    <a href="order-view.php" class="btn btn-primary">Geri Dön</a>
                                 </div>
                                 <div class="col-xs-4 col-xs-offset-4">
-                                    <input type="submit" class="btn btn-success btn-send" value="Güncelle" name="">
+                                    <input type="submit" class="btn btn-success" value="Güncelle" name="">
                                 </div>
                             </div>
                         </form>

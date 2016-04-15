@@ -13,16 +13,16 @@
                         <div class="form-group">
                             <label for="">Son Durum</label>';
                             include 'dbsettings.php';
-                            $result = mysqli_query($connection, 
+                            $result = mysqli_query($connection,
                             "CALL durum_combobox()") or die("Query fail: " . mysqli_error());
-                            echo 
+                            echo
                             '
                                 <select name="durumlar" class="form-control phones selectpicker" data-container="body">';
                                 while ($row = mysqli_fetch_array($result)){
-                                echo '<option value = "'.$row["durum"].'">'.$row["durum"].'</option>'; 
+                                echo '<option value = "'.$row["durum"].'">'.$row["durum"].'</option>';
                                     }
                                  echo '
-                                </select>                          
+                                </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
@@ -36,14 +36,14 @@
                             <label for="">Arıza Ücreti</label>
                             <input type="text" class="form-control" placeholder="Ücret" name="ucret">
                         </div>
-                    </div>    
+                    </div>
                 </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-2">
-                    <input type="submit" class="btn btn-success btn-send" value="Güncelle" name="guncelle">
+                    <input type="submit" class="btn btn-success" value="Güncelle" name="guncelle">
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-2">
-                    <a href="admin-all-orders.php" class="btn btn-danger btn-send">İptal</a>
+                    <a href="admin-all-orders.php" class="btn btn-danger">İptal</a>
                 </div>
             </div>
             </form>
@@ -54,4 +54,3 @@
 </html>';
 ?>
 
-    
