@@ -51,6 +51,45 @@
             header("Location:index.php");
         }
     }
+    else if(isset($_POST["gonder"])){
+        $eposta = $_POST["eposta"];
+        $result = mysqli_query($connection,
+        "CALL sifre_unuttum('$eposta',@sifre,@bilgi)") or die("Query fail: " . mysqli_error());
+
+        $row = mysqli_fetch_array($result);
+
+        if ($row[@bilgi]=="kullanici var"){
+            require_once 'class.phpmailer.php';
+            $mail = new phpmailer();
+            error_reporting(0);
+            $mail -> IsSMTP();
+            $mail -> SMTPDebug = 1;
+            $mail -> SMTPAuth = true;
+            $mail -> SMTPSecure = 'ssl';
+            $mail -> Host = 'smtp.yandex.com.tr';
+            $mail -> Port = 465;
+            $mail -> IsHTML(true);
+            $mail -> CharSet = 'utf-8';
+            $mail -> Username = "iletisim@okanuzun.com";
+            $mail -> Password = "135Okan246";
+            $mail -> SetFrom("iletisim@okanuzun.com");
+            $mail -> Subject = "Bilgilendirme";
+            $mail -> Body = 'Şifreniz : '.$row[@kul_sifre];
+            $mail -> AddAddress($eposta);
+
+            if (!$mail->Send()){
+                
+            }
+            else{
+            
+            }
+        }
+        else{
+
+        }
+
+        
+    }
 ?>
 
 <?php
@@ -228,7 +267,7 @@
                                     <input type="text" class="form-control" placeholder="E-Posta Adresinizi Giriniz" name="eposta">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-register" value="Gönder" name="">
+                                    <input type="submit" class="btn btn-register" value="Gönder" name="gonder">
                                 </div>
                             </form>
                         </div>
