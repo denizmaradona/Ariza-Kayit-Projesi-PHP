@@ -77,14 +77,14 @@
             $mail -> Body = 'Şifreniz : '.$row[@kul_sifre];
             $mail -> AddAddress($eposta);
 
-            if (!$mail->Send()){
+            if (!$mail->Send()){ //mail gönderildi
                 
             }
-            else{
+            else{   // mail gönderilemedi
             
             }
         }
-        else{
+        else{ // sistemde böyle bir mail mevcut değil
 
         }
 
