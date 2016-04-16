@@ -38,7 +38,7 @@
                                     $result = mysqli_query($connection,
                                     "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                     while ($row = mysqli_fetch_array($result)){
-                                        if ($row['yazan']!='Müşteri Temsilcisi'){
+                                        if (strpos($row[0],'Temsil')===false){
                                             echo '
                                                 <article>
                                                     <div class="row">
