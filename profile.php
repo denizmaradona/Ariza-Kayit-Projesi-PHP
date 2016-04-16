@@ -27,6 +27,12 @@
 
             }
 		}
+        else if(isset($_POST["degistir"])){
+            if ($_POST["yeni_sifre"]==$_POST["yeni_sifre_tekrar"]){
+                include 'dbsettings.php';
+                $result = mysqli_query($connection,"CALL sifre_degistir('".$_SESSION['eposta']."','".$_POST["yeni_sifre"]."')") or die("Query fail: " . mysqli_error());
+            }
+        }
 
 ?>
 
@@ -142,13 +148,13 @@
                 <div class="modal-body">
                     <form action="" method="post">
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Yeni Şifreniz" name="">
+                            <input type="password" class="form-control" placeholder="Yeni Şifreniz" name="yeni_sifre">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Yeni Şifreniz Tekrar" name="">
+                            <input type="password" class="form-control" placeholder="Yeni Şifreniz Tekrar" name="yeni_sifre_tekrar">
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Değiştir" name="">
+                            <input type="submit" class="btn btn-success" value="Değiştir" name="degistir">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                         </div>
                     </form>
