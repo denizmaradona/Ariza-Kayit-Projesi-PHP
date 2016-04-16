@@ -1,6 +1,5 @@
 <?php include 'login-header.php';
 include 'dbsettings.php';
-
     echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -26,30 +25,24 @@ include 'dbsettings.php';
                                             </tr>
                                         </thead>
                                         <tbody>';
-                                            
-                                            $result = mysqli_query($connection, 
+                                            $result = mysqli_query($connection,
                                             "CALL durum_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                             $onay='';
                                             while ($row = mysqli_fetch_array($result)){
                                                 echo '
                                                 <tr>
                                                     <td class="col-xs-2">'.$row[0].'</td>
-                                                    <td class="col-xs-4">'.$row[1].'</td>
-                                                    <td class="col-xs-4">'.$row[2].'</td>
-                                                    <td class="col-xs-2"><i class="fa fa-try">'.$row[3].'</i></td>
+                                                    <td class="col-xs-6">'.$row[1].'</td>
+                                                    <td class="col-xs-2">'.$row[2].'</td>
+                                                    <td class="col-xs-2"><i class="fa fa-try"> '.$row[3].'</i></td>
                                                 </tr>';
                                                 $onay=$row[0];
                                             }
-                                            
                                             include 'dbsettings.php';
-                                            $result = mysqli_query($connection, 
+                                            $result = mysqli_query($connection,
                                             "CALL toplam_maliyet('".$_SESSION['id']."',@toplam)") or die("Query fail: " . mysqli_error());
                                             $row = mysqli_fetch_array($result);
-                                            echo '                                          
-                                            <tr>
-                                                <td colspan="2"><strong>Toplam Ücret:</strong></td>
-                                                <td colspan="1"><i class="fa fa-try"></i> '.$row[@toplam].'</td>
-                                            </tr>
+                                            echo '
                                         </tbody>
                                     </table>
                                 </div>
@@ -58,21 +51,32 @@ include 'dbsettings.php';
                     </div>
                 </div>
                 <div class="row">
-                    <div class="btn-wrapper">
-                        <div class="col-xs-12 col-md-2">
-                            <a href="order-view.php" class="btn btn-primary center-block">Geri Dön</a>
-                        </div>';
-                        if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
-                            echo'
-                        <div class="col-xs-12 col-md-2 col-md-offset-6">
-                            <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal">Onaylıyorum</a>
-                        </div>
-                        <div class="col-xs-12 col-md-2">
-                            <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal">Onaylamıyorum</a>
-                        </div>';
-                        }
-                        echo '
+                    <div class="col-xs-12 col-md-2">
+                        <a href="order-view.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                     </div>
+                    <div class="col-xs-12 col-md-3 col-md-offset-7">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped total-price">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Toplam Ücret:</strong></td>
+                                        <td><i class="fa fa-try"> '.$row[@toplam].'</i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>';
+
+                    if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
+                        echo'
+                    <div class="col-xs-12 col-md-2 col-md-offset-6">
+                        <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal">Onaylıyorum</a>
+                    </div>
+                    <div class="col-xs-12 col-md-2">
+                        <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal">Onaylamıyorum</a>
+                    </div>';
+                    }
+                    echo '
                 </div>
             </div>
         </div>
@@ -92,12 +96,12 @@ include 'dbsettings.php';
             <form action="order-view.php" method="post">
                 <input type="submit" class="btn btn-success" name="onayla" value="Evet">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
-            </form>    
+            </form>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>';
-        
+
 ?>

@@ -1,5 +1,11 @@
 <?php include 'login-header.php';
-
+    $sayac=0;
+    include 'dbsettings.php';
+    $result = mysqli_query($connection,
+    "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
+    while ($row = mysqli_fetch_array($result)){
+        $sayac++;
+    }
 ?>
 <?php
     echo '<div class="page-wrapper">
@@ -9,6 +15,9 @@
                     <h1 class="page-header">Arıza Kayıtları</h1>
                 </div>
             </div>
+            ';
+            if ($sayac!=0){
+                echo '
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
@@ -29,6 +38,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>';
+                                    
                                         include 'dbsettings.php';
                                         $result = mysqli_query($connection,
                                         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
@@ -48,7 +58,7 @@
                                                 </tr>
                                             </form>
                                             <?php
-                                        }
+                                        }                                                                          
                                         echo '
                                     </tbody>
                                 </table>
@@ -56,7 +66,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>'
+            ;}
+            echo '
         </div>
     </div>
 </div>

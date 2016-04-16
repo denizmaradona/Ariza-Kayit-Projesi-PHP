@@ -40,10 +40,10 @@
                 </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-2">
-                    <input type="submit" class="btn btn-success" value="Güncelle" name="guncelle">
+                    <button type="submit" class="btn btn-success" name="guncelle"><i class="fa fa-refresh"></i> Güncelle</button>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-2">
-                    <a href="admin-all-orders.php" class="btn btn-danger">İptal</a>
+                    <a href="admin-all-orders.php" class="btn btn-danger"><i class="fa fa-ban"></i> İptal</a>
                 </div>
             </div>
             </form>

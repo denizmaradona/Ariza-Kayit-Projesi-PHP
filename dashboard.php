@@ -121,7 +121,9 @@
                                                             <td class="col-xs-2">'.$row[1].'</td>
                                                             <td class="col-xs-2">'.$row[2].'</td>
                                                             <td class="col-xs-2">'.$row[5].'</td>
-                                                            <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" name="goruntule"></td>
+                                                            <td class="col-xs-2">
+                                                                <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
+                                                            </td>
                                                         </tr>
                                                     </form>';
                                                     }

@@ -1,5 +1,4 @@
 <?php include 'login-header.php'; ?>
-
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -74,10 +73,10 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="order-view.php" class="btn btn-primary">Geri Dön</a>
+                                    <a href="order-view.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                                 </div>
                                 <div class="col-xs-4 col-xs-offset-4">
-                                    <input type="submit" class="btn btn-success" value="Güncelle" name="">
+                                    <button type="submit" class="btn btn-success" name=""><i class="fa fa-refresh"></i> Güncelle</button>
                                 </div>
                             </div>
                         </form>

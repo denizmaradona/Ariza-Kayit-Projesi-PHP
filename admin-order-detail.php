@@ -1,4 +1,4 @@
-<?php include 'login-header.php'; 
+<?php include 'login-header.php';
 if (isset($_POST["guncelle"])){
     $durum = $_POST["durumlar"];
     $detay = $_POST["detay"];
@@ -6,14 +6,16 @@ if (isset($_POST["guncelle"])){
     $id = $_SESSION["id"];
 
     include 'dbsettings.php';
-    $result = mysqli_query($connection, 
+    $result = mysqli_query($connection,
     "CALL ariza_durum_guncelle('$id','$durum','$detay','$ucret')") or die("Query fail: " . mysqli_error());
 
 }
 else if(isset($_POST["goruntule"])){
     $id = $_POST["id"];
 }
-    
+else
+    $id = $_SESSION["id"];
+
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -39,18 +41,18 @@ else if(isset($_POST["goruntule"])){
                                 </thead>
                                 <tbody>';
                                 include 'dbsettings.php';
-                                $result = mysqli_query($connection, 
+                                $result = mysqli_query($connection,
                                 "CALL durum_gecmis_goster('$id')") or die("Query fail: " . mysqli_error());
                                 while ($row = mysqli_fetch_array($result)){
                                     echo '
                                     <tr>
                                         <td class="col-xs-4">'.$row[0].'</td>
-                                        <td class="col-xs-4">'.$row[1].'</td>
-                                        <td class="col-xs-4"><i class="fa fa-try"></i> '.$row[2].'</td>
+                                        <td class="col-xs-4">'.$row[2].'</td>
+                                        <td class="col-xs-4"><i class="fa fa-try"></i> '.$row[3].'</td>
                                     </tr>';
                                 }
                                 include 'dbsettings.php';
-                                $result = mysqli_query($connection, 
+                                $result = mysqli_query($connection,
                                 "CALL toplam_maliyet('$id',@toplam)") or die("Query fail: " . mysqli_error());
                                 $row = mysqli_fetch_array($result);
                                 echo '
@@ -67,7 +69,7 @@ else if(isset($_POST["goruntule"])){
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-3">
-                <a href="admin-all-orders.php" class="btn btn-primary center-block">Geri Dön</a>
+                <a href="admin-all-orders.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
             </div>
         </div>
     </div>
@@ -78,5 +80,5 @@ else if(isset($_POST["goruntule"])){
 ?>
 
 
-    
+
 

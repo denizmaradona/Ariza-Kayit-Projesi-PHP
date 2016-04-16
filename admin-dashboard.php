@@ -101,22 +101,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>';
-                                                include 'dbsettings.php';
-                                                $result = mysqli_query($connection,
-                                                "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
-
-                                                while($row = mysqli_fetch_array($result)) {
-
-                                                echo '<tr>
-
-                                                        <td name="ariza_no" id="ariza_no" class="col-xs-2">'.$row[0].'</td>
-                                                        <td class="col-xs-2">'.$row[1].'</td>
-                                                        <td class="col-xs-2">'.$row[2].'</td>
-                                                        <td class="col-xs-2">'.$row[3].'</td>
-                                                        <td class="col-xs-2">'.$row[4].'</td>
-                                                        <td class="col-xs-2"><input type="submit" class="btn btn-primary" value="Görüntüle" onclick=""></td>
-                                                    </tr>';
-                                                        }
+                                        include 'dbsettings.php';
+                                        $result = mysqli_query($connection,
+                                        "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
+                                        while($row = mysqli_fetch_array($result)) {
+                                        echo '
+                                            <form action="admin-order-view.php" method="post">
+                                                <tr>
+                                                    <td class="col-xs-2">'.$row[0].'</td><input type="hidden" name="id" value="'.$row[0].'">
+                                                    <td class="col-xs-2">'.$row[1].'</td>
+                                                    <td class="col-xs-2">'.$row[2].'</td>
+                                                    <td class="col-xs-2">'.$row[3].'</td>
+                                                    <td class="col-xs-2">'.$row[4].'</td>
+                                                    <td class="col-xs-2">
+                                                        <button type="submit" class="btn btn-primary" name="goruntule" onclick=""><i class="fa fa-eye"></i> Görüntüle</button>
+                                                    </td>
+                                                </tr>
+                                            </form>';
+                                                }
                                     echo '</tbody>
                                 </table>
                             </div>

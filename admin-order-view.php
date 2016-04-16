@@ -1,6 +1,10 @@
-<?php include 'login-header.php'; ?>
-
-<div class="page-wrapper">
+<?php include 'login-header.php';
+    if (isset($_POST["goruntule"])){
+        $_SESSION["id"] = $_POST["id"];
+    }
+ ?>
+ <?php 
+    echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
@@ -24,24 +28,33 @@
                             <th>Kaydı Sil</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr data-id="3326">
-                            <td>Onay Bekliyor</td>
-                            <td>Nokia</td>
-                            <td>Lumia 920</td>
-                            <td>Arıza kaydınız onay aşamasındadır.</td>
-                            <td><i class="fa fa-try"></i> 0</td>
-                            <td>06/03/2016 , 13:29</td>
-                            <td><a href="admin-order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                            <td><a href="admin-order-update.php" class="btn btn-success">Güncelle</a></td>
-                            <td><a href="#" class="btn btn-danger btn-delete">Sil</a></td>
-                        </tr>
+                        <tbody>';
+                        include 'dbsettings.php';
+                        $result = mysqli_query($connection,
+                        "CALL ariza_detay_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
+                        while($row = mysqli_fetch_array($result)) {
+                            echo '
+                            
+                            <tr>
+                                <td>'.$row[0].'</td>
+                                <td>'.$row[1].'</td>
+                                <td>'.$row[2].'</td>
+                                <td>'.$row[3].'</td>
+                                <td><i class="fa fa-try"></i> '.$row[4].'</td>
+                                <td>'.$row[5].'</td>
+                                <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>
+                                <td><a href="admin-order-update.php" class="btn btn-success"><i class="fa fa-refresh"></i> Güncelle</a></td>
+                                <td><a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Sil</a></td>
+                            </tr>
+                            ';
+                        }   
+                        echo '
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="col-xs-12 col-md-3">
-                <a href="admin-dashboard.php" class="btn btn-primary center-block">Geri Dön</a>
+                <a href="admin-dashboard.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
             </div>
         </div>
     </div>
@@ -66,4 +79,5 @@
     </div>
 </div>
 </body>
-</html>
+</html>';
+ ?>

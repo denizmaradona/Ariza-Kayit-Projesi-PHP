@@ -29,11 +29,13 @@
                                 $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
 
                                 while ($row = mysqli_fetch_array($result)){
-                                    if ($row[6]=="Cevaplandırıldı")
+                                    if ($row[6]=="Cevaplandırıldı"){
                                         $i_class='fa fa-check-circle';
+                                    }
 
-                                    else
+                                    else{
                                         $i_class='fa fa-info-circle';
+                                    }
 
                                     echo '
                                     <form action="admin-ticket-view.php" method="post">

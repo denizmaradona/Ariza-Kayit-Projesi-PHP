@@ -1,20 +1,20 @@
-<?php include 'login-header.php'; 
+<?php include 'login-header.php';
     if (isset($_POST["goruntule"])){
 
             $_SESSION["id"] = $_POST["id"];
         }
     else if(isset($_POST["onayla"])){
         include 'dbsettings.php';
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL fiyati_onayla('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
 
     }
     else if(isset($POST["onaylama"])){
         include 'dbsettings.php';
-        $result = mysqli_query($connection, 
+        $result = mysqli_query($connection,
         "CALL fiyati_onaylama('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
-    }    
-    
+    }
+
 ?>
 <?php
     echo '
@@ -43,38 +43,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>';
-                                    
-                                                include 'dbsettings.php';
-                                                $result = mysqli_query($connection, 
-                                                "CALL ariza_detay_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
-                                                
-                                                while($row = mysqli_fetch_array($result)) {
-                                                    echo '
-                                                    
-                                                        <tr>
-                                                            <td>'.$row[0].'</td>
-                                                            <td>'.$row[1].'</td>
-                                                            <td>'.$row[2].'</td>
-                                                            <td>'.$row[3].'</td>
-                                                            <td>'.$row[4].'</td>
-                                                            <td>'.$row[5].'</td>
-                                                            <td><a href="order-detail.php" class="btn btn-primary">Görüntüle</a></td>
-                                                            <td><a href="order-update.php" class="btn btn-success">Güncelle</a></td>
-                                                            <td><a href="#" class="btn btn-danger btn-delete">Sil</a></td>
-                                                        </tr>
-                                                    ';
-                                                    
-                                                    
+                                    include 'dbsettings.php';
+                                    $result = mysqli_query($connection,
+                                    "CALL ariza_detay_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
 
-                                                
-                                                    }
-                                                echo '
+                                    while($row = mysqli_fetch_array($result)) {
+                                        echo '
+                                            <tr>
+                                                <td>'.$row[0].'</td>
+                                                <td>'.$row[1].'</td>
+                                                <td>'.$row[2].'</td>
+                                                <td>'.$row[3].'</td>
+                                                <td>'.$row[4].'</td>
+                                                <td>'.$row[5].'</td>
+                                                <td><a href="order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>
+                                                <td><a href="order-update.php" class="btn btn-success"><i class="fa fa-refresh"></i> Güncelle</a></td>
+                                                <td><a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Sil</a></td>
+                                            </tr>
+                                        ';
+                                        }
+                                    echo '
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3">
-                        <a href="dashboard.php" class="btn btn-primary center-block">Geri Dön</a>
+                        <a href="dashboard.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +91,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>
@@ -106,4 +100,3 @@
 </html>';
 ?>
 
-        
