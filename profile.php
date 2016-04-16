@@ -1,4 +1,4 @@
-<?php include 'login-header.php';
+<?php   include 'login-header.php';
 		include 'dbsettings.php';
 		if (isset($_POST["guncelle"])){
 			$ad = $_POST["ad"];
@@ -29,10 +29,11 @@
 		}
         else if(isset($_POST["degistir"])){
             if ($_POST["yeni_sifre"]==$_POST["yeni_sifre_tekrar"]){
-                include 'dbsettings.php';
                 $result = mysqli_query($connection,"CALL sifre_degistir('".$_SESSION['eposta']."','".$_POST["yeni_sifre"]."')") or die("Query fail: " . mysqli_error());
             }
         }
+
+        
 
 ?>
 
