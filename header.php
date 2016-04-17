@@ -45,11 +45,11 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="assets/img/logo.png" class="img-responsive"></a>
+                        <a class="navbar-brand" href="index.php"><img src="assets/img/logo.png" class="img-responsive"></a>
                     </div>
                     <div class="collapse navbar-collapse site-navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Ana Sayfa</a></li>
+                            <li><a href="index.php">Ana Sayfa</a></li>
                             <li><a href="#">Hizmetler</a></li>
                             <li><a href="#">Hakkımızda</a></li>
                             <li><a href="#">S.S.S</a></li>

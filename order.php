@@ -1,4 +1,5 @@
-<?php include 'login-header.php'; ?>
+<?php include 'login-header.php';
+    echo '
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -13,38 +14,42 @@
                                 <div class="col-xs-6">
                                     <div class="info-content">
                                         <div class="form-group">
-                                        <?php
-                                        	include 'dbsettings.php';
-                                        	$result = mysqli_query($connection,
-     										"CALL marka_combobox()") or die("Query fail: " . mysqli_error());
+                                        ';
+                                            include 'dbsettings.php';
+                                            $result = mysqli_query($connection,
+                                            "CALL marka_combobox()") or die("Query fail: " . mysqli_error());
 
-                                            echo '<select name="markalar" class="form-control phones selectpicker onChange="changeTest(this)" data-container="body">';
-                                            while ($row = mysqli_fetch_array($result)){
-                                            	echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>';
-                                            }
-                                            echo '</select>';
+                                            echo '
+                                            <form action="" method="post">
+                                                <select id="marka" name="markalar" class="form-control selectpicker data-container="body">';
+                                                while ($row = mysqli_fetch_array($result))
+                                                    echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>';
+                                                echo '</select>
+                                            </form>
+                                            ';
 
-                                        ?>
+                                        echo '
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="info-content">
-                                        <div class="form-group">
-                                        <?php
-                                        	$result = mysqli_query($connection,
-     										"CALL model_combobox('$marka')") or die("Query fail: " . mysqli_error());
+                                </div>';
+                                if (isset($_POST["ileri"])){
+                                    echo '<div class="col-xs-6">
+                                            <div class="info-content">
+                                                <div class="form-group">';
+                                                include 'dbsettings.php';
+                                                $result = mysqli_query($connection,
+                                                "CALL model_combobox('".$_POST["markalar"]."')") or die("Query fail: " . mysqli_error());
 
-     										echo '<select name="modeller" class="form-control models iphone active selectpicker" data-container="body">';
-     										while($row = mysqli_fetch_array($result)){
-     											echo '<option value = '.$row["model"].'>'.$row["model"].'</option>';
-     										}
-     										echo '<select/>';
-                                        ?>
+                                                echo '<select id="model" name="modeller" class="form-control selectpicker" data-container="body">';
+                                                while($row = mysqli_fetch_array($result))
+                                                    echo '<option value = '.$row["model"].'>'.$row["model"].'</option>';
+                                                echo '</select>';
+                                            echo '
 
                                         </div>
                                     </div>
-                                </div>
+                                </div>';}
+                                echo '
                                 <div class="col-xs-12">
                                     <div class="info-content">
                                         <div class="form-group">
@@ -82,3 +87,5 @@
     </div>
 </body>
 </html>
+    ';
+?>

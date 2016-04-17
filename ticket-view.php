@@ -58,7 +58,7 @@
                                         }
                                         else{
                                             echo '
-                                                <article class="pull-right text-right">
+                                                <article class="text-right">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-10">
                                                             <div class="article-body">

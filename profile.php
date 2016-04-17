@@ -1,5 +1,6 @@
 <?php   include 'login-header.php';
 		include 'dbsettings.php';
+
 		if (isset($_POST["guncelle"])){
 			$ad = $_POST["ad"];
 			$soyad = $_POST["soyad"];
@@ -13,12 +14,14 @@
                 $_SESSION["eposta"] = $eposta;
             }
 		}
+
 		else if(isset($_POST["sil"])){
             $sifre = $_POST["sifre"];
             $result = mysqli_query($connection,"CALL hesabi_sil('".$_SESSION['eposta']."','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
             $row = mysqli_fetch_array($result);
+            
             if ($row[@bilgi]=="silindi"){
-
+                die("<script>location.href = 'index.php'</script>");
             }
             else if ($row[@bilgi]=="silinemez"){
 
@@ -27,14 +30,12 @@
 
             }
 		}
+        
         else if(isset($_POST["degistir"])){
             if ($_POST["yeni_sifre"]==$_POST["yeni_sifre_tekrar"]){
                 $result = mysqli_query($connection,"CALL sifre_degistir('".$_SESSION['eposta']."','".$_POST["yeni_sifre"]."')") or die("Query fail: " . mysqli_error());
             }
         }
-
-        
-
 ?>
 
     <div class="page-wrapper profile">

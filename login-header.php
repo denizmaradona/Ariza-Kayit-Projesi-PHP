@@ -32,7 +32,7 @@
         });
 
         jQuery(document).ready(function() {
-
+            /*
             // Select Box Control
             $(".phones").on("change", function() {
                 //remove active
@@ -43,7 +43,7 @@
                     subList.addClass("active");
                     subList.parent('.models').css('cssText', 'display: block !important');
                 }
-            });
+            });*/
 
             // Order Delete Control
             $('.btn-delete').on('click', function(e) {
