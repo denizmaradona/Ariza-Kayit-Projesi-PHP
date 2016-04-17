@@ -70,10 +70,10 @@ include 'dbsettings.php';
                     if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
                         echo'
                     <div class="col-xs-12 col-md-2 col-md-offset-6">
-                        <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal">Onaylıyorum</a>
+                        <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal1">Onaylıyorum</a>
                     </div>
                     <div class="col-xs-12 col-md-2">
-                        <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal">Onaylamıyorum</a>
+                        <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal2">Onaylamıyorum</a>
                     </div>';
                     }
                     echo '
@@ -81,8 +81,8 @@ include 'dbsettings.php';
             </div>
         </div>
     </div>
-
-<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Onaylama Modal -->
+<div class="modal fade" id="confirm-modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,6 +101,28 @@ include 'dbsettings.php';
         </div>
     </div>
 </div>
+
+<!-- Onaylamama Modal -->
+<div class="modal fade" id="confirm-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+            <form action="order-view.php" method="post">
+                <input type="submit" class="btn btn-success" name="onaylama" value="Evet">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>';
 

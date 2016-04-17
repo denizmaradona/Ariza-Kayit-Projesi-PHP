@@ -9,7 +9,7 @@
         "CALL fiyati_onayla('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
 
     }
-    else if(isset($POST["onaylama"])){
+    else if(isset($_POST["onaylama"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection,
         "CALL fiyati_onaylama('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());

@@ -9,6 +9,26 @@ if (isset($_POST["guncelle"])){
     $result = mysqli_query($connection,
     "CALL ariza_durum_guncelle('$id','$durum','$detay','$ucret')") or die("Query fail: " . mysqli_error());
 
+    if ($result && $durum=="Onaylandı"){ // Arıza kaydının onaylandığına dair bilgi mesajı
+        include 'dbsettings.php';
+        $result = mysqli_query($connection, "select kullanici.email from kullanici, ariza_kayit where ariza_kayit.id = '".$id."' and ariza_kayit.kullanici_id = kullanici.id") or die ("Query fail: " .mysqli_error());
+        if ($result){
+            $row = mysqli_fetch_array($result);
+            include 'mail-config.php';
+            $mail -> Subject = "Bilgilendirme";
+            $mail -> Body = "# '".$id."' nolu arıza kaydınız onaylanmıştır";
+            $mail -> AddAddress($row[0]);
+
+            if (!$mail->Send()){ //mail gönderilemedi
+                
+            }
+            else{   // mail gönderildi
+            
+            }
+        }
+            
+    }
+
 }
 else if(isset($_POST["goruntule"])){
     $id = $_POST["id"];

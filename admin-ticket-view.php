@@ -9,7 +9,37 @@
         "CALL admin_talep_cevapla('".$_SESSION["id"]."','$mesaj',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if($row[@bilgi]=="iletildi"){
+            include 'dbsettings.php';
+            $result = mysqli_query($connection, "select kullanici.email from kullanici, talep where talep.id='".$_SESSION["id"]."' and talep.kullanici_id = kullanici.id") or die ("Query fail: " .mysqli_error());
+            if ($result){
+                $row = mysqli_fetch_array($result);
+                $eposta = $row[0];
+                require_once 'class.phpmailer.php';
+                $mail = new phpmailer();
+                error_reporting(0);
+                $mail -> IsSMTP();
+                $mail -> SMTPDebug = 1;
+                $mail -> SMTPAuth = true;
+                $mail -> SMTPSecure = 'ssl';
+                $mail -> Host = 'smtp.yandex.com.tr';
+                $mail -> Port = 465;
+                $mail -> IsHTML(true);
+                $mail -> CharSet = 'utf-8';
+                $mail -> Username = "iletisim@okanuzun.com";
+                $mail -> Password = "135Okan246";
+                $mail -> SetFrom("iletisim@okanuzun.com");
+                $mail -> Subject = "Bilgilendirme";
+                $mail -> Body = "#'".$_SESSION["id"]."' nolu talebiniz cevaplandırıldı";
+                $mail -> AddAddress($eposta);
 
+                if (!$mail->Send()){ //mail gönderildi
+                    
+                }
+                else{   // mail gönderilemedi
+                
+                }
+            }
+            
         }
         else if($row[@bilgi]=="iletilemez"){
 
