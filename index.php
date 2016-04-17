@@ -15,11 +15,28 @@
 
      	$row = mysqli_fetch_array($result);
 
+        $durum = false;
+
      	if ($row[@bilgi]=="kayit basarili"){
-     		header("Location:index.php");
+            $durum = true;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+            </script>
+            <?php
+
+     		
      	}
      	else{
-            header("Location:index.php");
+            $durum = false;?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+            </script>
+            <?php
      	}
 
 	}
@@ -210,7 +227,7 @@
                                     <textarea cols="30" rows="3" class="form-control" placeholder="Adres" name="adres"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-register" value="Kayıt Ol" name="kayit_ol">
+                                    <button type="submit" class="btn btn-register"  name="kayit_ol">Kayıt Ol</button>
                                 </div>
                             </form>
                         </div>
@@ -225,14 +242,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarılı</h4>
-                    <h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarısız</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    if ($durum == true){
+                        echo '<h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarılı</h4>';
+                    }
+                    else{
+                        echo '<h4 class="modal-title" id="myModalLabel">E-mail Kullanılmakta. Lütfen başka bir e-mail adresiyle kayıt olunuz</h4>';
+                    }
+                    echo '
+                    
                 </div>
                 <div class="modal-body">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-check-circle"></i>
-                        <i class="fa fa-times-circle"></i>
+                    <div class="icon-wrapper">';
+                    if ($durum == true){
+                        echo '<i class="fa fa-check-circle"></i>';
+                    }
+                    else{
+                        echo '<i class="fa fa-times-circle"></i>';
+                    }
+                    echo '    
+                        
                     </div>
                 </div>
             </div>
