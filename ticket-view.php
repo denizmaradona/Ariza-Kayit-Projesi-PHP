@@ -1,20 +1,74 @@
 <?php include 'login-header.php';
     if (isset($_POST["gonder"])){
-        $mesaj = $_POST["mesaj"];
-        include 'dbsettings.php';
-        $result = mysqli_query($connection,
-        "CALL kul_talep_cevapla('".$_SESSION['id']."','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-        if ($row[@bilgi]=="iletildi"){
-
+        if (empty($_POST["mesaj"])){
+            $icerik = "Mesaj Kısmı Boş Bırakılamaz";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){                      
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
         }
         else{
-
-        }
+            $mesaj = $_POST["mesaj"];
+            include 'dbsettings.php';
+            $result = mysqli_query($connection,
+            "CALL kul_talep_cevapla('".$_SESSION['id']."','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            if ($row[@bilgi]=="iletildi"){
+                $icerik = "Mesajınız Başarıyla İletildi";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){                      
+                        $('#success-modal').modal('show');
+                    })
+                    </script>
+                <?php
+            }
+            else if($row[@bilgi])=="iletilemez"{
+                $icerik = "Mesajınızın İlk Önce Cevaplandırılmasını Bekleyiniz";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){                      
+                        $('#success-modal').modal('show');
+                    })
+                    </script>
+                <?php
+            }
+            else{
+                $icerik = "Yanıtlama İşlemi Başarısız";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){                      
+                        $('#success-modal').modal('show');
+                    })
+                    </script>
+                <?php
+            }
+        }       
     }
     else if (isset($_POST["goruntule"])){
-        $_SESSION["id"] = $_POST["id"];
-        $_SESSION["konu"] = $_POST["konu"];
+        $required = array('id','konu');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
+        }
+        if ($error){
+            $_SESSION["id"] = $_POST["id"];
+            $_SESSION["konu"] = $_POST["konu"];
+        }
+        else{ // Parametreler boş
+
+        }
+        
     }
 ?>
 <?php
@@ -97,6 +151,35 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    if ($durum){
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    else{
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    echo '
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="icon-wrapper">';
+                    if ($durum){
+                        echo '<i class="fa fa-check-circle"></i>';
+                    }
+                    else{
+                        echo '<i class="fa fa-times-circle"></i>';
+                    }
+                    echo '    
+                        
+                    </div>
                 </div>
             </div>
         </div>

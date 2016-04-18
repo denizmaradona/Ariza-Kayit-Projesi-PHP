@@ -2,23 +2,110 @@
 	include 'dbsettings.php';
 
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
-		$ad = $_POST["ad"];
-		$soyad = $_POST["soyad"];
-		$eposta = $_POST["eposta"];
-		$sifre = $_POST["sifre"];
-		$dogum_tarih = $_POST["dogum_tarih"];
-		$adres = $_POST["adres"];
-		$cep_tel = $_POST["cep_tel"];
 
-		$result = mysqli_query($connection,
-     	"CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
+        $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
+        }
 
-     	$row = mysqli_fetch_array($result);
+        if ($error){
+            $icerik = "Tüm Alanlar Doldurulmalıdır";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){                      
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
+        }
+        else{
+            $ad = $_POST["ad"];
+            $soyad = $_POST["soyad"];
+            $eposta = $_POST["eposta"];
+            $sifre = $_POST["sifre"];
+            $dogum_tarih = $_POST["dogum_tarih"];
+            $adres = $_POST["adres"];
+            $cep_tel = $_POST["cep_tel"];
 
-        $durum = false;
+            $result = mysqli_query($connection,
+            "CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
 
-     	if ($row[@bilgi]=="kayit basarili"){
+            $row = mysqli_fetch_array($result);
+
+            $durum = false;
+
+            if ($row[@bilgi]=="kayit basarili"){
+                $icerik = "Kullanıcı Kaydınız Başarıyla Gerçekleşmiştir";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
+
+                
+            }
+            else{
+                $icerik = "E-mail kullanılmakta. Lütfen başka bir e-mail ile kayıt olunuz";
+                $durum = false;?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                        $('#register-modal').modal('show');
+                    })
+                </script>
+                <?php
+            }
+        }    
+    }
+
+    else if(isset($_POST["giris_yap"])){ //giris icin
+        $eposta = $_POST["eposta"];
+        $sifre = $_POST["sifre"];
+
+        $result = mysqli_query($connection,
+        "CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
+
+        $row = mysqli_fetch_array($result);
+
+        if ($row[@bilgi]=="kullanici girisi basarili"){
+            session_start();
+            $_SESSION["oturum"] = true;
+            $_SESSION["eposta"] = $eposta;
+            
+            $icerik = "Başarıyla Giriş Yaptınız";
             $durum = true;
+            ?>
+            <script type="text/javascript">
+                $( window ).unload(function() {
+                   alert( "Bye now!" );
+                   $('#success-modal').modal('show'); 
+                });
+
+            </script>
+            <?php
+            header("Location:dashboard.php");
+
+
+        }
+        else if($row[@bilgi]=="temsilci girisi basarili"){
+            session_start();
+            $_SESSION["oturum"] = true;
+            $_SESSION["eposta"] = $eposta;
+            header("Location:admin-dashboard.php");
+        }
+
+        else { // kullanıcı adı veya şifre yanlış
+            $icerik = "Girdiğiniz Kullanıcı Adı veya Şifre Yanlış!";
+            $durum = false;
             ?>
             <script type="text/javascript">
                 $(function(){
@@ -27,47 +114,10 @@
             </script>
             <?php
 
-     		
-     	}
-     	else{
-            $durum = false;?>
-            <script type="text/javascript">
-                $(function(){
-                    $('#success-modal').modal('show');
-                })
-            </script>
-            <?php
-     	}
 
-	}
-
-	else if(isset($_POST["giris_yap"])){ //giris icin
-     	$eposta = $_POST["eposta"];
-		$sifre = $_POST["sifre"];
-
-		$result = mysqli_query($connection,
-     	"CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
-
-     	$row = mysqli_fetch_array($result);
-
-     	if ($row[@bilgi]=="kullanici girisi basarili"){
-     		session_start();
-     		$_SESSION["oturum"] = true;
-     		$_SESSION["eposta"] = $eposta;
-     		header("Location:dashboard.php");
-
-     	}
-     	else if($row[@bilgi]=="temsilci girisi basarili"){
-            session_start();
-            $_SESSION["oturum"] = true;
-            $_SESSION["eposta"] = $eposta;
-     		header("Location:admin-dashboard.php");
-        }
-
-        else { // kullanıcı adı veya şifre yanlış
-            header("Location:index.php");
         }
     }
+	
 
     else if(isset($_POST["gonder"])){
         $eposta = $_POST["eposta"];
@@ -83,14 +133,41 @@
             $mail -> AddAddress($eposta);
 
             if (!$mail->Send()){ //mail gönderilemedi
-                
+                $icerik = "E-mail gönderilemedi";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
             }
             else{   // mail gönderildi
-            
+                $icerik = "Şifreniz Belirtilen E-mail Adresine Gönderilmiştir. Lütfen Gelen Kutunuza Bakınız";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
             }
         }
         else{ // sistemde böyle bir mail mevcut değil
+            $icerik = "Sistemde Böyle Bir E-maile Ait Kayıt Bulunamadı";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){
 
+                    $('#success-modal').modal('show');
+                    $('#lost-password-modal').modal('show');
+
+                })
+            </script>
+            <?php
         }
 
         
@@ -177,7 +254,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                                     <div class="form-group">
-                                        <input class="btn btn-login" type="submit" value="Giriş Yap" name="giris_yap">
+                                        <button class="btn btn-login" type="submit" name="giris_yap">Giriş Yap</button>
                                         <a href="#" class="register" data-toggle="modal" data-target="#register-modal">Kayıt Ol</a>
                                         <a href="#" class="forgot" data-toggle="modal" data-target="#lost-password-modal">Şifremi Unuttum</a>
                                     </div>
@@ -237,17 +314,16 @@
         </div>
     </div>
 
-    <!-- Register Successful Modal -->
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
                     if ($durum == true){
-                        echo '<h4 class="modal-title" id="myModalLabel">Kayıt İşlemi Başarılı</h4>';
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     else{
-                        echo '<h4 class="modal-title" id="myModalLabel">E-mail Kullanılmakta. Lütfen başka bir e-mail adresiyle kayıt olunuz</h4>';
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     echo '
                     

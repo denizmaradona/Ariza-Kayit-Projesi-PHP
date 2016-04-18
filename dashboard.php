@@ -1,16 +1,35 @@
 <?php include 'login-header.php'
 ;
     if (isset($_POST["sil"])){
+
         include 'dbsettings.php';
 
         $result = mysqli_query($connection,
         "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
         if ($row[@bilgi]=="silindi"){ // silindi
-
+            $icerik = "Arıza Kaydınız Başarıyla Silinmiştir";
+            $durum = true;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                        
+                    $('#success-modal').modal('show');
+                })
+            </script>
+            <?php
         }
         else{ // silinemedi
-
+            $icerik = "Arıza Kaydınız İşlem Aşamasında Olduğundan Dolayı Silinemez";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                        
+                    $('#success-modal').modal('show');
+                })
+            </script>
+            <?php
         }
     }
 
@@ -140,6 +159,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    if ($durum == true){
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    else{
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    echo '
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="icon-wrapper">';
+                    if ($durum == true){
+                        echo '<i class="fa fa-check-circle"></i>';
+                    }
+                    else{
+                        echo '<i class="fa fa-times-circle"></i>';
+                    }
+                    echo '    
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>';
 

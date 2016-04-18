@@ -9,22 +9,63 @@
         $talep_sayi++;
     }
     if (isset($_POST["talep_olustur"])){
-        $konu = $_POST["konu"];
-        $mesaj = $_POST["mesaj"];
-
-        include 'dbsettings.php';
-        $result = mysqli_query($connection,
-        "CALL talep_olustur('$konu','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-        if ($row[@bilgi]=="basarili"){ //TALEP OLUSTURULDU
-            $talep_sayi++;
+        $required = array('konu','mesaj');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
         }
-        else if($row[@bilgi]=="basarisiz"){ // TALEP OLUSTURULAMADI
-
+        if ($error){
+            $icerik = "Tüm Alanlar Doldurulmalıdır";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){                      
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
         }
-        else{//NEDENI BILINMIYOR
+        else{
+            $konu = $_POST["konu"];
+            $mesaj = $_POST["mesaj"];
 
+            include 'dbsettings.php';
+            $result = mysqli_query($connection,
+            "CALL talep_olustur('$konu','$mesaj','".$_SESSION['eposta']."',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            if ($row[@bilgi]=="basarili"){ //TALEP OLUSTURULDU
+                $icerik = "Talebiniz Başarıyla Verilmiştir";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
+                $talep_sayi++;
+            }
+            else if($row[@bilgi]=="basarisiz"){ // TALEP OLUSTURULAMADI
+                $icerik = "Beş Talepten Fazla Verilmez";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
+            }
+            else{//NEDENI BILINMIYOR
+
+            }
         }
+
     }
     echo '<div class="page-wrapper">
             <div class="container-fluid">
@@ -128,6 +169,35 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    if ($durum){
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    else{
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    echo '
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="icon-wrapper">';
+                    if ($durum){
+                        echo '<i class="fa fa-check-circle"></i>';
+                    }
+                    else{
+                        echo '<i class="fa fa-times-circle"></i>';
+                    }
+                    echo '    
+                        
+                    </div>
+                </div>
             </div>
         </div>
     </div>
