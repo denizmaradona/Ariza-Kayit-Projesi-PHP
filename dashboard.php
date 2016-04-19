@@ -32,6 +32,22 @@
             <?php
         }
     }
+    else if (isset($_POST["gonder"])){
+        $marka = $_POST["markalar"];
+        $model = $_POST["modeller"];
+        $problem = $_POST["problem"];
+
+        include 'dbsettings.php';
+        $result = mysqli_query($connection,
+        "CALL ariza_kaydi_ver('".$_SESSION["eposta"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="verildi"){
+
+        }
+        else{
+            
+        }
+    }
 
 ?>
 <?php
