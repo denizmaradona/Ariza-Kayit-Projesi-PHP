@@ -43,21 +43,20 @@
                                         $result = mysqli_query($connection,
                                         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
                                         while($row = mysqli_fetch_array($result)){
-                                            ?>
-                                            <form action="" method="post">
+                                            echo '
+                                            <form method="post">
                                                 <tr>
-                                                    <td><?php echo $row[0]?><input type="hidden" name="id" value=<?php echo $row[0]?>></td>
-                                                    <td><?php echo $row[1]?></td>
-                                                    <td><?php echo $row[2]?></td>
-                                                    <td><?php echo $row[3]?></td>
-                                                    <td><?php echo $row[4]?></td>
-                                                    <td><i class="fa fa-try"></i><?php echo $row[6]?></td>
-                                                    <td><?php echo $row[5]?></td>
+                                                    <td>'.$row[0].'<input type="hidden" name="id" value='.$row[0].'></td>
+                                                    <td>'.$row[1].'</td>
+                                                    <td>'.$row[2].'</td>
+                                                    <td>'.$row[3].'</td>
+                                                    <td>'.$row[4].'</td>
+                                                    <td><i class="fa fa-try"></i>'.$row[6].'</td>
+                                                    <td>'.$row[5].'</td>
                                                     <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php"><i class="fa fa-eye"></i> Görüntüle</button></td>
                                                     <td><button type="submit" class="btn btn-success" name="guncelle" formaction="admin-order-update.php"><i class="fa fa-refresh"></i> Güncelle</button></td>
                                                 </tr>
-                                            </form>
-                                            <?php
+                                            </form>';                                         
                                         }                                                                          
                                         echo '
                                     </tbody>
