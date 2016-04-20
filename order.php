@@ -25,7 +25,7 @@
                                             <form action="" method="post">
                                                 <select id="marka" name="markalar" class="form-control selectpicker data-container="body" onchange="if(this.value != 0) {this.form.submit(); }">';
                                                 while ($row = mysqli_fetch_array($result)){
-                                                    $selected = "false";
+                                                    
                                                     if ($_POST["markalar"] == $row["marka"]){
                                                         echo '<option selected="true" value = '.$row["marka"].'>'.$row["marka"].'</option>';
                                                     }
@@ -53,7 +53,7 @@
 
                                             echo '<select id="model" name="modeller" class="form-control selectpicker" data-container="body">';
                                             while($row = mysqli_fetch_array($result))
-                                                echo '<option value = '.$row["model"].'>'.$row["model"].'</option>';
+                                                echo '<option value = "'.$row["model"].'">'.$row["model"].'</option>';
                                             echo '
                                                         </select>
                                                     </div>
