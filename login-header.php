@@ -126,6 +126,8 @@
     </script>
 </head>
 <?php 
+    $rank = $_SESSION["rank"];
+
     echo '<body id="dashboard">
     <div class="wrapper">
         <header class="dashboard-header">
@@ -148,14 +150,16 @@
                                     <a href="profile.php"><i class="fa fa-fw fa-user"></i>Profil</a>
                                 </li>
                                 <li>
-                                    <a href="index.php"><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
+                                    <a href="exit.php"><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
 
                                 </li>
                             </ul>
                         </li>
                     </ul>
                     <div class="navbar-collapse sidebar-navigation collapse">
-                        <ul class="nav side-nav">
+                        <ul class="nav side-nav">';
+                        if ($rank == 1){
+                            echo '
                             <li class="customer">
                                 <a href="dashboard.php"><i class="fa fa-fw fa-dashboard"></i>Kullanıcı Paneli</a>
                             </li>
@@ -168,7 +172,10 @@
                             <li class="customer">
                                 <a href="support.php"><i class="fa fa-fw fa-support"></i>Destek Talebi</a>
                             </li>
-                            <br>
+                            ';        
+                        }
+                        else{
+                            echo '
                             <li class="admin">
                                 <a href="admin-dashboard.php"><i class="fa fa-fw fa-dashboard"></i>Admin Paneli</a>
                             </li>
@@ -181,6 +188,9 @@
                             <li class="admin">
                                 <a href="admin-all-tickets.php"><i class="fa fa-fw fa-support"></i>Destek Talepleri</a>
                             </li>
+                            ';
+                        }
+                        echo '                            
                         </ul>
                     </div>
                 </div>
