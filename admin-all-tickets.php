@@ -1,12 +1,16 @@
 <?php include 'login-header.php';
+        include 'dbsettings.php';
+        $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
+        
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
                 <h1 class="page-header">Destek Talepleri</h1>
             </div>
-        </div>
-        <div class="row">
+        </div>';
+        if (mysqli_num_rows($result)!=0){
+            echo '<div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -25,8 +29,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>';
-                                include 'dbsettings.php';
-                                $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
+                                
 
                                 while ($row = mysqli_fetch_array($result)){
                                     if ($row[6]=="Cevaplandırıldı"){
@@ -60,7 +63,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>';
+        }
+            echo '
+        
     </div>
 </div>
 </div>
