@@ -80,6 +80,12 @@
             session_start();
             $_SESSION["oturum"] = true;
             $_SESSION["eposta"] = $eposta;
+
+            include 'dbsettings.php'; // isim cekilmesi
+            $result = mysqli_query($connection,
+            "CALL isim_cek('$eposta',@kul_isim)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            $_SESSION["isim"] = $row[@kul_isim];
             
             $icerik = "Başarıyla Giriş Yaptınız";
             $durum = true;
