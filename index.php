@@ -80,24 +80,14 @@
             session_start();
             $_SESSION["oturum"] = true;
             $_SESSION["eposta"] = $eposta;
+            $_SESSION["rank"] = 1;
 
             include 'dbsettings.php'; // isim cekilmesi
             $result = mysqli_query($connection,
             "CALL isim_cek('$eposta',@kul_isim)") or die("Query fail: " . mysqli_error());
             $row = mysqli_fetch_array($result);
             $_SESSION["isim"] = $row[@kul_isim];
-            
-            $icerik = "Başarıyla Giriş Yaptınız";
-            $durum = true;
-            ?>
-            <script type="text/javascript">
-                $( window ).unload(function() {
-                   alert( "Bye now!" );
-                   $('#success-modal').modal('show'); 
-                });
-
-            </script>
-            <?php
+                
             header("Location:dashboard.php");
 
 
@@ -106,6 +96,7 @@
             session_start();
             $_SESSION["oturum"] = true;
             $_SESSION["eposta"] = $eposta;
+            $_SESSION["rank"] = 2;
             header("Location:admin-dashboard.php");
         }
 
