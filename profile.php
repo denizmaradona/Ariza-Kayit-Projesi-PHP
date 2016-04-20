@@ -149,7 +149,6 @@
                     <script type="text/javascript">
                         $(function(){                       
                             $('#success-modal').modal('show');
-                            $('#update-modal').modal('show');
                         })
                     </script>
                     <?php
