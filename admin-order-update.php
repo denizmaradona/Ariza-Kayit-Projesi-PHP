@@ -1,5 +1,9 @@
 <?php include 'login-header.php';
-    $_SESSION["id"] = $_POST["id"];
+    if (isset($_POST["guncelle"])){
+        $_SESSION["id"] = $_POST["id"];
+    }
+?>
+<?php 
     echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -52,5 +56,6 @@
 </div>
 </body>
 </html>';
-?>
+?>    
+
 
