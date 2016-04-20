@@ -66,25 +66,44 @@
                         include 'dbsettings.php';
                         $result = mysqli_query($connection,
                         "CALL konusma_gecmis_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
-                        while ($row = mysqli_fetch_array($result)){
-                            echo '
-                            <article class="ml">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-3 col-md-2">
-                                        <div class="article-heading">
-                                            <span>'.$row[0].'</span><br>
-                                            <time>'.$row[2].'</time>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-9 col-md-10">
-                                        <div class="article-body">
-                                            <p>'.$row[1].'</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            ';
-                        }
+                         while ($row = mysqli_fetch_array($result)){
+                                        if (strpos($row[0],'Temsil')===false){
+                                            echo '
+                                                <article>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-2">
+                                                            <div class="article-heading">
+                                                                <span>'.$row[0].'</span><br>
+                                                                <time>'.$row[2].'</time>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-10">
+                                                            <div class="article-body">
+                                                                <p>'.$row[1].'</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>';
+                                        }
+                                        else{
+                                            echo '
+                                                <article class="text-right">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-10">
+                                                            <div class="article-body">
+                                                                <p>'.$row[1].'</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-2">
+                                                            <div class="article-heading mtop">
+                                                                <span>'.$row[0].'</span><br>
+                                                                <time>'.$row[2].'</time>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>';
+                                        }
+                                    }
                         echo '
                         </div>
                     </div>
