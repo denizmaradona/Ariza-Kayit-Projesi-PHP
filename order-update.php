@@ -1,5 +1,5 @@
 <?php include 'login-header.php';
-    if (isset($_POST[""]))
+    
 ?>
 <?php 
     echo '<div class="page-wrapper">
