@@ -1,5 +1,8 @@
-<?php include 'login-header.php'; ?>
-        <div class="page-wrapper">
+<?php include 'login-header.php';
+    if (isset($_POST[""]))
+?>
+<?php 
+    echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -8,76 +11,66 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <form action="">
+                        <form action="" method="post">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="info-content">
-                                        <div class="form-group">
-                                            <select name="" class="form-control phones selectpicker" data-container="body">
-                                                <option value="">Marka Seçiniz</option>
-                                                <option value="iphone">iPhone</option>
-                                                <option value="samsung">Samsung</option>
-                                                <option value="asus" value="">Asus</option>
-                                                <option value="lg" value="">LG</option>
-                                                <option value="nokia" value="">Nokia</option>
-                                            </select>
+                                        <div class="form-group">';
+                                            include 'dbsettings.php';
+                                            $result = mysqli_query($connection,
+                                            "CALL marka_combobox()") or die("Query fail: " . mysqli_error());
+                                            echo '
+                                            <form action="" method="post">
+                                                <select id="marka" name="markalar" class="form-control selectpicker data-container="body" onchange="if(this.value != 0) {this.form.submit(); }">';
+                                                while ($row = mysqli_fetch_array($result)){
+                                                    
+                                                    if ($_POST["markalar"] == $row["marka"]){
+                                                        echo '<option selected="true" value = '.$row["marka"].'>'.$row["marka"].'</option>';
+                                                    }
+                                                    else{
+                                                        echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>';
+                                                    }
+                                                    
+                                                }
+                                                echo '</select>
+                                            </form>';
+                                            echo '
+                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="info-content">
-                                        <div class="form-group">
-                                            <select name="" class="form-control models iphone active selectpicker" data-container="body">
-                                                <option value="">iPhone 4</option>
-                                                <option value="">iPhone 4s</option>
-                                                <option value="">iPhone 5</option>
-                                                <option value="">iPhone 5s</option>
-                                                <option value="">iPhone 6</option>
-                                            </select>
-                                            <select name="" class="form-control models samsung selectpicker" data-container="body">
-                                                <option value="">Galaxy S2</option>
-                                                <option value="">Galaxy S3</option>
-                                                <option value="">Galaxy S4</option>
-                                                <option value="">Galaxy S5</option>
-                                                <option value="">Galaxy S6</option>
-                                            </select>
-                                            <select name="" class="form-control models asus selectpicker" data-container="body">
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                                <option value="">Zenfone 1</option>
-                                            </select>
-                                            <select name="" class="form-control models lg selectpicker" data-container="body">
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                                <option value="">G3</option>
-                                            </select>
-                                            <select name="" class="form-control models nokia selectpicker" data-container="body">
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                                <option value="">Lumia 920</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="info-content">
-                                        <div class="form-group">
-                                            <textarea name="" cols="30" rows="5" class="form-control" placeholder="Açıklamanız"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="order-view.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                                </div>
-                                <div class="col-xs-4 col-xs-offset-4">
-                                    <button type="submit" class="btn btn-success" name=""><i class="fa fa-refresh"></i> Güncelle</button>
-                                </div>
+                                        <div class="form-group">';
+                                            if (isset($_POST["markalar"])){
+                                            
+                                                include 'dbsettings.php';
+                                                $result = mysqli_query($connection,
+                                                "CALL model_combobox('".$_POST["markalar"]."')") or die("Query fail: " . mysqli_error());
+
+                                                echo '<select id="model" name="modeller" class="form-control selectpicker" data-container="body">';
+                                                while($row = mysqli_fetch_array($result))
+                                                    echo '<option value = "'.$row["model"].'">'.$row["model"].'</option>';
+                                                echo '
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="info-content">
+                                                        <div class="form-group">
+                                                            <textarea name="problem" id="" cols="30" rows="5" class="form-control" placeholder="Açıklamanız"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <button type="submit" class="btn btn-success" name="guncelle" formaction="order-view.php">Gönder</button>
+                                                </div>
+                                                    ';  
+                                        }
+                                                                                                                  
+                                        else echo '                                            
+                                        
                             </div>
                         </form>
                     </div>
@@ -86,4 +79,6 @@
         </div>
     </div>
 </body>
-</html>
+</html>';
+?>
+        

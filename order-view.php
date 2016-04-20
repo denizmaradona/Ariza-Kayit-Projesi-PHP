@@ -14,6 +14,21 @@
         $result = mysqli_query($connection,
         "CALL fiyati_onaylama('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
     }
+    else if(isset($_POST["guncelle"])){
+        $marka = $_POST["markalar"];
+        $model = $_POST["modeller"];
+        $problem = $_POST["problem"];
+        include 'dbsettings.php';
+        $result = mysqli_query($connection,
+        "CALL ariza_bilgilerini_degistir('".$_SESSION["id"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
+        $row = mysqli_fetch_array($result);
+        if ($row[@bilgi]=="degistirildi"){
+
+        }
+        else{ //Degistirilemez
+
+        }
+    }
 
 ?>
 <?php
