@@ -28,7 +28,7 @@
                     </script>
                 <?php
             }
-            else if($row[@bilgi])=="iletilemez"{
+            else if($row[@bilgi]=="iletilemez"){
                 $icerik = "Mesajınızın İlk Önce Cevaplandırılmasını Bekleyiniz";
                 $durum = false;
                 ?>
@@ -61,7 +61,7 @@
                 break;
             }
         }
-        if ($error){
+        if (!$error){
             $_SESSION["id"] = $_POST["id"];
             $_SESSION["konu"] = $_POST["konu"];
         }
