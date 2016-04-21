@@ -34,7 +34,7 @@
 
                 if ($result){
                     $_SESSION["eposta"] = $eposta;
-                    $_SESSION["isim"] = $ad;
+                    $_SESSION["isim"] = strtoupper($ad);
                     $icerik = "Bilgileriniz Başarıyla Güncellenmiştir";
                     $durum = true;
                     ?>
