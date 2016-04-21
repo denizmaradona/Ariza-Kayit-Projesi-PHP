@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
-                            <label for="">Son Durum</label>';
+                            <label for="">Güncellenecek Durum</label>';
                             include 'dbsettings.php';
                             $result = mysqli_query($connection,
                             "CALL durum_combobox()") or die("Query fail: " . mysqli_error());
@@ -31,13 +31,13 @@
                     </div>
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
-                            <label for="">Arıza Detayı</label>
+                            <label for="">Durum Hakkında</label>
                             <input type="text" class="form-control" placeholder="Detay" name="detay">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
-                            <label for="">Arıza Ücreti</label>
+                            <label for="">Durum Masrafı</label>
                             <input type="text" class="form-control" placeholder="Ücret" name="ucret">
                         </div>
                     </div>
