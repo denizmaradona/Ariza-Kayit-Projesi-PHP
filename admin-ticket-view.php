@@ -103,27 +103,38 @@
                                                     </div>
                                                 </article>';
                                         }
+                                        $son_yazan = $row[0];
                                     }
                         echo '
                         </div>
                     </div>
                 </div>
-            </div>
-            <form action="" method="post">
+            </div>';
+            if (strpos($son_yazan,'Temsilci')===false){
+                echo '
+                <form action="" method="post">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <textarea name="mesaj" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-2">
-                        <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                    </div>
+                </div>';
+            }
+                echo '
+                    <div class="row">
+                        <div class="col-xs-12 col-md-2">
+                            <a href="admin-all-tickets.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
+                        </div>
+                ';
+                if (strpos($son_yazan,'Temsilci')===false){
+                    echo '
                     <div class="col-xs-12 col-md-2 col-md-offset-2">
                         <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
                     </div>
+                    ';
+                }
+                    echo '
                 </div>
             </form>
         </div>

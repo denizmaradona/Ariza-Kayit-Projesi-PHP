@@ -128,12 +128,16 @@
                                                     </div>
                                                 </article>';
                                         }
+                                        $son_yazan = $row[0]; 
                                     }
+
                                     echo '
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                    if (strpos($son_yazan,'Temsil')!==false){
+                        echo '
                     <form action="" method="post">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
@@ -141,16 +145,24 @@
                                     <textarea name="mesaj" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
                                 </div>
                             </div>
-                        </div>
+                        </div>';}
+                        echo '
                         <div class="row">
                             <div class="col-xs-12 col-md-2">
                                 <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                            </div>
+                            </div>';
+                            if (strpos($son_yazan,'Temsil')!==false){
+                                echo '
                             <div class="col-xs-12 col-md-2 col-md-offset-2">
                                 <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
                             </div>
                         </div>
-                    </form>
+                    </form>';            
+                            }
+                            
+                        
+                    
+                    echo '
                 </div>
             </div>
         </div>
