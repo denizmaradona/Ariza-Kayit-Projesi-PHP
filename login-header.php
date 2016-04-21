@@ -140,7 +140,11 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="dashboard.php">Hoşgeldin '.$_SESSION["isim"].'</a>
+                        <a class="navbar-brand" href="dashboard.php">';if($rank==1){
+                            echo 'Hoşgeldin '.$_SESSION["isim"];
+                        }  
+                        else echo 'ADMİN PANEL';
+                        echo '</a>
                     </div>
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
