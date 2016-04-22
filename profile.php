@@ -156,7 +156,12 @@
             }
         }
 ?>
-<?php 
+<?php
+    include 'dbsettings.php';
+    $result = mysqli_query($connection,
+    "CALL hesap_silimi_kontrol('".$_SESSION["eposta"]."',@bilgi)") or die("Query fail: " . mysqli_error());
+    $row = mysqli_fetch_array($result);
+    $onay = $row[@bilgi];
     echo '<div class="page-wrapper profile">
         <div class="container-fluid">
             <div class="row">
@@ -225,8 +230,14 @@
                                     <div class="col-xs-12 col-md-4">
                                         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#change-password-modal"><i class="fa fa-random"></i> Şifremi Değiştir</a>
                                     </div>
-                                    <div class="col-xs-12 col-md-4">
-                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fa fa-trash-o"></i> Hesabımı Sil</a>
+                                    <div class="col-xs-12 col-md-4">';
+                                    if ($onay == "silebilir")
+                                        $class="";
+                                    else
+                                        $class="disabled";
+                                    echo '
+                                    <a href="#" class="btn btn-danger '.$class.'" data-toggle="modal" data-target="#delete-account-modal"><i class="fa fa-trash-o"></i> Hesabımı Sil</a>
+                                    
                                     </div>
                                 </div>
                             </div>
