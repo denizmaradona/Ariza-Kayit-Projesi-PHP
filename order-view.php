@@ -58,6 +58,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>';
+                                    
+                                    $durumlar = array("Onay bekliyor","Onaylanmadı","Teslimat tamamlandı");
                                     include 'dbsettings.php';
                                     $result = mysqli_query($connection,
                                     "CALL ariza_detay_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
@@ -70,10 +72,17 @@
                                                 <td>'.$row[2].'</td>
                                                 <td>'.$row[3].'</td>
                                                 <td>'.$row[4].'</td>
-                                                <td>'.$row[5].'</td>
+                                                <td>'.$row[5].'</td>';
+                                            if (in_array($row[0], $durumlar)){
+                                                $class="";
+                                            }
+                                            else{
+                                                $class="disabled";
+                                            }
+                                            echo'
                                                 <td><a href="order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>
-                                                <td><a href="order-update.php" class="btn btn-success"><i class="fa fa-refresh"></i> Güncelle</a></td>
-                                                <td><a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Sil</a></td>
+                                                <td><a href="order-update.php" class="btn btn-success '.$class.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
+                                                <td><a href="#" class="btn btn-danger btn-delete '.$class.'"><i class="fa fa-trash-o"></i> Sil</a></td>
                                             </tr>
                                         ';
                                         }
