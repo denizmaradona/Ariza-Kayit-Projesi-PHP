@@ -53,29 +53,45 @@ include 'dbsettings.php';
                 <div class="row">
                     <div class="col-xs-12 col-md-2">
                         <a href="order-view.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                    </div>
-                    <div class="col-xs-12 col-md-3 col-md-offset-7">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped total-price">
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Toplam Ücret:</strong></td>
-                                        <td><i class="fa fa-try"> '.$row[@toplam].'</i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>';
-
                     if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
                         echo'
-                    <div class="col-xs-12 col-md-2 col-md-offset-6">
+                    <div class="col-xs-12 col-md-2 col-md-offset-3">
                         <a href="#" class="btn btn-success center-block" data-toggle="modal" data-target="#confirm-modal1">Onaylıyorum</a>
                     </div>
                     <div class="col-xs-12 col-md-2">
                         <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal2">Onaylamıyorum</a>
-                    </div>';
+                    </div>
+                        <div class="col-xs-12 col-md-3">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped total-price">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Toplam Ücret:</strong></td>
+                                            <td><i class="fa fa-try"> '.$row[@toplam].'</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>';
                     }
+                    else {
+                        echo '
+                        <div class="col-xs-12 col-md-3 col-md-offset-7">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped total-price">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Toplam Ücret:</strong></td>
+                                            <td><i class="fa fa-try"> '.$row[@toplam].'</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>';
+                    }
+
+
                     echo '
                 </div>
             </div>
