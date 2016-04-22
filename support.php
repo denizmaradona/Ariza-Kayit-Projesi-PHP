@@ -134,9 +134,15 @@
                         </div>
                     </div>';
                     }
+                    if ($talep_sayi < 5){
+                        $class="";
+                    }
+                    else{
+                        $class="disabled";
+                    }
                     echo '
                     <div class="col-xs-12 col-md-3">
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#support-modal"><i class="fa fa-plus-square-o"></i> Talep Oluştur</a>
+                        <a href="#" class="btn btn-danger '.$class.'" data-toggle="modal" data-target="#support-modal"><i class="fa fa-plus-square-o"></i> Talep Oluştur</a>
                     </div>
                 </div>
             </div>
