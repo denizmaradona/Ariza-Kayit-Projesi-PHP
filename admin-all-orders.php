@@ -27,11 +27,11 @@
                                     <thead>
                                         <tr>
                                             <th class="skip-filter">Arıza No #</th>
-                                            <th class="skip-filter">Durum</th>
-                                            <th>Telefon Marka</th>
-                                            <th class="skip-filter">Telefon Model</th>
+                                            <th class="skip-filter">Durumu</th>
+                                            <th>Telefon Markası</th>
+                                            <th class="skip-filter">Telefon Modeli</th>
                                             <th class="skip-filter">Detay</th>
-                                            <th class="skip-filter">Ücret</th>
+                                            <th class="skip-filter">Olası Ücret</th>
                                             <th class="skip-filter">Verilme Tarihi</th>
                                             <th class="skip-filter">İşlem Geçmişi</th>
                                             <th class="skip-filter">Kaydı Güncelle</th>
@@ -53,8 +53,15 @@
                                                     <td>'.$row[4].'</td>
                                                     <td><i class="fa fa-try"></i>'.$row[6].'</td>
                                                     <td>'.$row[5].'</td>
-                                                    <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php"><i class="fa fa-eye"></i> Görüntüle</button></td>
-                                                    <td><button type="submit" class="btn btn-success" name="guncelle" formaction="admin-order-update.php"><i class="fa fa-refresh"></i> Güncelle</button></td>
+                                                    <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php"><i class="fa fa-eye"></i> Görüntüle</button></td>';
+                                                    if (strpos($row[1], "tespit edildi")){
+                                                        $class="disabled";
+                                                    }
+                                                    else{
+                                                        $class="";
+                                                    }
+                                                    echo '
+                                                    <td><button type="submit" class="btn btn-success '.$class.'" name="guncelle" formaction="admin-order-update.php"><i class="fa fa-refresh"></i> Güncelle</button></td>
                                                 </tr>
                                             </form>';                                         
                                         }                                                                          
