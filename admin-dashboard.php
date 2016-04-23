@@ -94,8 +94,8 @@
                                         <tr>
                                             <th>Arıza No #</th>
                                             <th>Oluşturulma Tarihi</th>
-                                            <th>Telefon Marka</th>
-                                            <th>Telefon Model</th>
+                                            <th>Telefon Markası</th>
+                                            <th>Telefon Modeli</th>
                                             <th>Kayıt Durumu</th>
                                             <th>Kayıt Detayları</th>
                                         </tr>
@@ -114,7 +114,7 @@
                                                     <td class="col-xs-2">'.$row[3].'</td>
                                                     <td class="col-xs-2">'.$row[4].'</td>
                                                     <td class="col-xs-2">
-                                                        <button type="submit" class="btn btn-primary" name="goruntule" onclick=""><i class="fa fa-eye"></i> Görüntüle</button>
+                                                    <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
                                                     </td>
                                                 </tr>
                                             </form>';
