@@ -81,7 +81,7 @@
                                 $row = mysqli_fetch_array($result);
                                 echo '
                                 <tr>
-                                    <td colspan="2"><strong>Toplam Ücret:</strong></td>
+                                    <td colspan="2"><strong>Toplam Alınacak Ücret:</strong></td>
                                     <td colspan="1"><i class="fa fa-try"></i> '.$row[@toplam].'</td>
                                 </tr>
                                 </tbody>
