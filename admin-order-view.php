@@ -2,6 +2,11 @@
     if (isset($_POST["goruntule"])){
         $_SESSION["id"] = $_POST["id"];
     }
+    include 'dbsettings.php';
+    $result = mysqli_query($connection,
+    "CALL ariza_guncelleme_kontrol('".$_SESSION["id"]."',@bilgi)") or die("Query fail: " . mysqli_error());
+    $row = mysqli_fetch_array($result);
+    $onay = $row[@bilgi];
  ?>
  <?php 
     echo '<div class="page-wrapper">
@@ -25,7 +30,7 @@
                             <th>Verilme Tarihi</th>
                             <th>İşlem Geçmişi</th>
                             <th>Kaydı Güncelle</th>
-                            <th>Kaydı Sil</th>
+                            <!--<th>Kaydı Sil</th>-->
                         </tr>
                         </thead>
                         <tbody>';
@@ -42,9 +47,16 @@
                                 <td>'.$row[3].'</td>
                                 <td><i class="fa fa-try"></i> '.$row[4].'</td>
                                 <td>'.$row[5].'</td>
-                                <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>
-                                <td><a href="admin-order-update.php" class="btn btn-success"><i class="fa fa-refresh"></i> Güncelle</a></td>
-                                <td><a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Sil</a></td>
+                                <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>';
+                                if ($onay == "guncellenemez"){
+                                    $class = "disabled";
+                                }
+                                else{
+                                    $class = "";
+                                }
+                                echo '
+                                <td><a href="admin-order-update.php" class="btn btn-success '.$class.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
+                                <!--<td><a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Sil</a></td>-->
                             </tr>
                             ';
                         }   
