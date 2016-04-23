@@ -1,7 +1,7 @@
-<?php 
-    include 'login-header.php'; 
+<?php
+    include 'login-header.php';
     include 'dbsettings.php';
-    $result = mysqli_query($connection, 
+    $result = mysqli_query($connection,
     "CALL kullanicilari_goster()") or die("Query fail: " . mysqli_error());
 
     echo '<div class="page-wrapper">
@@ -29,7 +29,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>';
-                                        
                                         while($row = mysqli_fetch_array($result)){
                                             echo '
                                             <tr>
@@ -41,7 +40,7 @@
                                                 <td class="col-xs-4">'.$row[5].'</td>
                                             </tr>';
                                         }
-                                        echo ' 
+                                        echo '
                                     </tbody>
                                 </table>
                             </div>
@@ -56,8 +55,4 @@
 </div>
 </body>
 </html>';
-                                        
-                                   
 ?>
-
-    

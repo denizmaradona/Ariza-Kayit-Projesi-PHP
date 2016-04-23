@@ -3,7 +3,7 @@
         $_SESSION["id"] = $_POST["id"];
     }
 ?>
-<?php 
+<?php
     echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -19,12 +19,11 @@
                             include 'dbsettings.php';
                             $result = mysqli_query($connection,
                             "CALL durum_combobox()") or die("Query fail: " . mysqli_error());
-                            echo
-                            '
+                            echo'
                                 <select name="durumlar" class="form-control phones selectpicker" data-container="body">';
                                 while ($row = mysqli_fetch_array($result)){
-                                echo '<option value = "'.$row["durum"].'">'.$row["durum"].'</option>';
-                                    }
+                                    echo '<option value = "'.$row["durum"].'">'.$row["durum"].'</option>';
+                                }
                                  echo '
                                 </select>
                         </div>
@@ -32,7 +31,7 @@
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
                             <label for="">Durum Hakkında</label>
-                            <input type="text" class="form-control" placeholder="Detay" name="detay">
+                            <textarea cols="30" rows="5" class="form-control" placeholder="Detay" name="detay"></textarea>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
@@ -56,6 +55,4 @@
 </div>
 </body>
 </html>';
-?>    
-
-
+?>

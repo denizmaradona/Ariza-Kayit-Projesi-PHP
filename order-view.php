@@ -1,13 +1,11 @@
 <?php include 'login-header.php';
     if (isset($_POST["goruntule"])){
-
-            $_SESSION["id"] = $_POST["id"];
-        }
+        $_SESSION["id"] = $_POST["id"];
+    }
     else if(isset($_POST["onayla"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection,
         "CALL fiyati_onayla('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
-
     }
     else if(isset($_POST["onaylama"])){
         include 'dbsettings.php';
@@ -29,7 +27,6 @@
 
         }
     }
-
 ?>
 <?php
     echo '
@@ -58,7 +55,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>';
-                                    
                                     $durumlar = array("Onay bekliyor","Onaylanmadı","Teslimat tamamlandı");
                                     include 'dbsettings.php';
                                     $result = mysqli_query($connection,
@@ -83,8 +79,7 @@
                                                 <td><a href="order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>
                                                 <td><a href="order-update.php" class="btn btn-success '.$class.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
                                                 <td><a href="#" class="btn btn-danger btn-delete '.$class.'"><i class="fa fa-trash-o"></i> Sil</a></td>
-                                            </tr>
-                                        ';
+                                            </tr>';
                                         }
                                     echo '
                                 </tbody>
@@ -99,28 +94,27 @@
         </div>
     </div>
 
-<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
-            </div>
-            <div class="modal-body">
-                <p>Kaydı <b>silmek</b> istediğinize emin misiniz?</p>
-            </div>
-            <form action="dashboard.php" method="post">
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-danger" value="Evet" name="sil">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
+    <!-- Order Delete Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
                 </div>
-            </form>
-
+                <div class="modal-body">
+                    <p>Kaydı <b>silmek</b> istediğinize emin misiniz?</p>
+                </div>
+                <form action="dashboard.php" method="post">
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-danger" value="Evet" name="sil">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </form>
 </body>
 </html>';
 ?>
-

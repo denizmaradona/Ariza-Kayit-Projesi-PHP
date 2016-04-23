@@ -1,8 +1,6 @@
 <?php include 'header.php';
 	include 'dbsettings.php';
-
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
-
         $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
         $error = false;
         foreach ($required as $field) {
@@ -11,13 +9,12 @@
                 break;
             }
         }
-
         if ($error){
             $icerik = "Tüm Alanlar Doldurulmalıdır";
             $durum = false;
             ?>
             <script type="text/javascript">
-                $(function(){                      
+                $(function(){
                     $('#success-modal').modal('show');
                 })
                 </script>
@@ -34,9 +31,7 @@
 
             $result = mysqli_query($connection,
             "CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
-
             $row = mysqli_fetch_array($result);
-
             $durum = false;
 
             if ($row[@bilgi]=="kayit basarili"){
@@ -45,13 +40,11 @@
                 ?>
                 <script type="text/javascript">
                     $(function(){
-                        
+
                         $('#success-modal').modal('show');
                     })
                 </script>
                 <?php
-
-                
             }
             else{
                 $icerik = "E-mail kullanılmakta. Lütfen başka bir e-mail ile kayıt olunuz";
@@ -64,16 +57,14 @@
                 </script>
                 <?php
             }
-        }    
+        }
     }
-
     else if(isset($_POST["giris_yap"])){ //giris icin
         $eposta = $_POST["eposta"];
         $sifre = $_POST["sifre"];
 
         $result = mysqli_query($connection,
         "CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
-
         $row = mysqli_fetch_array($result);
 
         if ($row[@bilgi]=="kullanici girisi basarili"){
@@ -87,10 +78,8 @@
             "CALL isim_cek('$eposta',@kul_isim)") or die("Query fail: " . mysqli_error());
             $row = mysqli_fetch_array($result);
             $_SESSION["isim"] = $row[@kul_isim];
-                
+
             header("Location:dashboard.php");
-
-
         }
         else if($row[@bilgi]=="temsilci girisi basarili"){
             session_start();
@@ -110,17 +99,12 @@
                 })
             </script>
             <?php
-
-
         }
     }
-	
-
     else if(isset($_POST["gonder"])){
         $eposta = $_POST["eposta"];
         $result = mysqli_query($connection,
         "CALL sifre_unuttum('$eposta',@sifre,@bilgi)") or die("Query fail: " . mysqli_error());
-
         $row = mysqli_fetch_array($result);
 
         if ($row[@bilgi]=="kullanici var"){
@@ -166,8 +150,6 @@
             </script>
             <?php
         }
-
-        
     }
 ?>
 
@@ -323,7 +305,6 @@
                         echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     echo '
-                    
                 </div>
                 <div class="modal-body">
                     <div class="icon-wrapper">';
@@ -333,8 +314,7 @@
                     else{
                         echo '<i class="fa fa-times-circle"></i>';
                     }
-                    echo '    
-                        
+                    echo '
                     </div>
                 </div>
             </div>
@@ -367,9 +347,5 @@
         </div>
     </div>
     ';
-
 ?>
-
-
-
 <?php include 'footer.php'; ?>

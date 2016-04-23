@@ -31,7 +31,6 @@
             });
         });
     </script>
-    <script>less.watch();</script>
 </head>
 <body>
     <header>

@@ -1,6 +1,4 @@
-<?php include 'login-header.php';
-?>
-
+<?php include 'login-header.php'; ?>
 <?php
     include 'dbsettings.php';
     $talep_sayi=0;
@@ -22,7 +20,7 @@
             $durum = false;
             ?>
             <script type="text/javascript">
-                $(function(){                      
+                $(function(){
                     $('#success-modal').modal('show');
                 })
                 </script>
@@ -42,7 +40,7 @@
                 ?>
                 <script type="text/javascript">
                     $(function(){
-                        
+
                         $('#success-modal').modal('show');
                     })
                 </script>
@@ -55,7 +53,7 @@
                 ?>
                 <script type="text/javascript">
                     $(function(){
-                        
+
                         $('#success-modal').modal('show');
                     })
                 </script>
@@ -65,7 +63,6 @@
 
             }
         }
-
     }
     echo '<div class="page-wrapper">
             <div class="container-fluid">
@@ -113,20 +110,19 @@
                                                 $i_class='fa fa-info-circle';
                                             }
                                             echo '
-                                                    <form action="ticket-view.php" method="post">
-                                                        <tr>
-                                                            <input type="hidden" name="id" value="'.$row[0].'">
-                                                            <td class="col-xs-2">'.$row[1].'</td>
-                                                            <td class="col-xs-2">'.$row[2].'</td>
-                                                            <td class="col-xs-2">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
-                                                            <td class="col-xs-1"><i class="'.$i_class.'"></i>'.$row[4].'</td>
-                                                            <td class="col-xs-1">
-                                                                <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
-                                                            </td>
-                                                        </tr>
-                                                    </form>';
+                                            <form action="ticket-view.php" method="post">
+                                                <tr>
+                                                    <input type="hidden" name="id" value="'.$row[0].'">
+                                                    <td class="col-xs-2">'.$row[1].'</td>
+                                                    <td class="col-xs-2">'.$row[2].'</td>
+                                                    <td class="col-xs-2">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
+                                                    <td class="col-xs-1"><i class="'.$i_class.'"></i>'.$row[4].'</td>
+                                                    <td class="col-xs-1">
+                                                        <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
+                                                    </td>
+                                                </tr>
+                                            </form>';
                                         }
-
                                         echo '</tbody>
                                     </table>
                                 </div>
@@ -148,6 +144,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -178,6 +175,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -190,7 +188,6 @@
                         echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     echo '
-                    
                 </div>
                 <div class="modal-body">
                     <div class="icon-wrapper">';
@@ -200,8 +197,7 @@
                     else{
                         echo '<i class="fa fa-times-circle"></i>';
                     }
-                    echo '    
-                        
+                    echo '
                     </div>
                 </div>
             </div>
@@ -209,13 +205,4 @@
     </div>
 </body>
 </html>';
-
 ?>
-
-
-
-
-
-
-
-

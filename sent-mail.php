@@ -1,8 +1,4 @@
 <?php
-	
-
-	
-
 	if($_POST){
 		error_reporting(0);
 		require_once 'class.phpmailer.php';
@@ -44,9 +40,8 @@
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Gonder"/></td>
-				<tr>			
+				<tr>
 			</table>
 		</form>';
 	}
-
 ?>

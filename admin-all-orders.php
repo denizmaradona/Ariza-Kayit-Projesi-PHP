@@ -23,22 +23,21 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped filtered">
+                                <table class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="skip-filter">Arıza No #</th>
-                                            <th class="skip-filter">Durumu</th>
+                                            <th>Arıza No #</th>
+                                            <th>Durumu</th>
                                             <th>Telefon Markası</th>
-                                            <th class="skip-filter">Telefon Modeli</th>
-                                            <th class="skip-filter">Detay</th>
-                                            <th class="skip-filter">Olası Ücret</th>
-                                            <th class="skip-filter">Verilme Tarihi</th>
-                                            <th class="skip-filter">İşlem Geçmişi</th>
-                                            <th class="skip-filter">Kaydı Güncelle</th>
+                                            <th>Telefon Modeli</th>
+                                            <th>Detay</th>
+                                            <th>Olası Ücret</th>
+                                            <th>Verilme Tarihi</th>
+                                            <th>İşlem Geçmişi</th>
+                                            <th>Kaydı Güncelle</th>
                                         </tr>
                                     </thead>
                                     <tbody>';
-                                    
                                         include 'dbsettings.php';
                                         $result = mysqli_query($connection,
                                         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
@@ -63,8 +62,8 @@
                                                     echo '
                                                     <td><button type="submit" class="btn btn-success '.$class.'" name="guncelle" formaction="admin-order-update.php"><i class="fa fa-refresh"></i> Güncelle</button></td>
                                                 </tr>
-                                            </form>';                                         
-                                        }                                                                          
+                                            </form>';
+                                        }
                                         echo '
                                     </tbody>
                                 </table>
@@ -81,4 +80,3 @@
 </body>
 </html>';
 ?>
-

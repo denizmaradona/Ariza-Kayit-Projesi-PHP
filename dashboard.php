@@ -1,9 +1,6 @@
-<?php include 'login-header.php'
-;
+<?php include 'login-header.php';
     if (isset($_POST["sil"])){
-
         include 'dbsettings.php';
-
         $result = mysqli_query($connection,
         "CALL ariza_kaydini_sil('".$_SESSION['id']."',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
@@ -13,7 +10,7 @@
             ?>
             <script type="text/javascript">
                 $(function(){
-                        
+
                     $('#success-modal').modal('show');
                 })
             </script>
@@ -25,7 +22,7 @@
             ?>
             <script type="text/javascript">
                 $(function(){
-                        
+
                     $('#success-modal').modal('show');
                 })
             </script>
@@ -45,10 +42,9 @@
 
         }
         else{
-            
+
         }
     }
-
 ?>
 <?php
         include 'dbsettings.php';
@@ -133,7 +129,6 @@
                                     <table id = "tablo" class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-
                                                 <th>İşlem Tarihi</th>
                                                 <th>Telefon Marka</th>
                                                 <th>Telefon Model</th>
@@ -142,28 +137,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>';
+                                            include 'dbsettings.php';
+                                            $result = mysqli_query($connection,
+                                            "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
 
-                                                include 'dbsettings.php';
-                                                $result = mysqli_query($connection,
-                                                "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-
-                                                while($row = mysqli_fetch_array($result)) {
-                                                echo
-                                                    '<form action="order-view.php" method="post">
-                                                        <tr>
-                                                            <input type="hidden" name="id" value="'.$row[0].'">
-                                                            <td class="col-xs-2">'.$row[3].'</td>
-                                                            <td class="col-xs-2">'.$row[1].'</td>
-                                                            <td class="col-xs-2">'.$row[2].'</td>
-                                                            <td class="col-xs-2">'.$row[5].'</td>
-                                                            <td class="col-xs-2">
-                                                                <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
-                                                            </td>
-                                                        </tr>
-                                                    </form>';
-                                                    }
-
-                                                echo '</tbody>
+                                            while($row = mysqli_fetch_array($result)) {
+                                            echo
+                                                '<form action="order-view.php" method="post">
+                                                    <tr>
+                                                        <input type="hidden" name="id" value="'.$row[0].'">
+                                                        <td class="col-xs-2">'.$row[3].'</td>
+                                                        <td class="col-xs-2">'.$row[1].'</td>
+                                                        <td class="col-xs-2">'.$row[2].'</td>
+                                                        <td class="col-xs-2">'.$row[5].'</td>
+                                                        <td class="col-xs-2">
+                                                            <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
+                                                        </td>
+                                                    </tr>
+                                                </form>';
+                                                }
+                                            echo '</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -187,7 +180,6 @@
                         echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     echo '
-                    
                 </div>
                 <div class="modal-body">
                     <div class="icon-wrapper">';
@@ -197,24 +189,12 @@
                     else{
                         echo '<i class="fa fa-times-circle"></i>';
                     }
-                    echo '    
-                        
+                    echo '
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 </body>
 </html>';
-
 ?>
-
-
-
-
-
-
-
-
-

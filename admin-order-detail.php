@@ -21,25 +21,23 @@
                 $mail -> AddAddress($row[0]);
 
                 if (!$mail->Send()){ //mail gönderilemedi
-                    
+
                 }
                 else{   // mail gönderildi
-                
+
                 }
             }
-                
         }
-
     }
     else if(isset($_POST["goruntule"])){
         $id = $_POST["id"];
     }
     else{
-        
+
     }
 ?>
 
-<?php 
+<?php
     echo '<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -101,9 +99,4 @@
 </div>
 </body>
 </html>';
-?>    
-
-
-
-
-
+?>

@@ -90,56 +90,53 @@ include 'dbsettings.php';
                             </div>
                         </div>';
                     }
-
-
                     echo '
                 </div>
             </div>
         </div>
     </div>
-<!-- Onaylama Modal -->
-<div class="modal fade" id="confirm-modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
-            </div>
-            <div class="modal-body">
-                <p>Emin misiniz?</p>
-            </div>
-            <div class="modal-footer">
-            <form action="order-view.php" method="post">
-                <input type="submit" class="btn btn-success" name="onayla" value="Evet">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
-            </form>
+
+    <!-- Onaylama Modal -->
+    <div class="modal fade" id="confirm-modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                <form action="order-view.php" method="post">
+                    <input type="submit" class="btn btn-success" name="onayla" value="Evet">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Onaylamama Modal -->
-<div class="modal fade" id="confirm-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
-            </div>
-            <div class="modal-body">
-                <p>Emin misiniz?</p>
-            </div>
-            <div class="modal-footer">
-            <form action="order-view.php" method="post">
-                <input type="submit" class="btn btn-success" name="onaylama" value="Evet">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
-            </form>
+    <!-- Onaylamama Modal -->
+    <div class="modal fade" id="confirm-modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Dikkat!</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                <form action="order-view.php" method="post">
+                    <input type="submit" class="btn btn-success" name="onaylama" value="Evet">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>';
-
 ?>

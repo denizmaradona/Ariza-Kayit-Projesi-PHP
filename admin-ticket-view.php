@@ -33,13 +33,12 @@
                 $mail -> AddAddress($eposta);
 
                 if (!$mail->Send()){ //mail gönderildi
-                    
+
                 }
                 else{   // mail gönderilemedi
-                
+
                 }
             }
-            
         }
         else if($row[@bilgi]=="iletilemez"){
 
@@ -68,44 +67,44 @@
                         "CALL konusma_gecmis_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
                          while ($row = mysqli_fetch_array($result)){
                                         if (strpos($row[0],'Temsil')===false){
-                                            echo '
-                                                <article>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-2">
-                                                            <div class="article-heading">
-                                                                <span>'.$row[0].'</span><br>
-                                                                <time>'.$row[2].'</time>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-md-10">
-                                                            <div class="article-body">
-                                                                <p>'.$row[1].'</p>
-                                                            </div>
+                                        echo '
+                                            <article>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-2">
+                                                        <div class="article-heading">
+                                                            <span>'.$row[0].'</span><br>
+                                                            <time>'.$row[2].'</time>
                                                         </div>
                                                     </div>
-                                                </article>';
+                                                    <div class="col-xs-12 col-md-10">
+                                                        <div class="article-body">
+                                                            <p>'.$row[1].'</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>';
                                         }
                                         else{
-                                            echo '
-                                                <article class="text-right">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-10">
-                                                            <div class="article-body">
-                                                                <p>'.$row[1].'</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-md-2">
-                                                            <div class="article-heading mtop">
-                                                                <span>'.$row[0].'</span><br>
-                                                                <time>'.$row[2].'</time>
-                                                            </div>
+                                        echo '
+                                            <article class="text-right">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-10">
+                                                        <div class="article-body">
+                                                            <p>'.$row[1].'</p>
                                                         </div>
                                                     </div>
-                                                </article>';
+                                                    <div class="col-xs-12 col-md-2">
+                                                        <div class="article-heading mtop">
+                                                            <span>'.$row[0].'</span><br>
+                                                            <time>'.$row[2].'</time>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>';
                                         }
                                         $son_yazan = $row[0];
                                     }
-                        echo '
+                            echo '
                         </div>
                     </div>
                 </div>
@@ -122,11 +121,10 @@
                 </div>';
             }
                 echo '
-                    <div class="row">
-                        <div class="col-xs-12 col-md-2">
-                            <a href="admin-all-tickets.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                        </div>
-                ';
+                <div class="row">
+                    <div class="col-xs-12 col-md-2">
+                        <a href="admin-all-tickets.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
+                    </div>';
                 if (strpos($son_yazan,'Temsilci')===false){
                     echo '
                     <div class="col-xs-12 col-md-2 col-md-offset-2">
@@ -144,4 +142,3 @@
 </body>
 </html>';
 ?>
-

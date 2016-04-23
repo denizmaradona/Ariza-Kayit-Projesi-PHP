@@ -6,7 +6,6 @@
     while($row = mysqli_fetch_array($result)) {
         $kayit_sayi++;
     }
-
     $talep_sayi=0;
     include 'dbsettings.php';
     $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
@@ -118,7 +117,7 @@
                                                     </td>
                                                 </tr>
                                             </form>';
-                                                }
+                                        }
                                     echo '</tbody>
                                 </table>
                             </div>

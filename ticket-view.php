@@ -5,7 +5,7 @@
             $durum = false;
             ?>
             <script type="text/javascript">
-                $(function(){                      
+                $(function(){
                     $('#success-modal').modal('show');
                 })
                 </script>
@@ -22,7 +22,7 @@
                 $durum = true;
                 ?>
                 <script type="text/javascript">
-                    $(function(){                      
+                    $(function(){
                         $('#success-modal').modal('show');
                     })
                     </script>
@@ -33,7 +33,7 @@
                 $durum = false;
                 ?>
                 <script type="text/javascript">
-                    $(function(){                      
+                    $(function(){
                         $('#success-modal').modal('show');
                     })
                     </script>
@@ -44,13 +44,13 @@
                 $durum = false;
                 ?>
                 <script type="text/javascript">
-                    $(function(){                      
+                    $(function(){
                         $('#success-modal').modal('show');
                     })
                     </script>
                 <?php
             }
-        }       
+        }
     }
     else if (isset($_POST["goruntule"])){
         $required = array('id','konu');
@@ -68,7 +68,6 @@
         else{ // Parametreler boş
 
         }
-        
     }
 ?>
 <?php
@@ -89,48 +88,46 @@
                                 <div class="panel-body">
                                     ';
                                     include 'dbsettings.php';
-                                    $result = mysqli_query($connection,
-                                    "CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
+                                    $result = mysqli_query($connection,"CALL konusma_gecmis_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
                                     while ($row = mysqli_fetch_array($result)){
                                         if (strpos($row[0],'Temsil')===false){
                                             echo '
-                                                <article>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-2">
-                                                            <div class="article-heading">
-                                                                <span>'.$row[0].'</span><br>
-                                                                <time>'.$row[2].'</time>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-md-10">
-                                                            <div class="article-body">
-                                                                <p>'.$row[1].'</p>
-                                                            </div>
+                                            <article>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-2">
+                                                        <div class="article-heading">
+                                                            <span>'.$row[0].'</span><br>
+                                                            <time>'.$row[2].'</time>
                                                         </div>
                                                     </div>
-                                                </article>';
+                                                    <div class="col-xs-12 col-md-10">
+                                                        <div class="article-body">
+                                                            <p>'.$row[1].'</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>';
                                         }
                                         else{
                                             echo '
-                                                <article class="text-right">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-10">
-                                                            <div class="article-body">
-                                                                <p>'.$row[1].'</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-md-2">
-                                                            <div class="article-heading mtop">
-                                                                <span>'.$row[0].'</span><br>
-                                                                <time>'.$row[2].'</time>
-                                                            </div>
+                                            <article class="text-right">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-10">
+                                                        <div class="article-body">
+                                                            <p>'.$row[1].'</p>
                                                         </div>
                                                     </div>
-                                                </article>';
+                                                    <div class="col-xs-12 col-md-2">
+                                                        <div class="article-heading mtop">
+                                                            <span>'.$row[0].'</span><br>
+                                                            <time>'.$row[2].'</time>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>';
                                         }
-                                        $son_yazan = $row[0]; 
+                                        $son_yazan = $row[0];
                                     }
-
                                     echo '
                                 </div>
                             </div>
@@ -138,30 +135,27 @@
                     </div>';
                     if (strpos($son_yazan,'Temsil')!==false){
                         echo '
-                    <form action="" method="post">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div class="form-group">
-                                    <textarea name="mesaj" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
+                        <form action="" method="post">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group">
+                                        <textarea name="mesaj" cols="30" rows="5" class="form-control ticket-textarea" placeholder="Açıklamanız"></textarea>
+                                    </div>
+                                </div>
+                            </div>';}
+                            echo '
+                            <div class="row">
+                                <div class="col-xs-12 col-md-2">
+                                    <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
+                                </div>';
+                                if (strpos($son_yazan,'Temsil')!==false){
+                                    echo '
+                                <div class="col-xs-12 col-md-2 col-md-offset-2">
+                                    <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
                                 </div>
                             </div>
-                        </div>';}
-                        echo '
-                        <div class="row">
-                            <div class="col-xs-12 col-md-2">
-                                <a href="support.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
-                            </div>';
-                            if (strpos($son_yazan,'Temsil')!==false){
-                                echo '
-                            <div class="col-xs-12 col-md-2 col-md-offset-2">
-                                <button type="submit" class="btn btn-success" name="gonder"><i class="fa fa-paper-plane-o"></i> Gönder</button>
-                            </div>
-                        </div>
-                    </form>';            
-                            }
-                            
-                        
-                    
+                        </form>';
+                    }
                     echo '
                 </div>
             </div>
@@ -179,7 +173,6 @@
                         echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
                     }
                     echo '
-                    
                 </div>
                 <div class="modal-body">
                     <div class="icon-wrapper">';
@@ -189,8 +182,7 @@
                     else{
                         echo '<i class="fa fa-times-circle"></i>';
                     }
-                    echo '    
-                        
+                    echo '
                     </div>
                 </div>
             </div>
