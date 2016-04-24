@@ -46,7 +46,7 @@
                                     <td><i class="fa fa-try"></i> '.$row[4].'</td>
                                     <td>'.$row[5].'</td>
                                     <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>';
-                                    if ($onay == "guncellenemez"){
+                                    if ($onay == "guncellenemez" || $row[0]=="Teslimat tamamlandı"){
                                         $class = "disabled";
                                     }
                                     else{

@@ -53,7 +53,7 @@
                                                     <td><i class="fa fa-try"></i>'.$row[6].'</td>
                                                     <td>'.$row[5].'</td>
                                                     <td><button type="submit" class="btn btn-primary" name="goruntule" formaction="admin-order-detail.php"><i class="fa fa-eye"></i> Görüntüle</button></td>';
-                                                    if (strpos($row[1], "tespit edildi")){
+                                                    if (strpos($row[1], "tespit edildi") || $row[1]=="Teslimat tamamlandı"){
                                                         $class="disabled";
                                                     }
                                                     else{
