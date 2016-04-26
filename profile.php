@@ -208,7 +208,7 @@
                                         <h3>Adres</h3>
                                     </div>
                                     <div class="col-xs-8">
-                                        <input name ="adres" class="form-control" type="text" value='.$row[4].'>
+                                        <input name ="adres" class="form-control" type="text" value="'.$row[4].'">
                                     </div>
                                 </div>
                                 <div class="form-group">
