@@ -1,5 +1,7 @@
-<?php include 'header.php';
+<?php 
+    include 'header.php';
 	include 'dbsettings.php';
+
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
         $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
         $error = false;
@@ -47,7 +49,7 @@
                 <?php
             }
             else{
-                $icerik = "E-mail kullanılmakta. Lütfen başka bir e-mail ile kayıt olunuz";
+                $icerik = "E-mail kullanılmaktadır. Lütfen başka bir e-mail ile kayıt olunuz";
                 $durum = false;?>
                 <script type="text/javascript">
                     $(function(){
@@ -60,37 +62,16 @@
         }
     }
     else if(isset($_POST["giris_yap"])){ //giris icin
-        $eposta = $_POST["eposta"];
-        $sifre = $_POST["sifre"];
-
-        $result = mysqli_query($connection,
-        "CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-
-        if ($row[@bilgi]=="kullanici girisi basarili"){
-            session_start();
-            $_SESSION["oturum"] = true;
-            $_SESSION["eposta"] = $eposta;
-            $_SESSION["rank"] = 1;
-
-            include 'dbsettings.php'; // isim cekilmesi
-            $result = mysqli_query($connection,
-            "CALL isim_cek('$eposta',@kul_isim)") or die("Query fail: " . mysqli_error());
-            $row = mysqli_fetch_array($result);
-            $_SESSION["isim"] = $row[@kul_isim];
-
-            header("Location:dashboard.php");
+        $required = array('eposta', 'sifre');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
         }
-        else if($row[@bilgi]=="temsilci girisi basarili"){
-            session_start();
-            $_SESSION["oturum"] = true;
-            $_SESSION["eposta"] = $eposta;
-            $_SESSION["rank"] = 2;
-            header("Location:admin-dashboard.php");
-        }
-
-        else { // kullanıcı adı veya şifre yanlış
-            $icerik = "Girdiğiniz Kullanıcı Adı veya Şifre Yanlış!";
+        if ($error){
+            $icerik = "E-mail veya Şifre Boş Bırakılamaz";
             $durum = false;
             ?>
             <script type="text/javascript">
@@ -100,6 +81,47 @@
             </script>
             <?php
         }
+        else{
+            $eposta = $_POST["eposta"];
+            $sifre = $_POST["sifre"];
+
+            $result = mysqli_query($connection,
+            "CALL giris_yap('$eposta','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+
+            if ($row[@bilgi]=="kullanici girisi basarili"){
+                session_start();
+                $_SESSION["eposta"] = $eposta;
+                $_SESSION["rank"] = 1;
+
+                include 'dbsettings.php'; // isim cekilmesi
+                $result = mysqli_query($connection,
+                "CALL isim_cek('$eposta',@kul_isim)") or die("Query fail: " . mysqli_error());
+                $row = mysqli_fetch_array($result);
+                $_SESSION["isim"] = $row[@kul_isim];
+
+                header("Location:dashboard.php");
+            }
+            else if($row[@bilgi]=="temsilci girisi basarili"){
+                session_start();
+                $_SESSION["eposta"] = $eposta;
+                $_SESSION["rank"] = 2;
+                header("Location:admin-dashboard.php");
+            }
+
+            else { // kullanıcı adı veya şifre yanlış
+                $icerik = "Girdiğiniz Kullanıcı Adı veya Şifre Yanlış!";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
+            }
+        }
+        
     }
     else if(isset($_POST["gonder"])){
         $eposta = $_POST["eposta"];
@@ -142,10 +164,7 @@
             ?>
             <script type="text/javascript">
                 $(function(){
-
                     $('#success-modal').modal('show');
-                    $('#lost-password-modal').modal('show');
-
                 })
             </script>
             <?php

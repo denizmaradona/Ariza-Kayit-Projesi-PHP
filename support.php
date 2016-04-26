@@ -1,5 +1,5 @@
-<?php include 'login-header.php'; ?>
-<?php
+<?php 
+    include 'login-header.php'; 
     include 'dbsettings.php';
     $talep_sayi=0;
     $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());

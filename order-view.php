@@ -6,26 +6,85 @@
         include 'dbsettings.php';
         $result = mysqli_query($connection,
         "CALL fiyati_onayla('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
+        if ($result){
+            $icerik = "Verilen Ücreti Başarıyla Onayladınız. Telefonunuz Kısa Bir Süre Sonra Onarım Aşamasına Geçecektir";
+            $durum = true;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
+        }
+        else{
+
+        }
     }
     else if(isset($_POST["onaylama"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection,
         "CALL fiyati_onaylama('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
+        if ($result){
+            $icerik = "Verilen Ücreti Onaylamadınız. Telefonunuz Kısa Bir Süre Sonra Kargoya Verilecektir";
+            $durum = true;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
+        }
+        else{
+
+        }
+
     }
     else if(isset($_POST["guncelle"])){
-        $marka = $_POST["markalar"];
-        $model = $_POST["modeller"];
-        $problem = $_POST["problem"];
-        include 'dbsettings.php';
-        $result = mysqli_query($connection,
-        "CALL ariza_bilgilerini_degistir('".$_SESSION["id"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-        if ($row[@bilgi]=="degistirildi"){
-
+        $required = array('markalar','modeller','problem');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
         }
-        else{ //Degistirilemez
-
+        if ($error){
+            $icerik = "Tüm Alanların Doldurulduğuna Emin Olunuz";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
         }
+        else{
+            $marka = $_POST["markalar"];
+            $model = $_POST["modeller"];
+            $problem = $_POST["problem"];
+            include 'dbsettings.php';
+            $result = mysqli_query($connection,
+            "CALL ariza_bilgilerini_degistir('".$_SESSION["id"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            if ($row[@bilgi]=="degistirildi"){
+                $icerik = "Arıza Kaydınızı Başarıyla Güncellediniz";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                    </script>
+                <?php
+            }
+            else{ //Degistirilemez
+
+            }
+        }
+        
     }
 ?>
 <?php
@@ -122,6 +181,33 @@
         </div>
     </div>
 </form>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    if ($durum == true){
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    else{
+                        echo '<h4 class="modal-title" id="myModalLabel">'.$icerik.'</h4>';
+                    }
+                    echo '
+                </div>
+                <div class="modal-body">
+                    <div class="icon-wrapper">';
+                    if ($durum == true){
+                        echo '<i class="fa fa-check-circle"></i>';
+                    }
+                    else{
+                        echo '<i class="fa fa-times-circle"></i>';
+                    }
+                    echo '
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>';
 ?>

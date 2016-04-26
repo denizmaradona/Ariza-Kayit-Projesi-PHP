@@ -1,4 +1,5 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
     if (isset($_POST["sil"])){
         include 'dbsettings.php';
         $result = mysqli_query($connection,
@@ -22,7 +23,6 @@
             ?>
             <script type="text/javascript">
                 $(function(){
-
                     $('#success-modal').modal('show');
                 })
             </script>
@@ -30,20 +30,50 @@
         }
     }
     else if (isset($_POST["gonder"])){
-        $marka = $_POST["markalar"];
-        $model = $_POST["modeller"];
-        $problem = $_POST["problem"];
-
-        include 'dbsettings.php';
-        $result = mysqli_query($connection,
-        "CALL ariza_kaydi_ver('".$_SESSION["eposta"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
-        $row = mysqli_fetch_array($result);
-        if ($row[@bilgi]=="verildi"){
-
+        $required = array('markalar','modeller','problem');
+        $error = false;
+        foreach ($required as $field) {
+            if (empty($_POST[$field])){
+                $error = true;
+                break;
+            }
+        }
+        if ($error){
+            $icerik = "Arıza Kaydı Verirken Tüm Alanları Doldurduğunuza Emin Olunuz";
+            $durum = false;
+            ?>
+            <script type="text/javascript">
+                $(function(){
+                    $('#success-modal').modal('show');
+                })
+                </script>
+            <?php
         }
         else{
+            $marka = $_POST["markalar"];
+            $model = $_POST["modeller"];
+            $problem = $_POST["problem"];
 
+            include 'dbsettings.php';
+            $result = mysqli_query($connection,
+            "CALL ariza_kaydi_ver('".$_SESSION["eposta"]."','$marka','$model','$problem',@bilgi)") or die("Query fail: " . mysqli_error());
+            $row = mysqli_fetch_array($result);
+            if ($row[@bilgi]=="verildi"){
+                $icerik = "Arıza Kaydınız Başarıyla Verilmiştir";
+                $durum = true;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
+            }
+            else{
+
+            }
         }
+        
     }
 ?>
 <?php

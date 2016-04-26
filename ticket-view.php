@@ -53,21 +53,8 @@
         }
     }
     else if (isset($_POST["goruntule"])){
-        $required = array('id','konu');
-        $error = false;
-        foreach ($required as $field) {
-            if (empty($_POST[$field])){
-                $error = true;
-                break;
-            }
-        }
-        if (!$error){
             $_SESSION["id"] = $_POST["id"];
             $_SESSION["konu"] = $_POST["konu"];
-        }
-        else{ // Parametreler boş
-
-        }
     }
 ?>
 <?php
