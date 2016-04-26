@@ -31,7 +31,7 @@
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
                             <label for="">Durum Hakkında</label>
-                            <textarea cols="30" rows="5" class="form-control" placeholder="Detay" name="detay"></textarea>
+                            <textarea cols="30" rows="3" class="form-control" placeholder="Detay" name="detay"></textarea>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
