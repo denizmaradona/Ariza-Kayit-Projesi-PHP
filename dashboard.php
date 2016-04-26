@@ -11,7 +11,6 @@
             ?>
             <script type="text/javascript">
                 $(function(){
-
                     $('#success-modal').modal('show');
                 })
             </script>
@@ -79,20 +78,14 @@
 <?php
         include 'dbsettings.php';
 		$result = mysqli_query($connection,
-	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-	    $kayit_sayi=0;
-
-	    while($row = mysqli_fetch_array($result)){
-	    	$kayit_sayi++;
-		}
+	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());	    
+	    $kayit_sayi = mysqli_num_rows($result);
+		
 
 		include'dbsettings.php';
     	$result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
-    	$talep_sayi=0;
-
-    	while ($row = mysqli_fetch_array($result)){
-    		$talep_sayi++;
-    	}
+    	$talep_sayi = mysqli_num_rows($result);
+    	
 
 	echo '<div class="page-wrapper">
             <div class="container-fluid">

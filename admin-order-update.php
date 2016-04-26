@@ -1,7 +1,7 @@
-<?php include 'login-header.php';
-    if (isset($_POST["guncelle"])){
-        $_SESSION["id"] = $_POST["id"];
-    }
+<?php 
+    include 'login-header.php';
+    if (isset($_POST["guncelle"]))
+        $_SESSION["id"] = $_POST["id"];  
 ?>
 <?php
     echo '<div class="page-wrapper">

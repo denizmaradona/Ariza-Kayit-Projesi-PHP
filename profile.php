@@ -1,4 +1,5 @@
-<?php   include 'login-header.php';
+<?php   
+    include 'login-header.php';
 	if (isset($_POST["guncelle"])){
         $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
         $error = false;
@@ -20,7 +21,7 @@
             <?php
         }
         else{
-            include 'dbsettings.php';
+            
             $ad = $_POST["ad"];
             $soyad = $_POST["soyad"];
             $eposta = $_POST["eposta"];
@@ -28,7 +29,8 @@
             $adres = $_POST["adres"];
             $dogum_tarih = $_POST["dogum_tarih"];
 
-            $result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','".$_SESSION['eposta']."','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error($connection));
+            include 'dbsettings.php';
+            $result = mysqli_query($connection,"CALL kisisel_bilgileri_guncelle('$ad','$soyad','".$_SESSION['eposta']."','$eposta','$cep_tel','$dogum_tarih','$adres')") or die("Query fail: " . mysqli_error());
 
             if ($result){
                 $_SESSION["eposta"] = $eposta;
@@ -59,8 +61,9 @@
         }
 	}
 	else if(isset($_POST["sil"])){
-        include 'dbsettings.php';
         $sifre = $_POST["sifre"];
+
+        include 'dbsettings.php';
         $result = mysqli_query($connection,"CALL hesabi_sil('".$_SESSION['eposta']."','$sifre',@bilgi)") or die("Query fail: " . mysqli_error());
         $row = mysqli_fetch_array($result);
 
@@ -111,8 +114,8 @@
         }
 	}
     else if(isset($_POST["degistir"])){
-        include 'dbsettings.php';
         if ($_POST["yeni_sifre"]==$_POST["yeni_sifre_tekrar"]){
+            include 'dbsettings.php';
             $result = mysqli_query($connection,"CALL sifre_degistir('".$_SESSION['eposta']."','".$_POST["yeni_sifre"]."')") or die("Query fail: " . mysqli_error());
             if($result){
                 $icerik = "Şifreniz Başarıyla Değiştirildi";

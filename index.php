@@ -3,7 +3,7 @@
 	include 'dbsettings.php';
 
 	if(isset($_POST["kayit_ol"])){ // kayit oldugunda
-        $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
+        $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih','sifre','sifre_tekrar');
         $error = false;
         foreach ($required as $field) {
             if (empty($_POST[$field])){
@@ -23,42 +23,55 @@
             <?php
         }
         else{
-            $ad = $_POST["ad"];
-            $soyad = $_POST["soyad"];
-            $eposta = $_POST["eposta"];
-            $sifre = $_POST["sifre"];
-            $dogum_tarih = $_POST["dogum_tarih"];
-            $adres = $_POST["adres"];
-            $cep_tel = $_POST["cep_tel"];
+            if ($_POST["sifre"] == $_POST["sifre_tekrar"]){
+                $ad = $_POST["ad"];
+                $soyad = $_POST["soyad"];
+                $eposta = $_POST["eposta"];
+                $sifre = $_POST["sifre"];
+                $dogum_tarih = $_POST["dogum_tarih"];
+                $adres = $_POST["adres"];
+                $cep_tel = $_POST["cep_tel"];
 
-            $result = mysqli_query($connection,
-            "CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
-            $row = mysqli_fetch_array($result);
-            $durum = false;
+                $result = mysqli_query($connection,
+                "CALL kayit_ol('$eposta','$ad','$soyad','$sifre','$cep_tel','$dogum_tarih','$adres',@bilgi)") or die("Query fail: " . mysqli_error());
+                $row = mysqli_fetch_array($result);
+                $durum = false;
 
-            if ($row[@bilgi]=="kayit basarili"){
-                $icerik = "Kullanıcı Kaydınız Başarıyla Gerçekleşmiştir";
-                $durum = true;
+                if ($row[@bilgi]=="kayit basarili"){
+                    $icerik = "Kullanıcı Kaydınız Başarıyla Gerçekleşmiştir";
+                    $durum = true;
+                    ?>
+                    <script type="text/javascript">
+                        $(function(){
+
+                            $('#success-modal').modal('show');
+                        })
+                    </script>
+                    <?php
+                }
+                else{
+                    $icerik = "E-mail kullanılmaktadır. Lütfen başka bir e-mail ile kayıt olunuz";
+                    $durum = false;?>
+                    <script type="text/javascript">
+                        $(function(){
+                            $('#success-modal').modal('show');
+                        })
+                    </script>
+                    <?php
+                }
+            }
+            else{
+                $icerik = "Şifreler Birbiriyle Uyuşmuyor";
+                $durum = false;
                 ?>
                 <script type="text/javascript">
                     $(function(){
-
                         $('#success-modal').modal('show');
                     })
                 </script>
                 <?php
             }
-            else{
-                $icerik = "E-mail kullanılmaktadır. Lütfen başka bir e-mail ile kayıt olunuz";
-                $durum = false;?>
-                <script type="text/javascript">
-                    $(function(){
-                        $('#success-modal').modal('show');
-                        $('#register-modal').modal('show');
-                    })
-                </script>
-                <?php
-            }
+            
         }
     }
     else if(isset($_POST["giris_yap"])){ //giris icin
@@ -290,7 +303,7 @@
                                     <input type="password" class="form-control" placeholder="Şifreniz" name="sifre">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Şifreniz Tekrar">
+                                    <input type="password" class="form-control" placeholder="Şifreniz Tekrar" name="sifre_tekrar">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Telefon Numaranız" name="cep_tel">
