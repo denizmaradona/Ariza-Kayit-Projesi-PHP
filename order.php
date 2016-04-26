@@ -26,7 +26,7 @@
                                                         echo '<option selected="true" value = '.$row["marka"].'>'.$row["marka"].'</option>';
                                                     }
                                                     else{
-                                                        echo '<option value = '.$row["marka"].'>'.$row["marka"].'</option>';
+                                                        echo '<option value = "'.$row["marka"].'">'.$row["marka"].'</option>';
                                                     }
                                                 }
                                                 echo '</select>
