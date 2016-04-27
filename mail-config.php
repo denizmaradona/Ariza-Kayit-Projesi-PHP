@@ -10,7 +10,7 @@
       $mail -> Port = 465;
       $mail -> IsHTML(true);
       $mail -> CharSet = 'utf-8';
-      $mail -> Username = "iletisim@okanuzun.com";
-      $mail -> Password = "135Okan246";
-      $mail -> SetFrom("iletisim@okanuzun.com");
+      $mail -> Username = "ariza.kayit@yandex.com";
+      $mail -> Password = "135anil246";
+      $mail -> SetFrom("ariza.kayit@yandex.com");
 ?>
