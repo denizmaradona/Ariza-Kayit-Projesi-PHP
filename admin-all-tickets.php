@@ -1,4 +1,5 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
     include 'dbsettings.php';
     $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
     echo '<div class="page-wrapper">

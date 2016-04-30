@@ -1,4 +1,5 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
     $id = $_SESSION["id"];
     if (isset($_POST["guncelle"])){
         $durum = $_POST["durumlar"];

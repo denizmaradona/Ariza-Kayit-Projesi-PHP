@@ -1,17 +1,12 @@
-<?php include 'login-header.php';
-    $kayit_sayi=0;
+<?php 
+    include 'login-header.php';
     include 'dbsettings.php';
     $result = mysqli_query($connection,
     "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
-    while($row = mysqli_fetch_array($result)) {
-        $kayit_sayi++;
-    }
-    $talep_sayi=0;
+    $kayit_sayi= mysqli_num_rows($result);
     include 'dbsettings.php';
     $result = mysqli_query($connection,"CALL talepleri_goster()") or die("Query fail: " . mysqli_error());
-    while($row = mysqli_fetch_array($result)) {
-        $talep_sayi++;
-    }
+    $talep_sayi = mysqli_num_rows($result);
     echo '<div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">

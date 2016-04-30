@@ -1,5 +1,5 @@
-<?php include 'login-header.php'; ?>
-<?php
+<?php 
+    include 'login-header.php';
     echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">

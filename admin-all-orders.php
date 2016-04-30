@@ -1,11 +1,9 @@
-<?php include 'login-header.php';
-    $sayac=0;
+<?php 
+    include 'login-header.php';
     include 'dbsettings.php';
     $result = mysqli_query($connection,
     "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
-    while ($row = mysqli_fetch_array($result)){
-        $sayac++;
-    }
+    $sayac = mysqli_num_rows($result);
 ?>
 <?php
     echo '<div class="page-wrapper">

@@ -1,4 +1,6 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
+    
     if (isset($_POST["goruntule"])){
         $_SESSION["id"] = $_POST["id"];
     }

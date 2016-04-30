@@ -1,5 +1,6 @@
-<?php include 'login-header.php';
-include 'dbsettings.php';
+<?php 
+    include 'login-header.php';
+    include 'dbsettings.php';
     echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">

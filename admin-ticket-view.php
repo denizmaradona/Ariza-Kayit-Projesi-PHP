@@ -1,4 +1,5 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
     if (isset($_POST["incele"])){
         $_SESSION["id"] = $_POST["id"];
     }
@@ -14,23 +15,11 @@
             if ($result){
                 $row = mysqli_fetch_array($result);
                 $eposta = $row[0];
-                require_once 'class.phpmailer.php';
-                $mail = new phpmailer();
-                error_reporting(0);
-                $mail -> IsSMTP();
-                $mail -> SMTPDebug = 1;
-                $mail -> SMTPAuth = true;
-                $mail -> SMTPSecure = 'ssl';
-                $mail -> Host = 'smtp.yandex.com.tr';
-                $mail -> Port = 465;
-                $mail -> IsHTML(true);
-                $mail -> CharSet = 'utf-8';
-                $mail -> Username = "iletisim@okanuzun.com";
-                $mail -> Password = "135Okan246";
-                $mail -> SetFrom("iletisim@okanuzun.com");
+                include 'mail-config.php';
                 $mail -> Subject = "Bilgilendirme";
                 $mail -> Body = "#'".$_SESSION["id"]."' nolu talebiniz cevaplandırıldı";
                 $mail -> AddAddress($eposta);
+                
 
                 if (!$mail->Send()){ //mail gönderildi
 

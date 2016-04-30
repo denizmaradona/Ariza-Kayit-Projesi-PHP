@@ -69,7 +69,15 @@
                 <?php
             }
             else{
-
+                $icerik = "Beşten Fazla Arıza Kaydı Veremezsiniz";
+                $durum = false;
+                ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $('#success-modal').modal('show');
+                    })
+                </script>
+                <?php
             }
         }
         

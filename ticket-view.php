@@ -1,4 +1,5 @@
-<?php include 'login-header.php';
+<?php 
+    include 'login-header.php';
     if (isset($_POST["gonder"])){
         if (empty($_POST["mesaj"])){
             $icerik = "Mesaj Kısmı Boş Bırakılamaz";
