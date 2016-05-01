@@ -36,26 +36,27 @@
                             include 'dbsettings.php';
                             $result = mysqli_query($connection,
                             "CALL ariza_detay_goster('".$_SESSION["id"]."')") or die("Query fail: " . mysqli_error());
-                            while($row = mysqli_fetch_array($result)) {
+                            $row = mysqli_fetch_array($result);
                                 echo '
-                                <tr>
-                                    <td>'.$row[0].'</td>
-                                    <td>'.$row[1].'</td>
-                                    <td>'.$row[2].'</td>
-                                    <td>'.$row[3].'</td>
-                                    <td><i class="fa fa-try"></i> '.$row[4].'</td>
-                                    <td>'.$row[5].'</td>
-                                    <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>';
-                                    if ($onay == "guncellenemez" || $row[0]=="Teslimat tamamlandı"){
-                                        $class = "disabled";
-                                    }
-                                    else{
-                                        $class = "";
-                                    }
-                                    echo '
-                                    <td><a href="admin-order-update.php" class="btn btn-success '.$class.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
-                                </tr>';
-                            }
+                                <form action="" method="post">
+                                    <tr>
+                                        <td>'.$row[0].'</td>
+                                        <td>'.$row[1].'</td>
+                                        <td>'.$row[2].'</td>
+                                        <td>'.$row[3].'</td>
+                                        <td><i class="fa fa-try"></i> '.$row[4].'</td>
+                                        <td>'.$row[5].'</td>
+                                        <td><a href="admin-order-detail.php" class="btn btn-primary"><i class="fa fa-eye"></i> Görüntüle</a></td>';
+                                        if ($onay == "guncellenemez" || $row[0]=="Teslimat tamamlandı"){
+                                            $class = "disabled";
+                                        }
+                                        else{
+                                            $class = "";
+                                        }
+                                        echo '
+                                        <td><a href="admin-order-update.php" class="btn btn-success '.$class.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
+                                    </tr>
+                                </form>';
                             echo '
                         </tbody>
                     </table>

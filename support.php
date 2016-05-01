@@ -91,6 +91,7 @@
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
+                                                <th>Talep No</th>
                                                 <th>Oluşturulma Tarihi</th>
                                                 <th>Son İşlem Tarihi</th>
                                                 <th>Konu</th>
@@ -112,11 +113,11 @@
                                             echo '
                                             <form action="ticket-view.php" method="post">
                                                 <tr>
-                                                    <input type="hidden" name="id" value="'.$row[0].'">
+                                                    <td class="col-xs-1">'.$row[0].'</td><input type="hidden" name="id" value="'.$row[0].'">
                                                     <td class="col-xs-2">'.$row[1].'</td>
                                                     <td class="col-xs-2">'.$row[2].'</td>
-                                                    <td class="col-xs-2">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
-                                                    <td class="col-xs-1"><i class="'.$i_class.'"></i>'.$row[4].'</td>
+                                                    <td class="col-xs-1">'.$row[3].'<input type="hidden" name="konu" value="'.$row[3].'"></td>
+                                                    <td class="col-xs-2"><i class="'.$i_class.'"></i>'.$row[4].'</td>
                                                     <td class="col-xs-1">
                                                         <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
                                                     </td>

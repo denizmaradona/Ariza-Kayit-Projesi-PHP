@@ -102,11 +102,11 @@
                                         echo '
                                             <form action="admin-order-view.php" method="post">
                                                 <tr>
-                                                    <td class="col-xs-2">'.$row[0].'</td><input type="hidden" name="id" value="'.$row[0].'">
-                                                    <td class="col-xs-2">'.$row[1].'</td>
+                                                    <td class="col-xs-1">'.$row[0].'</td><input type="hidden" name="id" value="'.$row[0].'">
+                                                    <td class="col-xs-2">'.$row[5].'</td>
                                                     <td class="col-xs-2">'.$row[2].'</td>
                                                     <td class="col-xs-2">'.$row[3].'</td>
-                                                    <td class="col-xs-2">'.$row[4].'</td>
+                                                    <td class="col-xs-2">'.$row[1].'</td>
                                                     <td class="col-xs-2">
                                                     <button type="submit" class="btn btn-primary" name="goruntule"><i class="fa fa-eye"></i> Görüntüle</button>
                                                     </td>

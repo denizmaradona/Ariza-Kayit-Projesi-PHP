@@ -104,6 +104,7 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Arıza No</th>
                                         <th>Durum</th>
                                         <th>Telefon Marka</th>
                                         <th>Telefon Model</th>
@@ -121,9 +122,10 @@
                                     $result = mysqli_query($connection,
                                     "CALL ariza_detay_goster('".$_SESSION['id']."')") or die("Query fail: " . mysqli_error());
 
-                                    while($row = mysqli_fetch_array($result)) {
+                                    $row = mysqli_fetch_array($result); 
                                         echo '
                                             <tr>
+                                                <td>'.$_SESSION["id"].'</td>
                                                 <td>'.$row[0].'</td>
                                                 <td>'.$row[1].'</td>
                                                 <td>'.$row[2].'</td>
@@ -148,7 +150,7 @@
                                                 <td><a href="order-update.php" class="btn btn-success '.$class_guncelle.'"><i class="fa fa-refresh"></i> Güncelle</a></td>
                                                 <td><a href="#" class="btn btn-danger btn-delete '.$class_sil.'"><i class="fa fa-trash-o"></i> Sil</a></td>
                                             </tr>';
-                                        }
+                                        
                                     echo '
                                 </tbody>
                             </table>

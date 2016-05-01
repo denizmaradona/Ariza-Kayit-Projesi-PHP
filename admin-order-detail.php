@@ -1,6 +1,5 @@
 <?php 
-    include 'login-header.php';
-    $id = $_SESSION["id"];
+    include 'login-header.php';   
     if (isset($_POST["guncelle"])){
         $durum = $_POST["durumlar"];
         $detay = $_POST["detay"];
@@ -34,7 +33,7 @@
         $id = $_POST["id"];
     }
     else{
-
+        $id = $_SESSION["id"];
     }
 ?>
 

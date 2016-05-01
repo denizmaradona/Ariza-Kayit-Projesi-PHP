@@ -41,7 +41,7 @@
                                         "CALL butun_ariza_kayitlarini_goster()") or die("Query fail: " . mysqli_error());
                                         while($row = mysqli_fetch_array($result)){
                                             echo '
-                                            <form method="post">
+                                            <form action="" method="post">
                                                 <tr>
                                                     <td>'.$row[0].'<input type="hidden" name="id" value='.$row[0].'></td>
                                                     <td>'.$row[1].'</td>
