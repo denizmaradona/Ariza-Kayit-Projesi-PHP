@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'login-header.php';
     if (isset($_POST["sil"])){
         include 'dbsettings.php';
@@ -80,33 +80,33 @@
                 <?php
             }
         }
-        
+
     }
 ?>
 <?php
         include 'dbsettings.php';
 		$result = mysqli_query($connection,
-	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());	    
+	    "CALL ariza_kayitlarini_goster('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
 	    $kayit_sayi = mysqli_num_rows($result);
-		
+
 
 		include'dbsettings.php';
     	$result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
     	$talep_sayi = mysqli_num_rows($result);
-    	
+
 
 	echo '<div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h1 class="page-header">
-                            Kullanıcı Paneli <small>Genel Bakış</small>
+                            Kullanıcı Paneli <small class="hidden-xs">Genel Bakış</small>
                         </h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-info alert-dismissable">
+                        <div class="alert alert-info alert-dismissable hidden-xs">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <i class="fa fa-info-circle"></i>  <strong>Hoşgeldiniz!</strong>
                         </div>

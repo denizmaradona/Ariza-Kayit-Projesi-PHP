@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'login-header.php';
     include 'dbsettings.php';
     $result = mysqli_query($connection,
@@ -12,13 +12,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="page-header">
-                        Admin Paneli <small>Genel Bakış</small>
+                        Admin Paneli <small class="hidden-xs">Genel Bakış</small>
                     </h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="alert alert-info alert-dismissable">
+                    <div class="alert alert-info alert-dismissable hidden-xs">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <i class="fa fa-info-circle"></i>  <strong>Hoşgeldiniz!</strong>
                     </div>

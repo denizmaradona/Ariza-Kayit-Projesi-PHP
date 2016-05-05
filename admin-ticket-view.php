@@ -1,7 +1,8 @@
-<?php 
+<?php
     include 'login-header.php';
     if (isset($_POST["incele"])){
         $_SESSION["id"] = $_POST["id"];
+        $_SESSION["konu"] = $_POST["konu"];
     }
     else if (isset($_POST["gonder"])){
         $mesaj = $_POST["mesaj"];
@@ -19,7 +20,7 @@
                 $mail -> Subject = "Bilgilendirme";
                 $mail -> Body = "#'".$_SESSION["id"]."' nolu talebiniz cevaplandırıldı";
                 $mail -> AddAddress($eposta);
-                
+
 
                 if (!$mail->Send()){ //mail gönderildi
 
@@ -47,7 +48,7 @@
                 <div class="col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title ticket-title"><strong>Konu: </strong>Telefonum söylenilen tarihte teslim edilmedi.</h3>
+                            <h3 class="panel-title ticket-title"><strong>Konu: </strong>'.$_SESSION["konu"].'</h3>
                             <span class="ticket-id pull-right">Talep No # '.$_SESSION["id"].'</span>
                         </div>
                         <div class="panel-body">';

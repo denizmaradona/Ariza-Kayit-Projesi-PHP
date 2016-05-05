@@ -1,4 +1,4 @@
-<?php   
+<?php
     include 'login-header.php';
 	if (isset($_POST["guncelle"])){
         $required = array('ad', 'soyad', 'eposta', 'cep_tel', 'adres', 'dogum_tarih');
@@ -21,7 +21,7 @@
             <?php
         }
         else{
-            
+
             $ad = $_POST["ad"];
             $soyad = $_POST["soyad"];
             $eposta = $_POST["eposta"];

@@ -14,11 +14,11 @@
     <link rel="stylesheet" type="text/less" href="assets/css/main.less">
 
     <script src="https://cdn.jsdelivr.net/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/less/2.6.1/less.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.tr.min.js" charset="UTF-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/less/2.6.1/less.min.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3,respond@1.4.2"></script>
     <![endif]-->
@@ -77,10 +77,15 @@
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hesabım <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu">';
+                            if ($rank==1){
+                                echo '
                                 <li>
                                     <a href="profile.php"><i class="fa fa-fw fa-user"></i>Profil</a>
                                 </li>
+                                ';
+                            }
+                            echo '                              
                                 <li>
                                     <a href="exit.php"><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
                                 </li>

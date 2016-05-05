@@ -12,10 +12,10 @@
     <link rel="stylesheet" type="text/less" href="assets/css/main.less">
 
     <script src="https://cdn.jsdelivr.net/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/less/2.6.1/less.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.tr.min.js" charset="UTF-8"></script>
+    <script src="https://cdn.jsdelivr.net/less/2.6.1/less.min.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3,respond@1.4.2"></script>
     <![endif]-->

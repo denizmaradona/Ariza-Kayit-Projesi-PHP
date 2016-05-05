@@ -44,7 +44,7 @@
                                                 <td class="col-xs-1">'.$row[2].'</td>
                                                 <td class="col-xs-2">'.$row[3].'</td>
                                                 <td class="col-xs-2">'.$row[4].'</td>
-                                                <td class="col-xs-2">'.$row[5].'</td>
+                                                <td class="col-xs-2">'.$row[5].'<input type="hidden" name="konu" value="'.$row[5].'"</td>
                                                 <td class="col-xs-2"><i class="'.$i_class.'"></i>'.$row[6].'</td>
                                                 <td class="col-xs-1">
                                                     <button type="submit" name="incele" class="btn btn-primary"><i class="fa fa-eye"></i> İncele</button>

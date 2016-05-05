@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'login-header.php';
     if (isset($_POST["gonder"])){
         if (empty($_POST["mesaj"])){
@@ -71,7 +71,7 @@
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title ticket-title"><strong>Konu: '.$_SESSION["konu"].'</strong></h3>
+                                    <h3 class="panel-title ticket-title"><strong>Konu: </strong>'.$_SESSION["konu"].'</h3>
                                 </div>
                                 <div class="panel-body">
                                     ';

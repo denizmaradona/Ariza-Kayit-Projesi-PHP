@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'login-header.php';
     echo '
         <div class="page-wrapper">
@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-md-8">
                         <form action="" method="post">
                             <div class="row">
                                 <div class="col-xs-6">
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-12 col-sm-4">
                                     <button type="submit" class="btn btn-success" name="gonder" formaction="dashboard.php">Gönder</button>
                                 </div>';
                                 }

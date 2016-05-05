@@ -1,5 +1,5 @@
-<?php 
-    include 'login-header.php'; 
+<?php
+    include 'login-header.php';
     include 'dbsettings.php';
     $talep_sayi=0;
     $result = mysqli_query($connection,"CALL musteri_talepleri('".$_SESSION['eposta']."')") or die("Query fail: " . mysqli_error());
@@ -68,12 +68,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1 class="page-header">Destek Talebi</h1>
+                        <h1 class="page-header">Destek Talepleriniz</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-info alert-dismissable">
+                        <div class="alert alert-info alert-dismissable hidden-xs">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <i class="fa fa-info-circle"></i>  <strong>Destek talepleriniz en kısa süre içerisinde cevaplandırılacaktır.</strong>
                         </div>

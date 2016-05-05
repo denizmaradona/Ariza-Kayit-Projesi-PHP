@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'login-header.php';
     include 'dbsettings.php';
     echo '<div class="page-wrapper">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-md-2">
+                    <div class="col-xs-12 col-sm-6 col-md-2">
                         <a href="order-view.php" class="btn btn-primary"><i class="fa fa-step-backward"></i> Geri Dön</a>
                     </div>';
                     if (strpos($onay,'Arıza')!==false){ //Fiyat verildiyse
@@ -64,7 +64,7 @@
                         <a href="#" class="btn btn-danger center-block" data-toggle="modal" data-target="#confirm-modal2">Onaylamıyorum</a>
                     </div>
                         <div class="col-xs-12 col-md-3">
-                            <div class="table-responsive">
+                            <div class="table-responsive no-border">
                                 <table class="table table-bordered table-hover table-striped total-price">
                                     <tbody>
                                         <tr>
@@ -78,8 +78,8 @@
                     }
                     else {
                         echo '
-                        <div class="col-xs-12 col-md-3 col-md-offset-7">
-                            <div class="table-responsive">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-md-offset-7">
+                            <div class="table-responsive no-border">
                                 <table class="table table-bordered table-hover table-striped total-price">
                                     <tbody>
                                         <tr>

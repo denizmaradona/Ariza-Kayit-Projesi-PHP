@@ -69,8 +69,11 @@ textarea:-ms-input-placeholder { /* Internet Explorer */
     transition:         all 0.3s linear;
 }
 
-.box-shadow {
-    box-shadow: 0 1px 0 white, inset 0 1px 4px rgba(156, 156, 156, 0.15);
+.inner-shadow {
+    box-shadow: inset 0 0 4px 4px rgba(0, 0, 0, 0.05);
+}
+.outer-shadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .modal-open {
@@ -93,6 +96,9 @@ textarea:-ms-input-placeholder { /* Internet Explorer */
 }
 .btn-info {
     border-bottom: 4px solid darken(#5BC0DE, 10%);
+}
+.btn-default {
+    border-bottom: 4px solid darken(#FFF, 10%);
 }
 
 @white-background : #DBD8D8;
@@ -143,26 +149,6 @@ header {
 
 .wrapper {
     padding-left: 225px;
-    input::-webkit-input-placeholder,
-    textarea::-webkit-input-placeholder { /* Chrome */
-        color: @grey-text !important;
-        letter-spacing: 1px;
-    }
-    input:-moz-placeholder,
-    textarea:-moz-placeholder { /* Firefox 18- */
-        color: @grey-text !important;
-        letter-spacing: 1px;
-    }
-    input::-moz-placeholder,
-    textarea::-moz-placeholder {  /* Firefox 19+ */
-        color: @grey-text !important;
-        letter-spacing: 1px;
-    }
-    input:-ms-input-placeholder,
-    textarea:-ms-input-placeholder { /* Internet Explorer */
-        color: @grey-text !important;
-        letter-spacing: 1px;
-    }
     .dashboard-header {
         .navbar {
             padding: 0;
@@ -267,7 +253,11 @@ header {
                 }
                 .ticket-title {
                     font-size: 20px;
+                    word-break: break-word;
                     display: inline-block;
+                    strong {
+                        margin-bottom: 10px;
+                    }
                 }
                 .ticket-id {
                     font-weight: 700;
@@ -289,12 +279,14 @@ header {
                     padding: 20px;
                     background-color: #F1F1F1;
                     border-radius: 5px;
-                    .box-shadow;
+                    .outer-shadow;
                     .mtop {
                         margin-top: 10px;
                     }
+                    .article-body {
+                        word-break: break-word;
+                    }
                     .article-heading {
-                        padding-bottom: 10px;
                         span {
                             font-size: 16px;
                             font-weight: 700;
@@ -334,13 +326,13 @@ header {
                     padding: 13px 10px;
                     color: @grey-text;
                     font-size: 16px;
-                    border: none;
+                    border: 1px solid #ddd;
                     border-radius: 5px;
                     width: 100%;
                     height: 100%;
                     border-left: 1px solid @white-background;
                     background-color: #F1F1F1;
-                    .box-shadow;
+                    box-shadow: none;
                 }
                 .bootstrap-select>button {
                     padding: 0 0 0 15px;
@@ -410,6 +402,9 @@ header {
         .form-group {
             display: inline-block;
             width: 100%;
+            .form-control {
+                border-radius: 2px;
+            }
         }
     }
 }
@@ -744,6 +739,61 @@ footer {
     .border-left {
         border: none !important;
     }
+    .no-border {
+        border: 0;
+    }
+    .table-responsive>.table-bordered>tbody>tr:last-child>td {
+        border: 1px solid #ddd;
+    }
+    .profile .form-group h3 {
+        font-size: 19px;
+    }
+    .wrapper .page-wrapper {
+        padding: 0;
+        .page-header {
+            margin: 25px 0 10px;
+        }
+        .panel {
+            margin-bottom: 10px;
+            .panel-heading {
+                padding: 10px;
+                .ticket-title {
+                    padding: 0;
+                }
+            }
+            .panel-body {
+                padding: 0;
+            }
+        }
+    }
+    .table-responsive {
+        margin: 0;
+        border: 0;
+    }
+    .alert-info {
+        padding: 10px 35px 10px 5px;
+        margin-bottom: 5px;
+    }
+    .wrapper .dashboard-header .navbar .top-nav li.dropdown {
+        display: inline-block;
+    }
+    .wrapper .page-wrapper .panel .panel-body article {
+        padding: 10px;
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+    .wrapper .page-wrapper .panel .panel-body article .article-heading {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .mtop {
+        margin-bottom: 0 !important;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        border-bottom: 0 !important;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -754,12 +804,16 @@ footer {
     .page-wrapper .reject {
         margin-top: 10px;
     }
-    .wrapper .page-wrapper .panel .panel-heading h3.panel-title {
-        padding: 0;
-        font-size: 15px;
+    .wrapper .page-wrapper .panel .panel-heading {
+        position: relative;
+        .ticket-title {
+            margin-top: 20px;
+        }
     }
     .wrapper .page-wrapper .panel .panel-heading .ticket-id {
-        margin-top: -11px;
+        position: absolute;
+        top: 0;
+        right: 10px;
     }
     .border-left {
         padding: 10px 0 0 0;
@@ -767,10 +821,6 @@ footer {
     .wrapper .page-wrapper .info-content h3 {
         font-size: 18px;
     }
-}
-
-@media only screen and (max-width: 320px) {
-
 }
 
 @media only screen and (min-width: 767px) {
