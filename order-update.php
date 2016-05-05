@@ -20,6 +20,7 @@
                                             echo '
                                             <form action="" method="post">
                                                 <select id="marka" name="markalar" class="form-control selectpicker data-container="body" onchange="if(this.value != 0) {this.form.submit(); }">';
+                                                    echo '<option value="0">Seçiniz</option>';
                                                 while ($row = mysqli_fetch_array($result)){
 
                                                     if ($_POST["markalar"] == $row["marka"]){
