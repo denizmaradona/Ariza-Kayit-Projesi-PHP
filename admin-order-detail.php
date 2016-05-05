@@ -57,6 +57,7 @@
                                 <thead>
                                 <tr>
                                     <th>Durum</th>
+                                    <th>Detay</th>
                                     <th>İşlem Tarihi</th>
                                     <th>Ücret</th>
                                 </tr>
@@ -68,9 +69,10 @@
                                 while ($row = mysqli_fetch_array($result)){
                                     echo '
                                     <tr>
-                                        <td class="col-xs-4">'.$row[0].'</td>
-                                        <td class="col-xs-4">'.$row[2].'</td>
-                                        <td class="col-xs-4"><i class="fa fa-try"></i> '.$row[3].'</td>
+                                        <td class="col-xs-3">'.$row[0].'</td>
+                                        <td class="col-xs-3">'.$row[1].'</td>
+                                        <td class="col-xs-3">'.$row[2].'</td>
+                                        <td class="col-xs-3"><i class="fa fa-try"></i> '.$row[3].'</td>
                                     </tr>';
                                 }
                                 include 'dbsettings.php';

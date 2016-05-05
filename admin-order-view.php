@@ -27,7 +27,7 @@
                                     <th>Durum</th>
                                     <th>Telefon Marka</th>
                                     <th>Telefon Model</th>
-                                    <th>Detay</th>
+                                    <th>Problem</th>
                                     <th>Ücret</th>
                                     <th>Verilme Tarihi</th>
                                     <th>İşlem Geçmişi</th>
