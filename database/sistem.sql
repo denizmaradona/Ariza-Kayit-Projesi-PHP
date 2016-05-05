@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 02 May 2016, 21:35:32
+-- Üretim Zamanı: 05 May 2016, 22:43:26
 -- Sunucu sürümü: 10.1.10-MariaDB
 -- PHP Sürümü: 7.0.4
 
@@ -67,11 +67,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ariza_detay_goster` (IN `ariza_no` 
   
   IF NOT EXISTS (SELECT * FROM durum_detay WHERE durum_detay.ariza_id = ariza_no AND durum LIKE '%fiyat onaylandı%') THEN
   
-    SELECT ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.detay, SUM(durum_detay.fiyat), ariza_kayit.verilis_tarih FROM ariza_kayit,telefon,durum_detay WHERE ariza_kayit.id = ariza_no AND telefon.id = ariza_kayit.telefon_id AND durum_detay.ariza_id = ariza_kayit.id AND durum_detay.durum NOT LIKE '%tespit edildi%' AND durum_detay.fiyat IS NOT NULL;
+    SELECT ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.problem, SUM(durum_detay.fiyat), ariza_kayit.verilis_tarih FROM ariza_kayit,telefon,durum_detay WHERE ariza_kayit.id = ariza_no AND telefon.id = ariza_kayit.telefon_id AND durum_detay.ariza_id = ariza_kayit.id AND durum_detay.durum NOT LIKE '%tespit edildi%' AND durum_detay.fiyat IS NOT NULL;
     
   ELSE
   
-    SELECT ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.detay, SUM(durum_detay.fiyat), ariza_kayit.verilis_tarih FROM ariza_kayit,telefon,durum_detay WHERE ariza_kayit.id = ariza_no AND telefon.id = ariza_kayit.telefon_id AND durum_detay.ariza_id = ariza_kayit.id AND durum_detay.fiyat IS NOT NULL;
+    SELECT ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.problem, SUM(durum_detay.fiyat), ariza_kayit.verilis_tarih FROM ariza_kayit,telefon,durum_detay WHERE ariza_kayit.id = ariza_no AND telefon.id = ariza_kayit.telefon_id AND durum_detay.ariza_id = ariza_kayit.id AND durum_detay.fiyat IS NOT NULL;
     
   END IF; 
 
@@ -148,7 +148,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ariza_kayitlarini_goster` (IN `kul_
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `butun_ariza_kayitlarini_goster` ()  BEGIN
-  SELECT ariza_kayit.id, ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.detay, ariza_kayit.verilis_tarih , sum(durum_detay.fiyat) FROM ariza_kayit, telefon, durum_detay WHERE ariza_kayit.telefon_id = telefon.id AND ariza_kayit.id = durum_detay.ariza_id GROUP BY ariza_kayit.id;
+  SELECT ariza_kayit.id, ariza_kayit.durum, telefon.marka, telefon.model, ariza_kayit.problem, ariza_kayit.verilis_tarih , sum(durum_detay.fiyat) FROM ariza_kayit, telefon, durum_detay WHERE ariza_kayit.telefon_id = telefon.id AND ariza_kayit.id = durum_detay.ariza_id GROUP BY ariza_kayit.id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `durum_combobox` ()  BEGIN
@@ -747,17 +747,17 @@ ALTER TABLE `telefon`
 -- Tablo için AUTO_INCREMENT değeri `ariza_kayit`
 --
 ALTER TABLE `ariza_kayit`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Tablo için AUTO_INCREMENT değeri `durum_detay`
 --
 ALTER TABLE `durum_detay`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Tablo için AUTO_INCREMENT değeri `olasi_durumlar`
 --
@@ -767,7 +767,7 @@ ALTER TABLE `olasi_durumlar`
 -- Tablo için AUTO_INCREMENT değeri `talep`
 --
 ALTER TABLE `talep`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Tablo için AUTO_INCREMENT değeri `talep_yazisma`
 --
